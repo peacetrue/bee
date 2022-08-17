@@ -1,0 +1,17 @@
+= 简介
+
+:website: https://peacetrue.github.io
+:app-name: bee
+:foresight-repo-id: 02ab1513-ee9d-4104-8222-061df269c6d6
+:imagesdir: docs/antora/modules/ROOT/assets/images
+
+image:https://img.shields.io/lgtm/grade/java/github/peacetrue/{app-name}["LGTM Grade",link="https://lgtm.com/projects/g/peacetrue/{app-name}"]
+image:https://snyk.io/test/github/peacetrue/{app-name}/badge.svg["Snyk",link="https://app.snyk.io/org/peacetrue"]
+image:https://img.shields.io/github/workflow/status/peacetrue/{app-name}/build/master["GitHub Workflow Status",link="https://github.com/peacetrue/{app-name}/actions"]
+image:https://foresight.service.thundra.io/public/api/v1/badge/success?repoId={foresight-repo-id}["Foresight",link="https://foresight.thundra.io/repositories/github/peacetrue/{app-name}/test-runs"]
+image:https://img.shields.io/codecov/c/github/peacetrue/{app-name}/master["Codecov",link="https://app.codecov.io/gh/peacetrue/{app-name}"]
+
+//@formatter:off
+{website}/{app-name}/[{app-name}] 是一个开发者助手，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
+
+
