@@ -1,0 +1,26 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+    id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}"
+    id "org.springframework.boot" version "${springBootPluginVersion}"
+}
+
+group "com.github.peacetrue.bee"
+version "${peaceBackendVersion}${tailSnapshot}"
+description "Bee 后端模块"
+
+dependencies {
+    implementation platform(SpringBootPlugin.BOM_COORDINATES)
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    runtimeOnly "com.h2database:h2"
+    runtimeOnly "mysql:mysql-connector-java"
+    implementation "org.springframework.boot:spring-boot-starter-jersey"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-cache"
+    implementation "com.github.ben-manes.caffeine:caffeine:2.6.2"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "javax.xml.bind:jaxb-api"
+}
+

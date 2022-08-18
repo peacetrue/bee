@@ -1,0 +1,22 @@
+= Bee 后端模块
+
+== 搭建应用
+
+.Gradle 配置
+[source%nowrap,gradle]
+----
+include::example$backend/build.gradle[]
+----
+
+.类库版本
+[source%nowrap,gradle]
+----
+include::example$backend/gradle.properties[]
+----
+
+启动应用 `BeeApplication`，访问 http://localhost:8080/actuator ：
+
+image::backend/image-2022-08-18-20-43-39-739.png[]
+
+
+
