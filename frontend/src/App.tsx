@@ -1,24 +1,28 @@
 import React from 'react';
 import './App.css';
-import {AppBar, Container, CssBaseline, Grid, Link, Toolbar, Typography} from "@mui/material";
+import {AppBar, Container, CssBaseline, Grid, Link as MuiLink, Toolbar, Typography} from "@mui/material";
 import EmojiNatureIcon from '@mui/icons-material/EmojiNature';
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import Home from "./pages/Home";
+import Monitoring from "./pages/Monitoring";
 
 //@formatter:off
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <CssBaseline/>
       <Container maxWidth={false}>
         <AppBar>
           <Toolbar variant="dense">
-            <Link href="https://bee.peacetrue.cn" color="inherit"><EmojiNatureIcon/></Link>
+            <MuiLink component={Link} to="/" color="inherit"><EmojiNatureIcon/></MuiLink>
             <Typography variant="h6" color="inherit" component="div" ml={1}>Bee</Typography>
             <Grid container ml={4} spacing={4}>
               <Grid item>
-                <Link href="https://peacetrue.github.io/bee" color="inherit" underline="none" target={"_blank"}>文档</Link>
+                <MuiLink href="https://peacetrue.github.io/bee" color="inherit" underline="none" target={"_blank"}>文档</MuiLink>
               </Grid>
               <Grid item>
-                <Link href="https://peacetrue.github.io/bee" color="inherit" underline="none">监控</Link>
+                {/*https://stackoverflow.com/questions/63216730/can-you-use-material-ui-link-with-react-router-dom-link*/}
+                <MuiLink component={Link} to="/monitoring" color="inherit" underline={"none"}>监控</MuiLink>
               </Grid>
             </Grid>
           </Toolbar>
@@ -27,19 +31,18 @@ function App() {
           <Grid item>
             <Toolbar/>
           </Grid>
-          <Grid item flexGrow={1}
-                container flexDirection={"column"}
-                justifyContent={"center"} alignItems={"center"} spacing={4} >
-            <Grid item><Typography variant={"h1"}>Bee</Typography></Grid>
-            <Grid item><Typography variant={"h3"}>开发者助手</Typography></Grid>
-            <Grid item><Typography variant={"h5"}>辅助技术人员日常开发，致力于在琐碎的细节中提升效率</Typography></Grid>
+          <Grid item flexGrow={1}>
+              <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="/monitoring" element={<Monitoring />} />
+              </Routes>
           </Grid>
           <Grid item textAlign={"center"} height={"80px"}>
             © 2022 peacetrue. 鄂ICP备20006312号
           </Grid>
         </Grid>
       </Container>
-    </>
+    </BrowserRouter>
   );
 }
 

@@ -51,3 +51,16 @@ roboto 字体和默认字体差别不大，如非必要无需使用 roboto 字�
 
 image::frontend/image-2022-08-18-16-42-27-504.png[]
 
+== 实现菜单路由跳转
+
+文档为外链，监控为内链；内链需要使用路由。
+
+.安装路由
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+npm install react-router-dom@6
+----
+
+解决问题：
+
+* https://stackoverflow.com/questions/63216730/can-you-use-material-ui-link-with-react-router-dom-link[MUI Link 和 router Link 配合使用^]
