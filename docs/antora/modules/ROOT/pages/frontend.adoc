@@ -16,3 +16,33 @@ npm run build
 npm install -g serve
 serve -s build
 ----
+
+== 安装 MUI
+
+参考 https://mui.com/zh/material-ui/getting-started/installation/。
+
+.安装类库
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+npm install @mui/material @mui/styled-engine-sc styled-components
+----
+
+参考 https://mui.com/zh/material-ui/react-typography/#general。
+
+.安装字体
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+npm install @fontsource/roboto
+----
+
+.导入字体
+[source%nowrap,typescript,subs="specialchars,attributes"]
+----
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+----
+
+roboto 字体和默认字体差别不大，可不用 roboto 字体，保持简洁性。
+
