@@ -4,3 +4,7 @@
 
 include::partial$branches/antora.adoc[]
 
+include::partial$branches/frontend.adoc[]
+
+include::partial$branches/backend.adoc[]
+
