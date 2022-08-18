@@ -25,6 +25,7 @@ serve -s build
 [source%nowrap,bash,subs="specialchars,attributes"]
 ----
 npm install @mui/material @mui/styled-engine-sc styled-components
+npm install @mui/icons-material
 ----
 
 参考 https://mui.com/zh/material-ui/react-typography/#general。
@@ -36,7 +37,7 @@ npm install @fontsource/roboto
 ----
 
 .导入字体
-[source%nowrap,typescript,subs="specialchars,attributes"]
+[source%nowrap,js,subs="specialchars,attributes"]
 ----
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -44,5 +45,9 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 ----
 
-roboto 字体和默认字体差别不大，可不用 roboto 字体，保持简洁性。
+roboto 字体和默认字体差别不大，如非必要无需使用 roboto 字体。
+
+== 实现首页布局
+
+image::frontend/image-2022-08-18-16-42-27-504.png[]
 
