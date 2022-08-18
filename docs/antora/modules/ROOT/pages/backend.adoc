@@ -14,6 +14,8 @@ include::example$backend/build.gradle[]
 include::example$backend/gradle.properties[]
 ----
 
+== 访问应用
+
 启动应用 `BeeApplication`，访问 http://localhost:8080/actuator ：
 
 image::backend/image-2022-08-18-20-43-39-739.png[]
