@@ -2,6 +2,19 @@
 
 本文介绍资源库中分支的含义，标题为分支名。
 
+.分支之间的关系
+[plantuml,target=branchs,format=png]
+----
+@startuml
+[antora] <-- [master]
+[antora] <-- [frontend]
+[antora] <-- [backend]
+
+[frontend]  <-- [master]
+[backend] <-- [master]
+@enduml
+----
+
 include::partial$branches/antora.adoc[]
 
 include::partial$branches/frontend.adoc[]

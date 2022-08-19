@@ -1,5 +1,6 @@
 * xref:index.adoc[]
 * xref:branch.adoc[]
+* xref:architecture.adoc[]
 include::partial$navs/antora.adoc[]
 include::partial$navs/frontend.adoc[]
 include::partial$navs/backend.adoc[]
