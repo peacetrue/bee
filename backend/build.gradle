@@ -1,6 +1,7 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
+    id 'application'
     id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}"
     id "org.springframework.boot" version "${springBootPluginVersion}"
 }
@@ -21,6 +22,18 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "javax.xml.bind:jaxb-api"
 }
 
+application {
+    applicationDefaultJvmArgs = ["-Xms50M", "-Xmx50M", "-Dspring.profiles.active=prod"]
+}
+
+task deployToRemote(group: "peacetrue") {
+    doLast {
+        exec {
+            workingDir("$buildDir/distributions")
+            def args = ["scp", "$archivesBaseName-boot-${version}.zip", "root@aliyun:/root/peacetrue"]
+            commandLine(args)
+        }
+    }
+}

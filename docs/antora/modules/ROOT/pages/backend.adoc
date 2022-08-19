@@ -2,7 +2,9 @@
 
 == 搭建应用
 
-.Gradle 配置
+Gradle 配置：
+
+.build.gradle
 [source%nowrap,gradle]
 ----
 include::example$backend/build.gradle[]
@@ -14,11 +16,17 @@ include::example$backend/build.gradle[]
 include::example$backend/gradle.properties[]
 ----
 
+Gradle 版本和 Spring Gradle 插件版本存在不兼容的情况，需要注意。
+
 == 访问应用
 
 启动应用 `BeeApplication`，访问 http://localhost:8080/actuator ：
 
 image::backend/image-2022-08-18-20-43-39-739.png[]
+
+== 打包
+
+使用 `application` 插件打包后，部署到远程服务。
 
 
 
