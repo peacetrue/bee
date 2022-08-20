@@ -7,7 +7,7 @@ Gradle 配置：
 .build.gradle
 [source%nowrap,gradle]
 ----
-include::example$backend/build.gradle[]
+include::example$backend/build.gradle[tag=basic]
 ----
 
 .类库版本
@@ -24,9 +24,69 @@ Gradle 版本和 Spring Gradle 插件版本存在不兼容的情况，需要注�
 
 image::backend/image-2022-08-18-20-43-39-739.png[]
 
-== 打包
+== 自动部署
 
-使用 `application` 插件打包后，部署到远程服务。
+使用 https://docs.gradle.org/current/userguide/application_plugin.html[application^] 插件打包后，
+部署到远程服务。
 
+=== 部署包结构
 
+[source%nowrap,tree]
+----
+backend-boot
+├── bin
+│   ├── backend
+│   └── backend.bat
+└── lib
+    └── backend-1.0.0-SNAPSHOT.jar
+----
 
+=== 部署脚本
+
+部署脚本名称默认与项目名相同。
+
+调用脚本，脚本会自动根据上面的目录结构，找到执行的 jar 包：
+
+[source%nowrap,bash]
+----
+$ cd backend-boot/bin
+$ backend
+----
+
+脚本后面的参数作为程序参数，会传递给 `main` 方法。
+如需更改 JVM 参数，可使用 `JAVA_OPTS` 环境变量：
+
+[source%nowrap,bash]
+----
+$ export JAVA_OPTS='"-Xmx1G" "-Xms1G"'
+$ backend
+----
+
+关于 $JAVA_OPTS 的调用方式：
+
+[source%nowrap,bash]
+----
+$ export JAVA_OPTS='"-Xmx1G" "-Xms1G"'
+$ java $JAVA_OPTS -jar backend-1.0.0-SNAPSHOT.jar
+错误: 找不到或无法加载主类 "-Xmx1G" "-Xms1G"
+原因: java.lang.ClassNotFoundException: "-Xmx1G" "-Xms1G"
+
+# 正确的调用方式如下：
+$ eval "java $JAVA_OPTS -jar backend-1.0.0-SNAPSHOT.jar"
+----
+
+=== 部署实现
+
+.build.gradle
+[source%nowrap,gradle]
+----
+include::example$backend/build.gradle[tag=deploy]
+----
+
+.用法
+[source%nowrap,gradle]
+----
+./gradlew installBootDist
+----
+
+打包后，自动上传到远程服务器并重启。
