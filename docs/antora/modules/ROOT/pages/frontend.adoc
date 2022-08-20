@@ -3,23 +3,20 @@
 
 == 创建应用
 
-参考 https://create-react-app.dev/docs/adding-typescript/
+参考 https://create-react-app.dev/docs/adding-typescript/ 。
 
 [source%nowrap,bash,subs="specialchars,attributes"]
 ----
 npx create-react-app {module-name} --template typescript
 
 cd {module-name}
+npm install
 npm start
-npm run build
-
-npm install -g serve
-serve -s build
 ----
 
 == 安装 MUI
 
-参考 https://mui.com/zh/material-ui/getting-started/installation/。
+参考 https://mui.com/zh/material-ui/getting-started/installation/ 。
 
 .安装类库
 [source%nowrap,bash,subs="specialchars,attributes"]
@@ -28,7 +25,7 @@ npm install @mui/material @mui/styled-engine-sc styled-components
 npm install @mui/icons-material
 ----
 
-参考 https://mui.com/zh/material-ui/react-typography/#general。
+参考 https://mui.com/zh/material-ui/react-typography/#general 。
 
 .安装字体
 [source%nowrap,bash,subs="specialchars,attributes"]
@@ -64,3 +61,4 @@ npm install react-router-dom@6
 解决问题：
 
 * https://stackoverflow.com/questions/63216730/can-you-use-material-ui-link-with-react-router-dom-link[MUI Link 和 router Link 配合使用^]
+* https://juejin.cn/post/6844903942942359560[nginx 服务器配置 React 的 Browser 路由模式]

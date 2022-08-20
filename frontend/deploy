@@ -1,11 +1,14 @@
 #!/bin/bash
 
 #tag::basic[]
+remoteDir="/usr/share/nginx/html"
 # 删除历史文件
-rm -rf build bee
+rm -rf build build.tar
+# 重新构建
 npm run build
-cp -r build bee
-# "/usr/share/nginx/html/bee/index.html"
-ssh root@aliyun "rm -rf /usr/share/nginx/html/bee"
-scp -r bee root@aliyun:/usr/share/nginx/html
+# 打包
+tar -cf build.tar build
+# 部署到远程服务
+scp build.tar "root@aliyun:$remoteDir"
+ssh root@aliyun "cd $remoteDir; tar -xf build.tar; rm -rf bee; mv build bee"
 #end::basic[]
