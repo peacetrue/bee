@@ -1,6 +1,8 @@
+//tag::basic[]
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
+    id "application"
     id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}"
     id "org.springframework.boot" version "${springBootPluginVersion}"
 }
@@ -21,6 +23,53 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "javax.xml.bind:jaxb-api"
 }
+
+//end::basic[]
+
+//tag::deploy[]
+application {
+    applicationDefaultJvmArgs = ["-Xms50M", "-Xmx50M", "-Dspring.profiles.active=prod"]
+}
+
+
+ext {
+    remoteHost = "root@aliyun"
+    remoteWorkingDir = "~/bee"
+    remoteArchiveName = "$archivesBaseName-boot"
+}
+
+task prepareRemote(group: "peacetrue-remote") {
+    doLast {
+        exec {
+            commandLine("ssh", "$remoteHost", "mkdir -p $remoteWorkingDir")
+        }
+    }
+}
+
+installBootDist.finalizedBy("deployToRemote")
+task deployToRemote(group: "peacetrue-remote") {
+    doLast {
+        exec {
+            workingDir("$buildDir/install")
+            def args = ["scp", "-r", "$remoteArchiveName", "$remoteHost:$remoteWorkingDir"]
+            println "command: ${String.join(' ', args)}"
+            commandLine(args)
+        }
+    }
+}
+
+deployToRemote.finalizedBy("restartRemote")
+task restartRemote(group: "peacetrue-remote") {
+    doLast {
+        // http://aliyun:8080/actuator
+        // bash: line 1: kill-by-port: command not found -> https://stackoverflow.com/questions/820517/bashrc-at-ssh-login
+        exec {
+            def args = ["ssh", "$remoteHost", "cd $remoteWorkingDir/$remoteArchiveName; kill-by-port 8080; nohup bin/backend > /dev/null 2>&1 &"]
+            println "command: ${args.get(0)} ${args.get(1)} '${args.get(2)}'"
+            commandLine(args)
+        }
+    }
+}
+//end::deploy[]
 
