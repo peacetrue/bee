@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#tag::basic[]
+# 删除历史文件
+rm -rf build bee
+npm run build
+cp -r build bee
+# "/usr/share/nginx/html/bee/index.html"
+ssh root@aliyun "rm -rf /usr/share/nginx/html/bee"
+scp -r bee root@aliyun:/usr/share/nginx/html
+#end::basic[]
