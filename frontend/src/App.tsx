@@ -5,6 +5,7 @@ import EmojiNatureIcon from '@mui/icons-material/EmojiNature';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Monitoring from "./pages/Monitoring";
+import NotFound from './pages/NotFound';
 
 //@formatter:off
 function App() {
@@ -35,6 +36,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />}/>
                 <Route path="/monitoring" element={<Monitoring />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
           </Grid>
           <Grid item textAlign={"center"} height={"80px"}>
