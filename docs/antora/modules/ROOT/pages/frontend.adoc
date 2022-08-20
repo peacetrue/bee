@@ -62,3 +62,13 @@ npm install react-router-dom@6
 
 * https://stackoverflow.com/questions/63216730/can-you-use-material-ui-link-with-react-router-dom-link[MUI Link 和 router Link 配合使用^]
 * https://juejin.cn/post/6844903942942359560[nginx 服务器配置 React 的 Browser 路由模式]
+
+== 部署
+
+将本地构建的静态文件，上传到服务器 Nginx 的静态资源目录下。
+
+.deploy
+[source%nowrap,bash]
+----
+include::example$frontend/deploy[tag=basic]
+----

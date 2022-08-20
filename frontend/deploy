@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #tag::basic[]
+# nginx 静态资源目录
 remoteDir="/usr/share/nginx/html"
 # 删除历史文件
 rm -rf build build.tar
