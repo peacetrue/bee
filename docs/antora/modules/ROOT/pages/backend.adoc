@@ -1,44 +1,76 @@
-= Bee 后端模块
+= 后端模块
+:beeMonitorPort: 8080
+:beeMainPort: 8081
 
-== 搭建应用
+== 模块环境
 
-Gradle 配置：
+* JDK 17
+** 源码级别：8
+** 编译级别：8
+* 构建工具：Gradle 7.4.2
+* Spring Boot 2.7.0
+
+Gradle 版本和 Spring Gradle 插件版本存在不兼容的情况，需要注意。
+Gradle 7.4.2 和 spring-boot-gradle-plugin 2.7.0 可正常匹配
+
+== 应用规划
+
+|===
+|名称 |描述 |端口 |备注
+
+|http://peacetrue.cn:{beeMonitorPort}[bee-monitor^]
+|监控应用
+|{beeMonitorPort}
+|监控主应用的运行状态，基于 https://github.com/codecentric/spring-boot-admin[SBA^] 实现
+
+|http://peacetrue.cn:{beeMainPort}[bee-main^]
+|主应用
+|{beeMainPort}
+|功能都在主应用中实现
+|===
+
+== 监控应用
+
+依赖如下：
 
 .build.gradle
 [source%nowrap,gradle]
 ----
-include::example$backend/build.gradle[tag=basic]
+include::example$backend/monitor/build.gradle[tag=dependencies]
 ----
 
-.类库版本
+== 主应用
+
+依赖如下：
+
+.build.gradle
 [source%nowrap,gradle]
 ----
-include::example$backend/gradle.properties[]
+include::example$backend/main/build.gradle[tag=dependencies]
 ----
-
-Gradle 版本和 Spring Gradle 插件版本存在不兼容的情况，需要注意。
-
-== 访问应用
-
-启动应用 `BeeApplication`，访问 http://localhost:8080/actuator ：
-
-image::backend/image-2022-08-18-20-43-39-739.png[]
 
 == 自动部署
 
 使用 https://docs.gradle.org/current/userguide/application_plugin.html[application^] 插件打包后，
 部署到远程服务。
 
+以 *bee-main* 为例说明，
+*bee-monitor* 与此类似。
+
 === 部署包结构
+
+运行 `./gradlew installBootDist`，
+在 *build/install* 目录下生成部署包，
+文件结构如下：
 
 [source%nowrap,tree]
 ----
-backend-boot
+main-boot
 ├── bin
-│   ├── backend
-│   └── backend.bat
+│   ├── main
+│   └── main.bat
 └── lib
-    └── backend-1.0.0-SNAPSHOT.jar
+    └── main-1.0.0-SNAPSHOT.jar
 ----
 
 === 部署脚本
@@ -49,8 +81,8 @@ backend-boot
 
 [source%nowrap,bash]
 ----
-$ cd backend-boot/bin
-$ backend
+$ cd main-boot/bin
+$ ./main
 ----
 
 脚本后面的参数作为程序参数，会传递给 `main` 方法。
@@ -59,7 +91,7 @@ $ backend
 [source%nowrap,bash]
 ----
 $ export JAVA_OPTS='"-Xmx1G" "-Xms1G"'
-$ backend
+$ ./main
 ----
 
 关于 $JAVA_OPTS 的调用方式：
@@ -77,10 +109,12 @@ $ eval "java $JAVA_OPTS -jar backend-1.0.0-SNAPSHOT.jar"
 
 === 部署实现
 
+通过 Gradle 任务实现自动部署。
+
 .build.gradle
 [source%nowrap,gradle]
 ----
-include::example$backend/build.gradle[tag=deploy]
+include::example$backend/deploy.gradle[]
 ----
 
 .用法
@@ -89,4 +123,4 @@ include::example$backend/build.gradle[tag=deploy]
 ./gradlew installBootDist
 ----
 
-打包后，自动上传到远程服务器并重启。
+打包后，自动上传到远程服务器并重启，然后打开浏览器，访问应用主页。
