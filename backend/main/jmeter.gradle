@@ -1,0 +1,103 @@
+//tag::jmeter[]
+ext {
+    jmeterWorkingDir = "${sourceSets.test.resources.srcDirs[0]}/jmxs"
+}
+
+//jmeter.dependsOn("processTestResources")
+task jmeter(group: "peacetrue-jmeter") {
+    doLast {
+        def jmx = "nginx"
+        delete("${jmeterWorkingDir}/${jmx}", "${jmeterWorkingDir}/${jmx}.csv")
+        exec {
+            workingDir("${jmeterWorkingDir}")
+            // https://stackoverflow.com/questions/60204942/exception-generated-when-trying-to-generate-jmeter-html-reports
+            // jmeter -n -t 测试计划.jmx -q test.properties -l 测试结果.csv -e -LDEBUG -o 测试报告 "-LDEBUG"
+            def args = ["/usr/local/bin/jmeter", "-n", "-t", "${jmx}.jmx", "-q", "${jmx}-500.properties", "-l", "${jmx}.csv", "-e", "-o", "${jmx}"]
+            println "command: ${String.join(" ", args)}"
+            commandLine(args)
+            ignoreExitValue(true)
+        }
+    }
+}
+
+["baidu", "aliyun", "bee"].forEach(name -> {
+    def jmeterWorkingDir = "${sourceSets.test.resources.srcDirs[0]}/jmxs/$name"
+
+    ["100", "300", "500", "1000"].forEach(threadCount -> {
+        tasks.register("$name-$threadCount", task -> {
+            task.setGroup("peacetrue-jmeter")
+            task.finalizedBy("$name-run")
+            doLast {
+                delete("${jmeterWorkingDir}/options.properties")
+                exec {
+                    workingDir("${jmeterWorkingDir}")
+                    environment("PATH", "${environment.PATH}:/usr/local/bin")
+                    def args = ["ln", "-s", "../options-${threadCount}.properties", "options.properties"]
+                    println "command: ${String.join(" ", args)}"
+                    commandLine(args)
+                    ignoreExitValue(true)
+                }
+            }
+        })
+    })
+
+    tasks.register("$name-run", task -> {
+        task.setGroup("peacetrue-jmeter")
+        task.finalizedBy("$name-open")
+        doLast {
+            delete("${jmeterWorkingDir}/report", "${jmeterWorkingDir}/result.csv")
+            exec {
+                workingDir("${jmeterWorkingDir}")
+                environment("PATH", "${environment.PATH}:/usr/local/bin")
+                def args = ["/usr/local/bin/jmeter", "-n", "-t", "test-plan.jmx", "-q", "options.properties", "-l", "result.csv", "-e", "-o", "report"]
+                println "command: ${String.join(" ", args)}"
+                commandLine(args)
+                ignoreExitValue(true)
+            }
+        }
+    })
+
+    tasks.register("$name-open", task -> {
+        task.setGroup("peacetrue-jmeter")
+        doLast {
+            exec {
+                workingDir("${jmeterWorkingDir}")
+                def args = ["open", "-a", "Google Chrome", "report/index.html"]
+                println "command: ${String.join(" ", args)}"
+                commandLine(args)
+                ignoreExitValue(true)
+            }
+        }
+    })
+})
+
+task jmeterGenerateOutput(group: "peacetrue-jmeter") {
+    doLast {
+        def jmx = "nginx"
+        delete("${jmeterWorkingDir}/${jmx}")
+        exec {
+            workingDir("${jmeterWorkingDir}")
+            environment("PATH", "${environment.PATH}:/usr/local/bin")
+            def args = ["/usr/local/bin/jmeter", "-g", "${jmx}.csv", "-o", "${jmx}"]
+            println "command: ${String.join(" ", args)}"
+            commandLine(args)
+            ignoreExitValue(true)
+        }
+    }
+}
+
+jmeter.finalizedBy("openChrome")
+task openChrome(group: "peacetrue-jmeter") {
+    doLast {
+        def jmx = "nginx"
+        exec {
+            workingDir("${jmeterWorkingDir}")
+            def args = ["open", "-a", "Google Chrome", "${jmx}/index.html"]
+            println "command: ${String.join(" ", args)}"
+            commandLine(args)
+            ignoreExitValue(true)
+        }
+    }
+}
+//end::jmeter[]
+
