@@ -1,6 +1,7 @@
 = 简介
 :website: https://peacetrue.github.io
-:app-name: bee
+:page-component-name: Bee
+:repo-name: bee
 :foresight-repo-id: 02ea4d16-76a8-4400-bed3-47c567a7286d
 :imagesdir: docs/antora/modules/ROOT/assets/images
 
@@ -11,6 +12,4 @@
 //image:https://img.shields.io/codecov/c/github/peacetrue/{app-name}/master["Codecov",link="https://app.codecov.io/gh/peacetrue/{app-name}"]
 
 //@formatter:off
-{website}/{app-name}/[{app-name}] 是一个开发者助手，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
-
-
+{website}/{repo-name}/[{page-component-name}] 是一个开发者助手，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
