@@ -1,0 +1,42 @@
+group "com.github.peacetrue.bee"
+version "1.0.0"
+description "Bee Nginx 配置"
+
+// 远程服务配置，需提前做免密。
+// 脚本执行时，不能触发输入密码
+def remoteHost = "root@aliyun"
+def remoteWorkingDir = "/etc/nginx"
+
+task uploadBeeConf(group: "peacetrue-nginx") {
+    doLast {
+        exec {
+            workingDir("$projectDir")
+            def args = ["scp", "-r", "bee.peacetrue.cn.conf", "$remoteHost:$remoteWorkingDir/sites-enabled"]
+            println "command: ${String.join(' ', args)}"
+            commandLine(args)
+        }
+    }
+}
+
+task lnNginxBeeConf(group: "peacetrue-nginx") {
+    doLast {
+        exec {
+            workingDir("/usr/local/etc/nginx/servers")
+            def args = ["ln", "-s", "$projectDir/bee.peacetrue.cn.conf", "bee.peacetrue.cn.conf"]
+            println "command: ${String.join(' ', args)}"
+            commandLine(args)
+        }
+    }
+}
+
+uploadBeeConf.finalizedBy("reloadNginx")
+task reloadNginx(group: "peacetrue-nginx") {
+    doLast {
+        exec {
+            workingDir("$projectDir")
+            def args = ["ssh", "root@aliyun", "nginx -s reload"]
+            println "command: ${String.join(' ', args)}"
+            commandLine(args)
+        }
+    }
+}

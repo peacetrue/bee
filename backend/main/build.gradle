@@ -1,0 +1,48 @@
+//tag::basic[]
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+    id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}"
+    id "application"
+    id "org.springframework.boot" version "${springBootPluginVersion}"
+}
+
+group "com.github.peacetrue.bee"
+version "${beeMainVersion}${tailSnapshot}"
+description "Bee 后端模块"
+
+dependencies {
+    //tag::dependencies[]
+    implementation platform(SpringBootPlugin.BOM_COORDINATES)
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    runtimeOnly "com.h2database:h2"
+    runtimeOnly "mysql:mysql-connector-java"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-cache"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "de.codecentric:spring-boot-admin-starter-client" // SBA 客户端
+    implementation "org.jolokia:jolokia-core" // 基于 JMX 修改 MBean
+    //end::dependencies[]
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+}
+
+// 在 Spring 配置文件中使用 Gradle 属性
+processResources {
+    expand(project.properties)
+}
+
+// 在 SBA 应用列表显示版本号
+springBoot {
+    buildInfo()
+}
+
+
+//end::basic[]
+
+apply from: "../deploy.gradle"
+ext {
+    remotePort = "$beeMainPort"
+}
+apply from: "jmeter.gradle"
+
