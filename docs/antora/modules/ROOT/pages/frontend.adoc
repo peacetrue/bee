@@ -1,6 +1,8 @@
 = Bee 前端模块
 :module-name: frontend
 
+功能优先，样式居后。
+
 == 创建应用
 
 参考 https://create-react-app.dev/docs/adding-typescript/ 。
@@ -85,21 +87,17 @@ include::example$frontend/deploy[tag=basic]
 </svg>
 ----
 
-使用网站 https://cloudconvert.com/svg-to-ico[cloudconvert^]，
-转换 logo.svg 为 favicon.ico 和 logo192.png、logo512.png。
+使用网站 https://cloudconvert.com/svg-to-ico[cloudconvert^]， 转换 logo.svg 为 favicon.ico 和 logo192.png、logo512.png。
 
 == 导航菜单
 
-使用 `Tabs` 组件制作导航菜单。
-首页时，导航菜单不选中；
-其他页面，导航菜单根据地址栏路径选中。
+使用 `Tabs` 组件制作导航菜单。 首页时，导航菜单不选中； 其他页面，导航菜单根据地址栏路径选中。
 
 == 功能页
 
 功能页左侧时菜单，右侧是内容，通过路由跳转实现。
 
-使用 `TreeView` 组件制作功能菜单。
-该组件是实验性的，需要安装扩展类库：
+使用 `TreeView` 组件制作功能菜单。 该组件是实验性的，需要安装扩展类库：
 
 .lab
 [source%nowrap,tsx]

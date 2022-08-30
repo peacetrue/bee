@@ -50,7 +50,8 @@ function App() {
             </Stack>
             {/* //TODO AppBar 下的颜色全部要使用继承，统一处理 */}
             <Stack sx={{flexDirection: "row", alignItems: "center", "& *": {color: "inherit"}}}>
-              <IconButton sx={{color: "inherit"}} href={"https://github.com/peacetrue/bee"} target={"_blank"}><GitHubIcon/></IconButton>
+              <IconButton sx={{color: "inherit"}} href={"https://github.com/peacetrue/bee"}
+                          target={"_blank"}><GitHubIcon/></IconButton>
               <ThemeSwitcher sx={{color: "inherit"}} value={themeIndex} onChange={(e, index) => setThemeIndex(index)}/>
             </Stack>
           </Toolbar>
@@ -64,7 +65,7 @@ function App() {
             <Outlet/>
           </Box>
           {/* 页脚 */}
-          <Box sx={{textAlign: "center", height: "64px"}}>
+          <Box sx={{textAlign: "center", height: theme => theme.spacing(8)}}>
             © 2022 peacetrue. 鄂ICP备20006312号
           </Box>
         </Stack>

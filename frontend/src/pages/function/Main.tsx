@@ -32,9 +32,9 @@ export default function Main() {
         defaultExpandIcon={<ChevronRightIcon/>}
         sx={{
           position: "sticky",
-          top: theme => theme.spacing(6), // ToolBar 的 8 - padding 的 2
+          top: theme => theme.spacing(8), // ToolBar 的 6 + padding 的 2
           width: theme => theme.spacing(24),
-          height: theme => `calc(100vh - ${theme.spacing(16)})`, // ToolBar 的 8 + footer 的 8
+          height: theme => `calc(100vh - ${theme.spacing(18)})`, // ToolBar 的 6 + padding 的 2 * 2(上下) + footer 的 8
           overflow: "auto",
         }}
       >
