@@ -42,7 +42,6 @@ function App() {
                   value={activeMenu} onChange={(event, newValue) => setActiveMenu(newValue)}
                   textColor={"inherit"} indicatorColor="secondary">
               <Tab label="功能" component={Link} to="/function" value={"/function"}/>
-              <Tab label="监控" component={Link} to="/monitoring" value={"/monitoring"}/>
             </Tabs>
             <Stack flexGrow={1} flexDirection={"row"}>
               <Button variant="text" sx={{color: "inherit", fontSize: "medium"}}
