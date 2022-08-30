@@ -1,50 +1,77 @@
-import React from 'react';
-import './App.css';
-import {AppBar, Container, CssBaseline, Grid, Link as MuiLink, Toolbar, Typography} from "@mui/material";
-import EmojiNatureIcon from '@mui/icons-material/EmojiNature';
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import Home from "./pages/Home";
-import Monitoring from "./pages/Monitoring";
-import NotFound from './pages/NotFound';
+import React from "react";
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  IconButton,
+  Link as MuiLink,
+  Stack,
+  Tab,
+  Tabs,
+  Toolbar
+} from "@mui/material";
+import EmojiNatureIcon from "@mui/icons-material/EmojiNature";
+import {Link, Outlet, useLocation} from "react-router-dom";
+import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
+import ThemeSwitcher from "./compontents/ThemeSwitcher";
+import SwitchableThemeProvider from "./compontents/SwitchableThemeProvider";
+import GitHubIcon from '@mui/icons-material/GitHub';
 
-//@formatter:off
 function App() {
+  let location = useLocation();
+  console.info("location: ", location)
+  let initialActiveMenu = location.pathname === "/" ? false
+    : location.pathname.split(/(?<=.+)\//, 1)[0];
+  const [activeMenu, setActiveMenu] = React.useState<string | boolean>(initialActiveMenu || false);
+  const [themeIndex, setThemeIndex] = React.useState<number>(0);
   return (
-    <BrowserRouter>
+    <SwitchableThemeProvider value={themeIndex}>
       <CssBaseline/>
+      {/*<BrowserRouter>*/}
+      {/* 展示全屏宽度 */}
       <Container maxWidth={false}>
+        {/* 导航菜单。position="fixed" 不占用高度 */}
         <AppBar>
           <Toolbar variant="dense">
-            <MuiLink component={Link} to="/" color="inherit"><EmojiNatureIcon/></MuiLink>
-            <Typography variant="h6" color="inherit" component="div" ml={1}>Bee</Typography>
-            <Grid container ml={4} spacing={4}>
-              <Grid item>
-                <MuiLink href="https://peacetrue.github.io/bee" color="inherit" underline="none" target={"_blank"}>文档</MuiLink>
-              </Grid>
-              <Grid item>
-                {/*https://stackoverflow.com/questions/63216730/can-you-use-material-ui-link-with-react-router-dom-link*/}
-                <MuiLink component={Link} to="/monitoring" color="inherit" underline={"none"}>监控</MuiLink>
-              </Grid>
-            </Grid>
+            <EmojiNatureIcon/>
+            <MuiLink ml={1} component={Link} to="/" color="inherit" underline="none" variant={"h6"}
+                     onClick={() => setActiveMenu(false)}>Bee</MuiLink>
+            <Tabs sx={{ml: 4, "& .MuiTab-root": {fontSize: "medium"}}}
+                  value={activeMenu} onChange={(event, newValue) => setActiveMenu(newValue)}
+                  textColor={"inherit"} indicatorColor="secondary">
+              <Tab label="功能" component={Link} to="/function" value={"/function"}/>
+            </Tabs>
+            <Stack flexGrow={1} flexDirection={"row"}>
+              <Button variant="text" sx={{color: "inherit", fontSize: "medium"}}
+                      href={"https://peacetrue.github.io/bee"} target={"_blank"}
+                      endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>文档</Button>
+            </Stack>
+            {/* //TODO AppBar 下的颜色全部要使用继承，统一处理 */}
+            <Stack sx={{flexDirection: "row", alignItems: "center", "& *": {color: "inherit"}}}>
+              <IconButton sx={{color: "inherit"}} href={"https://github.com/peacetrue/bee"}
+                          target={"_blank"}><GitHubIcon/></IconButton>
+              <ThemeSwitcher sx={{color: "inherit"}} value={themeIndex} onChange={(e, index) => setThemeIndex(index)}/>
+            </Stack>
           </Toolbar>
         </AppBar>
-        <Grid container flexDirection={"column"} minHeight={"100vh"}>
-          <Grid item>
-            <Toolbar/>
-          </Grid>
-          <Grid item flexGrow={1}>
-              <Routes>
-                <Route path="/" element={<Home />}/>
-                <Route path="/monitoring" element={<Monitoring />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-          </Grid>
-          <Grid item textAlign={"center"} height={"80px"}>
+        {/* 主体 */}
+        <Stack sx={{minHeight: "100vh"}}>
+          {/* 占位：https://mui.com/zh/material-ui/react-app-bar/#fixed-placement */}
+          <Toolbar variant="dense"/>
+          <Box sx={{padding: 2, flexGrow: 1}}>
+            {/* 路由出口 */}
+            <Outlet/>
+          </Box>
+          {/* 页脚 */}
+          <Box sx={{textAlign: "center", height: theme => theme.spacing(8)}}>
             © 2022 peacetrue. 鄂ICP备20006312号
-          </Grid>
-        </Grid>
+          </Box>
+        </Stack>
       </Container>
-    </BrowserRouter>
+      {/*</BrowserRouter>*/}
+    </SwitchableThemeProvider>
   );
 }
 
