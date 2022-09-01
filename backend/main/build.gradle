@@ -1,9 +1,7 @@
-//tag::basic[]
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
     id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}"
-    id "application"
     id "org.springframework.boot" version "${springBootPluginVersion}"
 }
 
@@ -12,19 +10,48 @@ version "${beeMainVersion}${tailSnapshot}"
 description "Bee 后端模块"
 
 dependencies {
-    //tag::dependencies[]
-    implementation platform(SpringBootPlugin.BOM_COORDINATES)
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-    runtimeOnly "com.h2database:h2"
-    runtimeOnly "mysql:mysql-connector-java"
+    //tag::version[]
+    implementation platform(SpringBootPlugin.BOM_COORDINATES) //版本管理
+    //end::version[]
+
+    //tag::web[]
     implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "org.springframework.boot:spring-boot-starter-cache"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "de.codecentric:spring-boot-admin-starter-client" // SBA 客户端
-    implementation "org.jolokia:jolokia-core" // 基于 JMX 修改 MBean
-    //end::dependencies[]
+    //end::web[]
+
+    //tag::springdoc[]
+    // http://localhost:8081/swagger-ui/index.html
+    implementation "org.springdoc:springdoc-openapi-ui:1.6.9"
+    implementation "org.latencyutils:LatencyUtils:2+"
+    //end::springdoc[]
+
+    //tag::sba[]
+//    implementation "de.codecentric:spring-boot-admin-starter-client" // SBA 客户端
+//    implementation "org.jolokia:jolokia-core" // 基于 JMX 修改 MBean
+    //end::sba[]
+
+    //tag::data[]
+//    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+//    runtimeOnly "com.h2database:h2"
+//    runtimeOnly "mysql:mysql-connector-java"
+    //end::data[]
+
+    //tag::cache[]
+//    implementation "org.springframework.boot:spring-boot-starter-cache"
+    //end::cache[]
+
+    //tag::conversion[]
+    implementation "com.github.peacetrue:peacetrue-common"
+    implementation "com.fasterxml.jackson.core:jackson-databind"
+    implementation "org.apache.commons:commons-text"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-properties"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+    //end::conversion[]
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.apache.commons:commons-io"
 }
 
 // 在 Spring 配置文件中使用 Gradle 属性

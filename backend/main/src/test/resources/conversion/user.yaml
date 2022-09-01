@@ -1,0 +1,10 @@
+name: "张三"
+age: 18
+roles:
+- name: "admin"
+  remark: "管理员"
+- name: "employee"
+  remark: "员工"
+tags:
+- "goodness"
+- "tall"
