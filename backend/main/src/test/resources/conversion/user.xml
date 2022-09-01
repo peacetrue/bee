@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<User>
+  <name>张三</name>
+  <age>18</age>
+  <roles>
+    <roles>
+      <name>admin</name>
+      <remark>管理员</remark>
+    </roles>
+    <roles>
+      <name>employee</name>
+      <remark>员工</remark>
+    </roles>
+  </roles>
+  <tags>
+    <tags>goodness</tags>
+    <tags>tall</tags>
+  </tags>
+</User>

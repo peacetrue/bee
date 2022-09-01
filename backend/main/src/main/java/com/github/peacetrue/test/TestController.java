@@ -1,4 +1,4 @@
-package com.github.peacetrue.bee;
+package com.github.peacetrue.test;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

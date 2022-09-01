@@ -1,0 +1,119 @@
+= 功能
+
+//@formatter:off
+
+== 数据转换
+
+支持在常用数据格式之间转换数据。
+
+=== 数据格式
+
+常用数据格式包括：
+
+* https://zh.m.wikipedia.org/zh-hans/XML[XML^]
+* https://en.wikipedia.org/wiki/JSON[JSON^]
+* https://zh.m.wikipedia.org/zh-hans/YAML[YAML^]
+* https://zh.m.wikipedia.org/zh-hans/.properties[properties^]
+* <<Postman,Postman>>
+
+XML、JSON、YAML 是标准数据格式；
+properties 是一种文件类型而非数据格式，
+因为没有对应的标准，此处直接使用其文件类型表示。
+
+[[Postman]]
+*Postman 格式* 表示 Postman 中使用到的 Bulk Key-Value 格式：
+
+image::backend/image-2022-08-31-17-26-27-976.png[]
+
+行与行之间使用 *\n* 分割；
+键值之间使用 *:* 分割。
+
+=== 转换逻辑
+
+以文本表示的不同格式的数据先转换为对象实例，
+再通过对象实例转换为其他格式的数据：
+
+[plantuml,target=data-convert,format=png]
+----
+@startuml
+
+folder 文本表示 {
+    [XML]
+    [JSON]
+    [YAML]
+    [properties]
+    [Postman]
+}
+
+folder 内存 {
+    [对象实例]
+    note bottom: 这里使用泛化对象实例，即键值对（Map)
+}
+
+[XML] <--> [对象实例]: 相互转换
+[JSON] <--> [对象实例]: 相互转换
+[YAML] <--> [对象实例]: 相互转换
+[properties] <--> [对象实例]: 相互转换
+[Postman] <--> [对象实例]: 相互转换
+
+@enduml
+----
+
+=== 示例
+
+举个例子，有如下用户：
+
+[plantuml,target=user,format=png]
+----
+@startuml
+
+object user {
+  name = "张三"
+  age = 18
+  roles = [role1, role2]
+  tags = ["goodness", "tall"]
+}
+
+object role1 {
+  name = "admin"
+  remark = "管理员"
+}
+
+object role2 {
+  name = "employee"
+  remark = "员工"
+}
+
+user::roles --> role1
+user::roles --> role2
+
+@enduml
+----
+
+对应不同格式的数据如下：
+
+.json
+[source%nowrap,json]
+----
+include::example$backend/main/src/test/resources/conversion/user.json[]
+----
+
+.xml
+[source%nowrap,xml]
+----
+include::example$backend/main/src/test/resources/conversion/user.xml[]
+----
+
+.properties
+[source%nowrap,properties]
+----
+include::example$backend/main/src/test/resources/conversion/user.properties[]
+----
+
+.yaml
+[source%nowrap,yaml]
+----
+include::example$backend/main/src/test/resources/conversion/user.yaml[]
+----
+
+

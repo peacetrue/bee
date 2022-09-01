@@ -39,7 +39,7 @@ task uploadToRemote(group: "peacetrue-deploy") {
 }
 
 
-deployToRemote.finalizedBy("restartRemote")
+uploadToRemote.finalizedBy("restartRemote")
 // 重启远程服务
 task restartRemote(group: "peacetrue-deploy") {
     doLast {
