@@ -36,3 +36,44 @@ $ ssh-copy-id -i ~/.ssh/id_rsa.pub root@aliyun
 === 预装命令
 
 参考 https://github.com/peacetrue/peacetrue-shell 。
+
+== 跨域问题
+
+本地开发时， 前端运行在 *http://localhost:3000/*， 后端运行在 *http://localhost:8081/*。 从前端调用后台时，会导致跨域，如何解决呢？ 一般有 2 种途径：
+
+. 后端代码允许跨域
+. 通过 Nginx 反向代理到相同域名下
+
+这里使用途径 2，保持与生产环境一致。
+
+本地测试时使用域名 *bee.com*。
+
+添加 hosts 条目：
+
+./etc/hosts
+[source%nowrap,bash]
+----
+echo '127.0.0.1 bee.com' >> /etc/hosts
+----
+
+准备 Nginx 配置：
+
+.bee.cn.conf
+[source%nowrap,bash]
+----
+include::example$backend/nginx/bee.cn.conf[]
+----
+
+.链接到 Nginx 配置目录
+[source%nowrap,bash]
+----
+cd "$nginxDir/servers"
+ln -s "$workingDir/bee/docs/antora/modules/ROOT/examples/backend/nginx/bee.cn.conf"  bee.cn.conf
+----
+
+
+
+
+
+
+
