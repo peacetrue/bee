@@ -1,11 +1,11 @@
-name: bee
+name: Bee
 title: 开发者助手
 version: master
 asciidoc:
   attributes:
     numbered: '@'
     website: https://peacetrue.github.io
-    app-name: bee
+    repo-name: bee
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc
