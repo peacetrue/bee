@@ -12,5 +12,6 @@
 
 //@formatter:off
 {website}/{repo-name}/[{page-component-name}] 是一个开发者助手，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
+
 {page-component-name} 翻译成中文是蜜蜂 🐝 ，寓意像蜜蜂一样勤勤恳恳付出而又默默无闻的大多数。
 谨以此网站献给那些辛勤创造的人们，世界因你们的付出更加美好。
