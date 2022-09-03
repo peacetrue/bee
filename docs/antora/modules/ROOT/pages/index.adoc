@@ -3,7 +3,6 @@
 :page-component-name: Bee
 :repo-name: bee
 :foresight-repo-id: 02ea4d16-76a8-4400-bed3-47c567a7286d
-:imagesdir: docs/antora/modules/ROOT/assets/images
 
 //image:https://img.shields.io/lgtm/grade/java/github/peacetrue/{app-name}["LGTM Grade",link="https://lgtm.com/projects/g/peacetrue/{app-name}"]
 //image:https://snyk.io/test/github/peacetrue/{app-name}/badge.svg["Snyk",link="https://app.snyk.io/org/peacetrue"]
@@ -13,3 +12,5 @@
 
 //@formatter:off
 {website}/{repo-name}/[{page-component-name}] 是一个开发者助手，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
+{page-component-name} 翻译成中文是蜜蜂 🐝 ，寓意像蜜蜂一样勤勤恳恳付出而又默默无闻的大多数。
+谨以此网站献给那些辛勤创造的人们，世界因你们的付出更加美好。
