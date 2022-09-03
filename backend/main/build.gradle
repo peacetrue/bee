@@ -22,8 +22,13 @@ dependencies {
     //tag::springdoc[]
     // http://localhost:8081/swagger-ui/index.html
     implementation "org.springdoc:springdoc-openapi-ui:1.6.9"
-    implementation "org.latencyutils:LatencyUtils:2+"
+    implementation "org.latencyutils:LatencyUtils:2.0.3"
     //end::springdoc[]
+
+    //tag::validation[]
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "com.github.peacetrue.result:peacetrue-result-exception-support"
+    //end::validation[]
 
     //tag::sba[]
 //    implementation "de.codecentric:spring-boot-admin-starter-client" // SBA 客户端

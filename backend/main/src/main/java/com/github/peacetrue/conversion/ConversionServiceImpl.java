@@ -29,16 +29,15 @@ public class ConversionServiceImpl implements ConversionService, FormatterRegist
 
     @Override
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public String convert(String sourceData, FormatWrapper sourceFormat, FormatWrapper targetFormat) throws IOException {
+    public String convert(String sourceContent, FormatWrapper sourceFormat, FormatWrapper targetFormat) throws IOException {
         String localSourceFormat = sourceFormat.getFormat();
         String localTargetFormat = targetFormat.getFormat();
-        log.info("convert source data from {} to {}:\n{}", localSourceFormat, localTargetFormat, sourceData);
+        log.info("convert source content from {} to {}:\n{}", localSourceFormat, localTargetFormat, sourceContent);
 
         Formatter<?> sourceFormatter = formatters.get(localSourceFormat);
         log.debug("got source Formatter: {}", sourceFormatter);
         if (sourceFormatter == null)
             throw new IllegalStateException("Can't found Formatter which supports " + localSourceFormat);
-
 
         Formatter<Object> targetFormatter = (Formatter) formatters.get(localTargetFormat);
         log.debug("got target Formatter: {}", targetFormatter);
@@ -54,7 +53,7 @@ public class ConversionServiceImpl implements ConversionService, FormatterRegist
             ));
         }
 
-        Object object = sourceFormatter.parse(sourceData, sourceFormat.getOptions());
+        Object object = sourceFormatter.parse(sourceContent, sourceFormat.getOptions());
         log.debug("got memory object: {}", object);
 
         return targetFormatter.print(object, targetFormat.getOptions());
