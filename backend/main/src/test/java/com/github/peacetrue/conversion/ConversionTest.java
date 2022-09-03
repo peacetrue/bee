@@ -10,6 +10,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.github.peacetrue.beanmap.BeanMap;
 import com.github.peacetrue.beanmap.BeanMapUtils;
 import com.github.peacetrue.net.URLQueryUtils;
+import com.github.peacetrue.util.MapUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.junit.jupiter.api.Assertions;
@@ -181,6 +182,5 @@ public class ConversionTest {
         User user = objectMapper.convertValue(beanMap, User.class);
         Assertions.assertEquals(USER, user);
     }
-
 
 }

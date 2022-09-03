@@ -63,10 +63,9 @@ class ConversionControllerTest {
         String targetData = IOUtils.toString(Objects.requireNonNull(targetStream));
         targetData = StringUtils.removeEnd(targetData, "\n");
 
-        ConversionController.Args args = new ConversionController.Args(
-                sourceData,
-                new FormatWrapper(JsonFormatter.FORMAT, null),
-                new FormatWrapper(YamlFormatter.FORMAT, null)
+        DataConversion args = new DataConversion(
+                new DataWrapper(JsonFormatter.FORMAT, sourceData),
+                new DataWrapper(YamlFormatter.FORMAT, null)
         );
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>(
                 URLQueryUtils.fromBeanMap(javaPropsMapper.writeValueAsMap(args))
