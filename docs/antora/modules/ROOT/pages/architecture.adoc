@@ -46,31 +46,34 @@ $ ssh-copy-id -i ~/.ssh/id_rsa.pub root@aliyun
 
 这里使用途径 2，保持与生产环境一致。
 
-本地测试时使用域名 *bee.com*。
+本地测试时使用域名 *bee.peacetrue.local*。
 
 添加 hosts 条目：
 
 ./etc/hosts
 [source%nowrap,bash]
 ----
-echo '127.0.0.1 bee.com' >> /etc/hosts
+echo '127.0.0.1 bee.peacetrue.local' >> /etc/hosts
 ----
 
 准备 Nginx 配置：
 
-.bee.cn.conf
+.bee.peacetrue.local
 [source%nowrap,bash]
 ----
-include::example$backend/nginx/bee.cn.conf[]
+include::example$backend/nginx/bee.peacetrue.local.conf[]
 ----
 
-.链接到 Nginx 配置目录
+链接到 Nginx 配置目录：
+
 [source%nowrap,bash]
 ----
 cd "$nginxDir/servers"
-ln -s "$workingDir/bee/docs/antora/modules/ROOT/examples/backend/nginx/bee.cn.conf"  bee.cn.conf
+ln -s "$workingDir/bee/docs/antora/modules/ROOT/examples/backend/nginx/bee.peacetrue.local.conf"  bee.peacetrue.local.conf
+nginx -s reload
 ----
 
+访问 http://bee.peacetrue.local 。
 
 
 
