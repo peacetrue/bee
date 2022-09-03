@@ -1,4 +1,4 @@
 == frontend
 
-Bee 前端模块。
+Bee 前端项目。
 
