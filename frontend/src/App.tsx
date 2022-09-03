@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Dispatch, SetStateAction} from "react";
 import {
   AppBar,
   Box,
@@ -18,60 +18,79 @@ import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
 import ThemeSwitcher from "./compontents/ThemeSwitcher";
 import SwitchableThemeProvider from "./compontents/SwitchableThemeProvider";
 import GitHubIcon from '@mui/icons-material/GitHub';
+import i18n from "./infrastructure/i18n"
+import {I18nextProvider, useTranslation} from "react-i18next";
+import LanguageSwitcher from "./compontents/LanguageSwitcher";
+import {Feedback} from "./compontents/Feedback";
+
+interface HeaderProps {
+  themeState: [number, Dispatch<SetStateAction<number>>]
+}
+
+function Header({themeState}: HeaderProps) {
+  let {pathname} = useLocation();
+  // 按第 2 个 / 分割：/function/conversion -> /function
+  let initialActiveMenu = pathname === "/" ? false : pathname.split(/(?<=.+)\//, 1)[0];
+  const [activeMenu, setActiveMenu] = React.useState<boolean | string>(initialActiveMenu || false);
+  const {t} = useTranslation();
+  return (
+    <AppBar>
+      <Toolbar variant="dense">
+        <EmojiNatureIcon/>
+        <MuiLink ml={1} component={Link} to="/" color="inherit" underline="none" variant={"h6"}
+                 onClick={() => setActiveMenu(false)}>Bee</MuiLink>
+        <Tabs sx={{ml: 4, "& .MuiTab-root": {fontSize: "medium"}}}
+              value={activeMenu} onChange={(event, newValue) => setActiveMenu(newValue)}
+              textColor={"inherit"} indicatorColor="secondary">
+          <Tab label={`${t("function")}`} component={Link} to="/function/conversion" value={"/function"}/>
+        </Tabs>
+        <Stack flexGrow={1} flexDirection={"row"}>
+          <Button variant="text" sx={{color: "inherit", fontSize: "medium"}}
+                  href={"https://peacetrue.github.io/bee"} target={"_blank"}
+                  endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>文档</Button>
+        </Stack>
+        {/* //TODO AppBar 下的颜色全部要使用继承，统一处理 */}
+        <Stack sx={{flexDirection: "row", alignItems: "center", "& *": {color: "inherit"}}}>
+          <IconButton sx={{color: "inherit"}} href={"https://github.com/peacetrue/bee"} target={"_blank"}>
+            <GitHubIcon/>
+          </IconButton>
+          <ThemeSwitcher sx={{color: "inherit"}} value={themeState[0]}
+                         onChange={(e, index) => themeState[1](index)}/>
+          <LanguageSwitcher sx={{color: "inherit"}} value={i18n.resolvedLanguage}
+                            onChange={(e, newValue) => i18n.changeLanguage(newValue)}/>
+        </Stack>
+      </Toolbar>
+    </AppBar>
+  );
+}
 
 function App() {
-  let location = useLocation();
-  console.info("location: ", location)
-  let initialActiveMenu = location.pathname === "/" ? false
-    : location.pathname.split(/(?<=.+)\//, 1)[0];
-  const [activeMenu, setActiveMenu] = React.useState<string | boolean>(initialActiveMenu || false);
-  const [themeIndex, setThemeIndex] = React.useState<number>(0);
+  const themeState = React.useState<number>(0);
   return (
-    <SwitchableThemeProvider value={themeIndex}>
-      <CssBaseline/>
-      {/*<BrowserRouter>*/}
-      {/* 展示全屏宽度 */}
-      <Container maxWidth={false}>
-        {/* 导航菜单。position="fixed" 不占用高度 */}
-        <AppBar>
-          <Toolbar variant="dense">
-            <EmojiNatureIcon/>
-            <MuiLink ml={1} component={Link} to="/" color="inherit" underline="none" variant={"h6"}
-                     onClick={() => setActiveMenu(false)}>Bee</MuiLink>
-            <Tabs sx={{ml: 4, "& .MuiTab-root": {fontSize: "medium"}}}
-                  value={activeMenu} onChange={(event, newValue) => setActiveMenu(newValue)}
-                  textColor={"inherit"} indicatorColor="secondary">
-              <Tab label="功能" component={Link} to="/function" value={"/function"}/>
-            </Tabs>
-            <Stack flexGrow={1} flexDirection={"row"}>
-              <Button variant="text" sx={{color: "inherit", fontSize: "medium"}}
-                      href={"https://peacetrue.github.io/bee"} target={"_blank"}
-                      endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>文档</Button>
-            </Stack>
-            {/* //TODO AppBar 下的颜色全部要使用继承，统一处理 */}
-            <Stack sx={{flexDirection: "row", alignItems: "center", "& *": {color: "inherit"}}}>
-              <IconButton sx={{color: "inherit"}} href={"https://github.com/peacetrue/bee"}
-                          target={"_blank"}><GitHubIcon/></IconButton>
-              <ThemeSwitcher sx={{color: "inherit"}} value={themeIndex} onChange={(e, index) => setThemeIndex(index)}/>
-            </Stack>
-          </Toolbar>
-        </AppBar>
-        {/* 主体 */}
-        <Stack sx={{minHeight: "100vh"}}>
-          {/* 占位：https://mui.com/zh/material-ui/react-app-bar/#fixed-placement */}
-          <Toolbar variant="dense"/>
-          <Box sx={{padding: 2, flexGrow: 1}}>
-            {/* 路由出口 */}
-            <Outlet/>
-          </Box>
-          {/* 页脚 */}
-          <Box sx={{textAlign: "center", height: theme => theme.spacing(8)}}>
-            © 2022 peacetrue. 鄂ICP备20006312号
-          </Box>
-        </Stack>
-      </Container>
-      {/*</BrowserRouter>*/}
-    </SwitchableThemeProvider>
+    <I18nextProvider i18n={i18n} defaultNS={"bee"}>
+      <SwitchableThemeProvider value={themeState[0]}>
+        <CssBaseline/>
+        {/* 展示全屏宽度 */}
+        <Container maxWidth={false}>
+          {/* 导航菜单。position="fixed" 不占用高度 */}
+          <Header themeState={themeState}/>
+          {/* 主体 */}
+          <Stack sx={{minHeight: "100vh"}}>
+            {/* 占位：https://mui.com/zh/material-ui/react-app-bar/#fixed-placement */}
+            <Toolbar variant="dense"/>
+            <Box sx={{padding: 2, flexGrow: 1}}>
+              {/* 路由出口 */}
+              <Outlet/>
+            </Box>
+            {/* 页脚 */}
+            <Box sx={{textAlign: "center", height: theme => theme.spacing(8)}}>
+              © 2022 peacetrue. 鄂ICP备20006312号
+            </Box>
+          </Stack>
+        </Container>
+        <Feedback/>
+      </SwitchableThemeProvider>
+    </I18nextProvider>
   );
 }
 

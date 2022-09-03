@@ -1,7 +1,7 @@
 = 前端
 :module-name: frontend
 
-优先实现功能，后续美化样式。
+优先实现功能，后续美化界面。
 
 == 创建应用
 
@@ -16,7 +16,9 @@ npm install
 npm start
 ----
 
-== 安装 MUI
+== 页面布局
+
+=== 安装 MUI
 
 参考 https://mui.com/zh/material-ui/getting-started/installation/ 。
 
@@ -46,13 +48,13 @@ import '@fontsource/roboto/700.css';
 
 roboto 字体和默认字体差别不大，如非必要无需使用。
 
-== 实现首页布局
+=== 实现首页布局
 
 image::frontend/image-2022-08-18-16-42-27-504.png[]
 
-== 实现菜单路由跳转
+=== 实现菜单路由跳转
 
-文档为外链，监控为内链；内链需要使用路由。
+文档为外链，功能为内链；内链需要使用路由。
 
 .安装路由
 [source%nowrap,bash,subs="specialchars,attributes"]
@@ -65,17 +67,7 @@ npm install react-router-dom@6
 * https://stackoverflow.com/questions/63216730/can-you-use-material-ui-link-with-react-router-dom-link[MUI Link 和 router Link 配合使用^]
 * https://juejin.cn/post/6844903942942359560[nginx 服务器配置 React 的 Browser 路由模式]
 
-== 部署
-
-将本地构建的静态文件，上传到服务器 Nginx 的静态资源目录下。
-
-.deploy
-[source%nowrap,bash]
-----
-include::example$frontend/deploy[tag=basic]
-----
-
-== 制作图标
+=== 制作图标
 
 默认的 logo 图标为 React，需要替换为 Bee。
 
@@ -89,18 +81,102 @@ include::example$frontend/deploy[tag=basic]
 
 使用网站 https://cloudconvert.com/svg-to-ico[cloudconvert^]， 转换 logo.svg 为 favicon.ico 和 logo192.png、logo512.png。
 
-== 导航菜单
+=== 导航菜单
 
 使用 `Tabs` 组件制作导航菜单。 首页时，导航菜单不选中； 其他页面，导航菜单根据地址栏路径选中。
 
-== 功能页
+=== 功能页
 
-功能页左侧时菜单，右侧是内容，通过路由跳转实现。
+功能页左侧是菜单，右侧是内容，通过路由跳转实现。
 
-使用 `TreeView` 组件制作功能菜单。 该组件是实验性的，需要安装扩展类库：
+使用 `TreeView` 组件制作功能菜单。该组件是实验性的，需要安装扩展类库：
 
 .lab
-[source%nowrap,tsx]
+[source%nowrap,bash]
 ----
 npm install @mui/lab
+----
+
+== 基础设施
+
+工欲善其事，必先利其器。开发功能之前，准备好基础设施。
+
+=== lodash
+
+使用 https://github.com/lodash/lodash[lodash^] 作为工具类库， 安装命令如下：
+
+.lodash
+[source%nowrap,bash]
+----
+npm install lodash
+----
+
+=== i18n
+
+使用 https://github.com/i18next/react-i18next[react-i18next^] 支持国际化， 安装命令如下：
+
+.react-i18next
+[source%nowrap,bash]
+----
+npm install react-i18next i18next
+----
+
+使用 https://github.com/i18next/i18next-browser-languageDetector[i18next-browser-languageDetector^]
+探测客户端语言， 安装命令如下：
+
+.i18next-browser-languagedetector
+[source%nowrap,bash]
+----
+npm install i18next-browser-languagedetector
+----
+
+=== form
+
+使用 https://react-hook-form.com/[React Hook Form^] 处理表单， 安装命令如下：
+
+.React Hook Form
+[source%nowrap,bash]
+----
+npm install react-hook-form
+----
+
+使用 https://github.com/jquense/yup[yup^] 验证表单， 安装命令如下：
+
+.yup
+[source%nowrap,bash]
+----
+npm install yup
+npm install @hookform/resolvers //<1>
+----
+
+<1> 配合 react-hook-form 使用
+
+yup 默认提示英文，配合 react-i18next 处理中文。
+
+使用 https://github.com/axios/axios[axios^] 调用后端接口， 命令安装如下：
+
+=== axios
+
+.axios
+[source%nowrap,bash]
+----
+npm install axios
+----
+
+使用 https://github.com/ljharb/qs#stringifying[qs^] 格式化请求参数， 安装命令如下：
+
+.qs
+[source%nowrap,bash]
+----
+npm install qs
+----
+
+=== 部署脚本
+
+将本地构建的静态文件，上传到服务器 Nginx 的静态资源目录下。
+
+.deploy
+[source%nowrap,bash]
+----
+include::example$frontend/deploy[tag=basic]
 ----
