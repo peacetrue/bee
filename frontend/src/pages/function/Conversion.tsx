@@ -101,7 +101,7 @@ export default function Conversion() {
       <Box><Typography variant={"h6"}>不同格式的数据相互转换</Typography></Box>
       <Box component={"form"} onSubmit={form.handleSubmit((data) => {
         //target 的内容不需要传回后台
-        data = {source: data.source, target: {format: data.target.format}};
+        data = {source: data.source, target: {format: data.target.format, content: ""}};
         Axios.post("/conversion", data, {responseType: "text"})
           .then(response => {
             let data = response.data;
