@@ -12,4 +12,5 @@ tar -cf build.tar build
 # 部署到远程服务
 scp build.tar "root@aliyun:$remoteDir"
 ssh root@aliyun "cd $remoteDir; tar -xf build.tar; rm -rf bee; mv build bee"
+open -a "Google Chrome" "http://bee.peacetrue.cn"
 #end::basic[]

@@ -1,0 +1,50 @@
+{
+  "zh": {
+    "yup": {
+      "mixed": {
+        "required": "${path} 是必须的",
+        "default": "${path} 是无效的",
+        "oneOf": "${path} 必须是如下值之一: ${values}",
+        "notOneOf": "${path} 必须不是如下值之一: ${values}",
+        "notType": "\n If \"null\" is intended as an empty value be sure to mark the schema as `.nullable()`",
+        "defined": "${path} 必须定义"
+      },
+      "string": {
+        "length": "${path} 必须是 ${length} 个字符",
+        "min": "${path} 至少 ${min} 个字符",
+        "max": "${path} 最多 ${max} 个字符",
+        "matches": "${path} 必须匹配正则表达式: \"${regex}\"",
+        "email": "${path} 必须是一个有效的邮件",
+        "url": "${path} 必须是一个有效的链接",
+        "uuid": "${path} 必须是一个有效的 UUID",
+        "trim": "${path} 必须是修剪过的字符串",
+        "lowercase": "${path} 必须是小写格式的字符串",
+        "uppercase": "${path} 必须是大写格式的字符串"
+      },
+      "number": {
+        "min": "${path} 必须大于或等于 ${min}",
+        "max": "${path} 必须小于或等于 ${max}",
+        "lessThan": "${path} 必须小于 ${less}",
+        "moreThan": "${path} 必须大于 ${more}",
+        "positive": "${path} 必须是一个正数",
+        "negative": "${path} 必须是一个负数",
+        "integer": "${path} 必须是一个整数",
+        "date.min": "${path} 必须晚于 ${min}"
+      },
+      "date": {
+        "max": "${path} 必须早于 ${max}"
+      },
+      "boolean": {
+        "isValue": "${path} 必须是 ${value}"
+      },
+      "object": {
+        "noUnknown": "${path} 具有未指定的键: ${unknown}"
+      },
+      "array": {
+        "min": "${path} 至少含有 ${min} 项",
+        "max": "${path} 至多含有 ${max} 项",
+        "length": "${path} 必须是 ${length} 项"
+      }
+    }
+  }
+}
