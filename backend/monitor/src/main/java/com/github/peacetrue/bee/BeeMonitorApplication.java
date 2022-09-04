@@ -11,9 +11,8 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author peace
  **/
-@Configuration
 @EnableAdminServer
-@EnableAutoConfiguration
+@SpringBootApplication
 public class BeeMonitorApplication {
 
     /**

@@ -1,6 +1,13 @@
 * xref:index.adoc[]
-* xref:branch.adoc[]
-* xref:architecture.adoc[]
-include::partial$navs/antora.adoc[]
-include::partial$navs/frontend.adoc[]
-include::partial$navs/backend.adoc[]
+* xref:requirement/requirement.adoc[]
+** xref:requirement/function.adoc[]
+** xref:requirement/design.adoc[]
+* xref:architecture/architecture.adoc[]
+** xref:architecture/frontend.adoc[]
+** xref:architecture/backend.adoc[]
+* 实现
+** xref:implement/api.adoc[]
+** xref:implement/manual.adoc[]
+* 性能
+** xref:test.adoc[]
+* xref:version.adoc[]

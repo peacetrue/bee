@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #tag::basic[]
-# nginx 静态资源目录
+# 服务端 nginx 静态资源目录
 remoteDir="/usr/share/nginx/html"
 # 删除历史文件
 rm -rf build build.tar
@@ -12,5 +12,6 @@ tar -cf build.tar build
 # 部署到远程服务
 scp build.tar "root@aliyun:$remoteDir"
 ssh root@aliyun "cd $remoteDir; tar -xf build.tar; rm -rf bee; mv build bee"
+# 打开浏览器
 open -a "Google Chrome" "http://bee.peacetrue.cn"
 #end::basic[]

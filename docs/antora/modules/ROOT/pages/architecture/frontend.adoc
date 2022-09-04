@@ -18,7 +18,7 @@ npm install
 npm start
 ----
 
-== 页面布局
+== 实现布局
 
 === 安装 MUI
 
@@ -50,15 +50,22 @@ import '@fontsource/roboto/700.css';
 
 roboto 字体和默认字体差别不大，如非必要无需使用。
 
-=== 实现页面布局
+=== 布局设计
 
-上中下布局：
+宽度充满整个窗口，使用上中下布局：
 
 * 上部为导航栏，高度固定，位置固定
 * 中部为主体区域，高度自适应，填充窗口剩余高度
 * 底部为页脚，高度固定，显示版权信息
 
-=== 实现路由跳转
+=== 导航菜单
+
+使用 https://mui.com/material-ui/react-tabs[Tabs^] 组件制作导航菜单。
+首页时，导航菜单不选中；其他页面，导航菜单根据地址栏路径选中。
+
+=== 路由跳转
+
+路由跳转使用浏览器模式：
 
 .安装路由
 [source%nowrap,bash,subs="specialchars,attributes"]
@@ -71,9 +78,9 @@ npm install react-router-dom@6
 * https://stackoverflow.com/questions/63216730/can-you-use-material-ui-link-with-react-router-dom-link[MUI Link 和 router Link 配合使用^]
 * https://juejin.cn/post/6844903942942359560[nginx 服务器配置 React 的 Browser 路由模式]
 
-=== 制作图标
+=== 图标制作
 
-默认的 logo 图标为 React，需要替换为 Bee。
+默认的 logo 图标为 React，需要替换为 Bee：
 
 .logo.svg
 [source%nowrap,xml]
@@ -85,17 +92,13 @@ npm install react-router-dom@6
 
 使用网站 https://cloudconvert.com/svg-to-ico[cloudconvert^]， 转换 logo.svg 为 favicon.ico 和 logo192.png、logo512.png。
 
-=== 导航菜单
+=== 功能主区域
 
-使用 `Tabs` 组件制作导航菜单。
-首页时，导航菜单不选中；
-其他页面，导航菜单根据地址栏路径选中。
+点击功能菜单时，主区域会显示功能界面。
 
-=== 功能页
+功能界面左侧为菜单，右侧为内容，通过路由实现跳转。
 
-功能页左侧为菜单，右侧是内容，通过路由实现跳转。
-
-使用 `TreeView` 组件制作功能菜单。
+使用 https://mui.com/material-ui/react-tree-view[TreeView^] 组件制作功能菜单。
 该组件是实验性的，需要安装扩展类库：
 
 .lab
@@ -106,9 +109,9 @@ npm install @mui/lab
 
 == 基础设施
 
-工欲善其事，必先利其器。开发功能之前，准备好基础设施。
+工欲善其事，必先利其器。开发功能之前，准备好常用类库。
 
-=== lodash
+=== 工具
 
 使用 https://github.com/lodash/lodash[lodash^] 作为工具类库， 安装命令如下：
 
@@ -118,7 +121,7 @@ npm install @mui/lab
 npm install lodash
 ----
 
-=== i18n
+=== 国际化
 
 使用 https://github.com/i18next/react-i18next[react-i18next^] 支持国际化， 安装命令如下：
 
@@ -137,7 +140,7 @@ npm install react-i18next i18next
 npm install i18next-browser-languagedetector
 ----
 
-=== form
+=== 表单
 
 使用 https://react-hook-form.com/[React Hook Form^] 处理表单， 安装命令如下：
 
@@ -158,11 +161,11 @@ npm install @hookform/resolvers //<1>
 
 <1> 配合 react-hook-form 使用
 
-yup 默认提示英文，配合 react-i18next 处理中文。
+yup 默认提示英文，配合 react-i18next，自定义改造处理中文。
+
+=== 请求
 
 使用 https://github.com/axios/axios[axios^] 调用后端接口， 命令安装如下：
-
-=== axios
 
 .axios
 [source%nowrap,bash]
@@ -178,12 +181,17 @@ npm install axios
 npm install qs
 ----
 
-=== 部署脚本
+=== 部署
 
-将本地构建的静态文件，上传到服务器 Nginx 的静态资源目录下。
+将本地构建的静态文件，上传到服务器 Nginx 静态资源目录下。
 
-.deploy
+.部署脚本
 [source%nowrap,bash]
 ----
 include::example$frontend/deploy[tag=basic]
 ----
+
+== 特性
+
+* 主题切换（日 / 夜）
+* 语言切换（中 / 英）

@@ -5,7 +5,9 @@ asciidoc:
   attributes:
     numbered: '@'
     website: https://peacetrue.github.io
-    repo-name: bee
+    app-name: bee
+    beeMonitorPort: 8080
+    beeMainPort: 8081
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc

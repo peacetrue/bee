@@ -1,20 +1,20 @@
 = 架构
 
-https://zhuanlan.zhihu.com/p/87855907[前后端分离架构^]。
+https://zhuanlan.zhihu.com/p/87855907[前后端分离^]。
 
-== 项目结构
+== 项目划分
 
 [plantuml,target=structure,format=png]
 ----
 @startuml
-[后端主应用] <--> [后端监控应用]: 相互调用
-[后端主应用] <--  [前端应用]:    单向调用
+[后端主应用] <--> [后端监控应用]: 相互通信
+[后端主应用] <--  [前端应用]:    单向通信
 @enduml
 ----
 
 * 后端主应用：提供功能接口
 * 后端监控应用：监控后端主应用运行状态及异常告警
-* 前端应用：提供功能界面展示，调用后端主应用接口
+* 前端应用：提供功能界面展示
 
 == 部署模式
 
@@ -76,7 +76,7 @@ include::example$backend/nginx/bee.peacetrue.local.conf[]
 
 === 远程
 
-远程部署模式与本地类似：
+远程指服务端。
 
 .远程部署模式
 [plantuml,target=deployment-remote,format=png]
@@ -116,3 +116,16 @@ Nginx 配置：
 ----
 include::example$backend/nginx/bee.peacetrue.cn.conf[]
 ----
+
+== 技术栈
+
+此处仅描述核心技术，
+其他技术根据实际需要在适当的时机引入。
+
+.前端
+* https://reactjs.org/[React^] 18+
+* https://mui.com/[MUI^] 5+
+
+.后端
+* https://www.oracle.com/java[Java] 8+
+* https://spring.io/projects/spring-boot/[Spring Boot^] 2+

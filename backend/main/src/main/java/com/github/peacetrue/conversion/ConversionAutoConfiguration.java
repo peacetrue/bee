@@ -18,12 +18,12 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author peace
  **/
+@Generated
 @Configuration
 @AutoConfigureAfter(JacksonAutoConfiguration.class)
 public class ConversionAutoConfiguration {
 
     @Bean
-    @Generated
     public ConversionController conversionController() {
         return new ConversionController();
     }

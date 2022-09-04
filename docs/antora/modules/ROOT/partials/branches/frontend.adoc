@@ -1,4 +1,0 @@
-== frontend
-
-Bee 前端项目。
-

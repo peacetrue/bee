@@ -2,6 +2,7 @@ package com.github.peacetrue.conversion;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.peacetrue.net.URLQueryUtils;
+import lombok.Generated;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -55,11 +56,13 @@ public class CollectionConverter implements Formatter<List<String>> {
 
 
     @Autowired
+    @Generated
     public void setObjectMapper(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
     @Autowired
+    @Generated
     public void setFormatterRegistrar(FormatterRegistrar formatterRegistrar) {
         formatterRegistrar.registerFormatter("collection", this);
     }

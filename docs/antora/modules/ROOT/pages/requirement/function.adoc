@@ -4,7 +4,9 @@
 
 == 数据转换
 
-支持在常用数据格式之间转换数据。
+在常用数据格式之间相互转换数据内容。
+
+数据含 3 个属性：格式、类型和内容，通常数据即指代数据内容。
 
 === 数据格式
 
@@ -28,40 +30,15 @@ image::backend/image-2022-08-31-17-26-27-976.png[]
 行与行之间使用 *\n* 分割；
 键值之间使用 *:* 分割。
 
-=== 转换逻辑
+=== 数据类型
 
-以文本表示的不同格式的数据先转换为对象实例，
-再通过对象实例转换为其他格式的数据：
-
-[plantuml,target=data-convert,format=png]
-----
-@startuml
-
-folder 文本表示 {
-    [XML]
-    [JSON]
-    [YAML]
-    [properties]
-    [Postman]
-}
-
-folder 内存 {
-    [对象实例]
-    note bottom: 这里使用泛化对象实例，即键值对（Map)
-}
-
-[XML] <--> [对象实例]: 相互转换
-[JSON] <--> [对象实例]: 相互转换
-[YAML] <--> [对象实例]: 相互转换
-[properties] <--> [对象实例]: 相互转换
-[Postman] <--> [对象实例]: 相互转换
-
-@enduml
-----
+https://zh.wikipedia.org/zh-cn/%E8%B3%87%E6%96%99%E9%A1%9E%E5%9E%8B[数据类型^] 主要是复合类型（对象和集合），不处理原始类型。
 
 === 示例
 
-举个例子，有如下用户：
+示例可作为实现的参考，但不是约束。
+
+有如下用户：
 
 [plantuml,target=user,format=png]
 ----
@@ -90,7 +67,7 @@ user::roles --> role2
 @enduml
 ----
 
-对应不同格式的数据如下：
+对应不同格式的内容如下：
 
 .json
 [source%nowrap,json]

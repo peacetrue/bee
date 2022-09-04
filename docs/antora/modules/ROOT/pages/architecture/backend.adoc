@@ -1,19 +1,15 @@
 = 后端项目
-:beeMonitorPort: 8080
-:beeMainPort: 8081
 
-== 项目环境
+== 开发环境
 
-* JDK 17
-** 源码级别：8
-** 编译级别：8
-* 构建工具：Gradle 7.4.2
+* JDK 17（源码级别 8、编译级别 8）
+* 构建工具： https://gradle.org/[Gradle^] 7.4.2
 * 项目框架：Spring Boot 2.7.0
 
 NOTE: Gradle 版本和 Spring Gradle 插件版本存在不兼容的情况，需要注意。
 Gradle 7.4.2 和 spring-boot-gradle-plugin 2.7.0 可正常匹配
 
-== 应用规划
+== 应用
 
 |===
 |名称 |描述 |端口 |备注
@@ -26,10 +22,10 @@ Gradle 7.4.2 和 spring-boot-gradle-plugin 2.7.0 可正常匹配
 |http://peacetrue.cn:{beeMainPort}[bee-main^]
 |主应用
 |{beeMainPort}
-|功能都在主应用中实现
+|实现业务功能
 |===
 
-== 监控应用
+=== 监控应用
 
 依赖如下：
 
@@ -39,14 +35,14 @@ Gradle 7.4.2 和 spring-boot-gradle-plugin 2.7.0 可正常匹配
 include::example$backend/monitor/build.gradle[tag=dependencies]
 ----
 
-== 主应用
+=== 主应用
 
 依赖如下：
 
 .build.gradle
 [source%nowrap,gradle]
 ----
-include::example$backend/main/build.gradle[tag=dependencies]
+include::example$backend/main/build.gradle[tags=web;sba;springdoc;validation]
 ----
 
 == 自动部署

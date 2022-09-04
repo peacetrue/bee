@@ -1,5 +1,6 @@
 package com.github.peacetrue.conversion;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 import com.github.peacetrue.net.URLQueryUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,8 @@ class ConversionControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private JavaPropsMapper javaPropsMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
     void getFormats() throws Exception {
@@ -65,15 +68,18 @@ class ConversionControllerTest {
 
         DataConversion args = new DataConversion(
                 new DataWrapper(JsonFormatter.FORMAT, sourceData),
-                new DataWrapper(YamlFormatter.FORMAT, null)
+                new DataWrapper(YamlFormatter.FORMAT, "")
         );
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>(
-                URLQueryUtils.fromBeanMap(javaPropsMapper.writeValueAsMap(args))
-        );
+//        MultiValueMap<String, String> params = new LinkedMultiValueMap<>(
+//                URLQueryUtils.fromBeanMap(javaPropsMapper.writeValueAsMap(args))
+//        );
+        String params = objectMapper.writeValueAsString(args);
         log.debug("params: {}", params);
         this.mockMvc.perform(post("/conversion")
-                .params(params)
-                .accept(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(params)
+                .accept(MediaType.APPLICATION_JSON)
+        )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(targetData))
         ;
