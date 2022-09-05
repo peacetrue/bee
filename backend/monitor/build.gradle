@@ -25,5 +25,5 @@ processResources {
 
 apply from: "../deploy.gradle"
 ext {
-    remotePort = "$beeMonitorPort"
+    remotePort = "$bee_monitor_port"
 }

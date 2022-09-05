@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author peace
  **/
-@Generated
+
 @Configuration
 @AutoConfigureAfter(JacksonAutoConfiguration.class)
 public class ConversionAutoConfiguration {
@@ -29,19 +29,19 @@ public class ConversionAutoConfiguration {
     }
 
     @Bean
-    @Generated
+    
     public ConversionServiceImpl conversionService() {
         return new ConversionServiceImpl();
     }
 
     @Bean
-    @Generated
+    
     public JsonFormatter jsonFormatter() {
         return new JsonFormatter();
     }
 
     @Bean
-    @Generated
+    
     @ConditionalOnMissingBean
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
@@ -53,7 +53,7 @@ public class ConversionAutoConfiguration {
     }
 
     @Bean
-    @Generated
+    
     @ConditionalOnMissingBean
     public XmlMapper xmlMapper() {
         XmlMapper xmlMapper = new XmlMapper();
@@ -62,13 +62,13 @@ public class ConversionAutoConfiguration {
     }
 
     @Bean
-    @Generated
+    
     public YamlFormatter yamlFormatter() {
         return new YamlFormatter();
     }
 
     @Bean
-    @Generated
+    
     @ConditionalOnMissingBean
     public YAMLMapper yamlMapper() {
         YAMLMapper yamlMapper = new YAMLMapper();
@@ -77,13 +77,13 @@ public class ConversionAutoConfiguration {
     }
 
     @Bean
-    @Generated
+    
     public PropertiesFormatter propertiesFormatter() {
         return new PropertiesFormatter();
     }
 
     @Bean
-    @Generated
+    
     @ConditionalOnMissingBean
     public JavaPropsMapper javaPropsMapper() {
         return new JavaPropsMapper();

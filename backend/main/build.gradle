@@ -1,13 +1,28 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
+
 plugins {
+    // build 约定插件
     id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}"
+    // Spring Boot Gradle 插件：https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/
     id "org.springframework.boot" version "${springBootPluginVersion}"
+    // https://github.com/springdoc/springdoc-openapi-gradle-plugin
+    id "org.springdoc.openapi-gradle-plugin" version "1.4.0"
+    // openapi 生成器：https://github.com/OpenAPITools/openapi-generator
+    id "org.openapi.generator" version "6.0.1"
 }
 
 group "com.github.peacetrue.bee"
 version "${beeMainVersion}${tailSnapshot}"
 description "Bee 后端模块"
+
+configurations {
+    // https://stackoverflow.com/questions/30792268/loggerfactory-is-not-a-logback-loggercontext-but-logback-is-on-the-classpath
+    all*.exclude module: "slf4j-simple"
+}
 
 dependencies {
     //tag::version[]
@@ -29,16 +44,18 @@ dependencies {
 
     //tag::springdoc[]
     // OpenAPI 3 文档支持：https://github.com/springdoc/springdoc-openapi
-    // http://localhost:8081/swagger-ui/index.html
-    implementation "org.springdoc:springdoc-openapi-ui:1.6.9"
-    implementation "org.latencyutils:LatencyUtils:2.0.3"
+    // http://bee.peacetrue.local/api/swagger-ui/index.html /api/v3/api-docs
+    implementation "org.springdoc:springdoc-openapi-ui:1.6.11"
+    // 从 javadoc 读取接口描述：https://springdoc.org/#javadoc-support
+    implementation "org.springdoc:springdoc-openapi-javadoc:1.6.11"
+    annotationProcessor "com.github.therapi:therapi-runtime-javadoc-scribe:0.15.0"
     //end::springdoc[]
 
     //tag::validation[]
     // Bean 验证
     implementation "org.springframework.boot:spring-boot-starter-validation"
     // 响应结果支持 https://peacetrue.github.io/peacetrue-result/index.html
-    implementation "com.github.peacetrue.result:peacetrue-result-exception-support"
+//    implementation "com.github.peacetrue.result:peacetrue-result-exception-support"
     //end::validation[]
 
     //tag::data[]
@@ -61,14 +78,49 @@ dependencies {
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-properties"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
     //end::conversion[]
-
+    implementation "org.openapitools:openapi-generator-gradle-plugin:6.0.1"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.apache.commons:commons-io"
 }
 
 // 在 Spring 配置文件中使用 Gradle 属性
+// https://docs.spring.io/spring-boot/docs/2.0.3.RELEASE/reference/html/howto-properties-and-configuration.html#howto-automatic-expansion-gradle
+// 使用 <%=bee_main_port%> 格式引用变量
 processResources {
     expand(project.properties)
+}
+
+// 生成 open API 3 定义，启动应用并调用接口 /v3/api-docs
+// https://github.com/springdoc/springdoc-openapi-gradle-plugin#customization
+openApi {
+    // 如果当前应用正在运行，需停止当前应用，否则端口冲突
+    apiDocsUrl = "${bee_url_dev}/api/v3/api-docs"
+    customBootRun {
+        // 生成生产环境的配置
+        args = ["--spring.profiles.active=prod"]
+    }
+}
+
+// generateOpenApiDocs 任务生成的时机较晚，不能直接引用
+tasks.configureEach({
+    if (name == "generateOpenApiDocs") finalizedBy("openApiGenerate")
+})
+
+// 生成 asciidoc 文档：https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator-gradle-plugin/README.adoc#configuration
+def asciidocDir = "${projectDir}/../../docs/antora/modules/ROOT/pages/implement"
+openApiGenerate {
+    inputSpec = "${buildDir}/openapi.json"
+    generatorName = "asciidoc"
+    outputDir = asciidocDir
+}
+
+// 删除 .openapi-generator 文件
+tasks.openApiGenerate {
+    doLast {
+        delete("${asciidocDir}/.openapi-generator")
+        delete("${asciidocDir}/.openapi-generator-ignore")
+        Files.move(Paths.get("${asciidocDir}/index.adoc"), Paths.get("${asciidocDir}/api.adoc"), StandardCopyOption.REPLACE_EXISTING)
+    }
 }
 
 // 在 SBA 应用列表显示版本号
@@ -76,11 +128,9 @@ springBoot {
     buildInfo()
 }
 
-//end::basic[]
-
 apply from: "../deploy.gradle"
 ext {
-    remotePort = "$beeMainPort"
+    remotePort = "$bee_main_port"
 }
 apply from: "jmeter.gradle"
 

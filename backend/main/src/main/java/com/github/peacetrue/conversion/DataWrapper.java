@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * 数据封装类。
+ * 数据参数。
  *
  * @author peace
  */
@@ -26,4 +26,5 @@ public class DataWrapper implements Serializable {
     /** 数据内容 */
     @NotNull
     private String content;
+
 }

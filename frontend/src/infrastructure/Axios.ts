@@ -12,6 +12,9 @@ let instance = axios.create({
 
 instance.interceptors.request.use(function (config) {
   console.info("request config: ", config)
+  // 默认使用 v1 版本接口
+  !config.headers && (config.headers = {});
+  !("Accept" in config.headers) && (config.headers.Accept = "application/vnd.bee.v1+json");
   return config;
 }, function (error) {
   console.info("request error: ", error)

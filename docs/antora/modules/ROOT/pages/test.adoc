@@ -271,7 +271,7 @@ image::test/image-2022-08-22-04-47-35-480.png[]
 健康检查接口的地址如下：
 
 * Tomcat：http://peacetrue.cn:8080/actuator/health
-* Nginx ：http://bee.peacetrue.cn/api/actuator/health
+* Nginx ：{bee_url_prod}/api/actuator/health
 
 === Tomcat 9
 

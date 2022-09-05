@@ -1,5 +1,7 @@
 = 架构
 
+//@formatter:off
+
 https://zhuanlan.zhihu.com/p/87855907[前后端分离^]。
 
 == 项目划分
@@ -56,7 +58,7 @@ Nginx --> 主应用: 反向代理
 * 后端监控应用：8080
 * 后端主应用：8081
 
-本地使用地址： http://bee.peacetrue.local 。
+本地使用地址： {bee_url_dev} 。
 
 添加 hosts 条目：
 
@@ -107,7 +109,7 @@ Nginx --> 主应用: 反向代理
 * 后端监控应用：8080
 * 后端主应用：8081
 
-远程使用地址： http://bee.peacetrue.cn 。
+远程使用地址： {bee_url_prod} 。
 
 Nginx 配置：
 
@@ -129,3 +131,27 @@ include::example$backend/nginx/bee.peacetrue.cn.conf[]
 .后端
 * https://www.oracle.com/java[Java] 8+
 * https://spring.io/projects/spring-boot/[Spring Boot^] 2+
+
+== 接口协议
+
+后端接口基于 https://zh.wikipedia.org/zh-cn/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE[HTTP] 协议，
+遵循 https://zh.wikipedia.org/zh-cn/%E8%A1%A8%E7%8E%B0%E5%B1%82%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2[REST API] 规范。
+
+=== 接口版本规范
+
+使用响应 https://en.wikipedia.org/wiki/Media_type[媒体类型^] 定义接口版本，
+格式为 *application/vnd.bee._version_+json*。
+
+_version_ 表示版本号，
+例如：*application/vnd.bee.v1+json*、*application/vnd.bee.v2+json* 。
+
+为什么不使用 URI 形式的版本？以及如何简单地在服务端和客户端升级版本？
+
+* https://www.baeldung.com/rest-versioning
+* https://www.baeldung.com/spring-rest-custom-media-type
+
+=== 响应结果
+
+前端根据后端响应状态处理返回数据。
+非 200 状态码，直接提示 `statusText` 值。
+

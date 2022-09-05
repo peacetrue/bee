@@ -3,7 +3,8 @@
     "bee": {
       "name": "Bee",
       "title": "开发者助手",
-      "function": "功能"
+      "function": "功能",
+      "document": "文档"
     }
   }
 }

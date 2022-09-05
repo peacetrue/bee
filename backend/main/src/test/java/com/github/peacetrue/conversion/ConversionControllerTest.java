@@ -2,7 +2,7 @@ package com.github.peacetrue.conversion;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
-import com.github.peacetrue.net.URLQueryUtils;
+import com.github.peacetrue.bee.OpenAPIConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -16,10 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -61,10 +60,9 @@ class ConversionControllerTest {
     @Test
     void convert() throws Exception {
         InputStream sourceStream = getClass().getResourceAsStream("/conversion/user.json");
-        String sourceData = IOUtils.toString(Objects.requireNonNull(sourceStream));
+        String sourceData = IOUtils.toString(Objects.requireNonNull(sourceStream), StandardCharsets.UTF_8);
         InputStream targetStream = getClass().getResourceAsStream("/conversion/user.yaml");
-        String targetData = IOUtils.toString(Objects.requireNonNull(targetStream));
-        targetData = StringUtils.removeEnd(targetData, "\n");
+        String targetData = IOUtils.toString(Objects.requireNonNull(targetStream), StandardCharsets.UTF_8);
 
         DataConversion args = new DataConversion(
                 new DataWrapper(JsonFormatter.FORMAT, sourceData),
@@ -78,7 +76,7 @@ class ConversionControllerTest {
         this.mockMvc.perform(post("/conversion")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(params)
-                .accept(MediaType.APPLICATION_JSON)
+                .accept(OpenAPIConfiguration.V1)
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(targetData))

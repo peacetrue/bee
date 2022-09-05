@@ -14,14 +14,14 @@ Gradle 7.4.2 和 spring-boot-gradle-plugin 2.7.0 可正常匹配
 |===
 |名称 |描述 |端口 |备注
 
-|http://peacetrue.cn:{beeMonitorPort}[bee-monitor^]
+|http://peacetrue.cn:{bee_monitor_port}[bee-monitor^]
 |监控应用
-|{beeMonitorPort}
+|{bee_monitor_port}
 |监控主应用的运行状态，基于 https://github.com/codecentric/spring-boot-admin[SBA^] 实现
 
-|http://peacetrue.cn:{beeMainPort}[bee-main^]
+|http://peacetrue.cn:{bee_main_port}[bee-main^]
 |主应用
-|{beeMainPort}
+|{bee_main_port}
 |实现业务功能
 |===
 

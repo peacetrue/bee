@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * 数据转换封装类。
+ * 数据转换参数。
  *
  * @author peace
  */
@@ -18,10 +18,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class DataConversion implements Serializable {
 
+    /** 原始数据 */
     @Valid
     @NotNull
     private DataWrapper source;
 
+    /** 目标数据 */
     @Valid
     @NotNull
     private DataWrapper target;

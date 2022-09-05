@@ -38,7 +38,7 @@ function DataPanel(props: DataPanelProps) {
             <FormControl fullWidth error={!!fieldState.error}>
               <InputLabel>数据格式</InputLabel>
               <Select {...field} label={"数据格式"}>
-                <MenuItem value=""><em>None</em></MenuItem>
+                <MenuItem value=""><em>请选择</em></MenuItem>
                 {formats.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)}
               </Select>
               <FormHelperText>{fieldState.error?.message}</FormHelperText>
@@ -88,26 +88,24 @@ export default function Conversion() {
     })
   });
 
+  let defaultValues: FieldValues = {source: {format: "", content: ""}, target: {format: "", content: ""}};
+  if (process.env.NODE_ENV === "development") {
+    defaultValues.source.format = "json";
+    defaultValues.source.content = user_json;
+    defaultValues.target.format = "yaml";
+  }
   const form = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      source: {format: "json", content: user_json},
-      target: {format: "yaml", content: ""}
-    } as FieldValues
+    defaultValues: defaultValues
   });
-
   return (
     <Stack spacing={1}>
       <Box><Typography variant={"h6"}>不同格式的数据相互转换</Typography></Box>
       <Box component={"form"} onSubmit={form.handleSubmit((data) => {
         //target 的内容不需要传回后台
         data = {source: data.source, target: {format: data.target.format, content: ""}};
-        Axios.post("/conversion", data, {responseType: "text"})
-          .then(response => {
-            let data = response.data;
-            typeof data !== 'string' && (data = JSON.stringify(data));
-            return form.setValue("target.content", data);
-          });
+        Axios.post("/conversion", data)
+          .then(response => form.setValue("target.content", response.data));
       })}>
         <Stack sx={{flexDirection: "row", alignItems: "center"}}>
           <Box sx={{flexGrow: 1}}>

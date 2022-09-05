@@ -4,18 +4,19 @@
 :app-name: bee
 :foresight-repo-id: 02ea4d16-76a8-4400-bed3-47c567a7286d
 
+image:https://img.shields.io/badge/License-Apache%202.0-orange["LICENSE",link="https://github.com/peacetrue/bee/blob/master/LICENSE"]
 image:https://snyk.io/test/github/peacetrue/{app-name}/badge.svg["Snyk",link="https://app.snyk.io/org/peacetrue"]
 image:https://img.shields.io/github/workflow/status/peacetrue/{app-name}/build/master["GitHub Workflow Status",link="https://github.com/peacetrue/{app-name}/actions"]
 image:https://foresight.service.thundra.io/public/api/v1/badge/success?repoId={foresight-repo-id}["Foresight",link="https://foresight.thundra.io/repositories/github/peacetrue/{app-name}/test-runs"]
 image:https://img.shields.io/codecov/c/github/peacetrue/{app-name}/master["Codecov",link="https://app.codecov.io/gh/peacetrue/{app-name}"]
 
 //@formatter:off
-{website}/{repo-name}/[{page-component-name}] 是一个开发者助手，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
+{website}/{app-name}/[Bee] 是一个开发者助手，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
 
-{page-component-name} 翻译成中文是蜜蜂 🐝 ，寓意像蜜蜂一样勤勤恳恳付出而又默默无闻的大多数。
+Bee 翻译成中文是蜜蜂 🐝 ，寓意像蜜蜂一样勤勤恳恳付出而又默默无闻的大多数。
 谨以此网站献给那些辛勤创造的人们，世界因你们的付出更加美好。
 
-== 文档组成
+== 文档结构
 
 文档主要包括 4 部分：需求、架构、实现和性能。
 
@@ -33,7 +34,5 @@ image:https://img.shields.io/codecov/c/github/peacetrue/{app-name}/master["Codec
 功能体现能不能做到某事，性能则体现事情做得好不好。
 最终产出压测报告。
 
-//== 致歉
-//
-//精力有限，会尽可能用简短的语句把事情说清楚。
-//如遇过于简短难以理解之处，敬请见谅。
+NOTE: 精力有限，会尽可能用简短的语句把事情说清楚。
+如遇过于简短难以理解之处，敬请见谅。

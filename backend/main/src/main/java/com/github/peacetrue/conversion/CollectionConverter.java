@@ -56,13 +56,13 @@ public class CollectionConverter implements Formatter<List<String>> {
 
 
     @Autowired
-    @Generated
+    
     public void setObjectMapper(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
     @Autowired
-    @Generated
+    
     public void setFormatterRegistrar(FormatterRegistrar formatterRegistrar) {
         formatterRegistrar.registerFormatter("collection", this);
     }
