@@ -2,9 +2,6 @@ package com.github.peacetrue.bee;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
-import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 /**
  * Bee 主应用。
@@ -23,19 +20,4 @@ public class BeeMainApplication {
         SpringApplication.run(BeeMainApplication.class, args);
     }
 
-    /**
-     * 记录请求日志。
-     *
-     * @return 日志过滤器
-     */
-    @Bean
-    public CommonsRequestLoggingFilter requestLoggingFilter() {
-        CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
-        loggingFilter.setIncludeClientInfo(true);
-        loggingFilter.setIncludeQueryString(true);
-        loggingFilter.setIncludePayload(true);
-        loggingFilter.setMaxPayloadLength(1024 * 1024);
-        loggingFilter.setIncludeHeaders(false);
-        return loggingFilter;
-    }
 }

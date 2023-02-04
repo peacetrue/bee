@@ -1,0 +1,63 @@
+= 用户手册
+
+本文介绍如何运行 {page-component-name} 项目。
+
+== 预览演示
+
+访问 http://bee.peacetrue.cn/function/conversion[数据转换功能^]。
+
+== 安装
+
+=== 预备
+
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+# 检出项目
+git clone https://github.com/peacetrue/bee.git && cd bee
+# 设置环境变量
+sh env
+----
+
+=== 开发环境
+
+开发环境指直接通过 IDE 运行，以 IntelliJ IDEA 为例。
+
+运行后端 `BeeMainApplication`：
+
+image:manual/backend.png[width=50%]
+
+激活开发环境：
+
+image:manual/dev.png[width=50%]
+
+启动前端 `package.json`：
+
+image:manual/frontend.png[width=50%]
+
+访问：
+
+http://localhost:3000/function/conversion[数据转换功能^]。
+
+=== 本地环境
+
+本地环境指通过 Nginx 在本机运行，配置与生产环境保持一致，便于迁移到生产环境。
+
+.本地运行：
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+# 在本机安装 Nginx
+# 设置 Nginx 配置目录
+export NGINX_CONFIG_DIR=/usr/local/etc/nginx
+# 设置 Nginx 静态资源目录；Mac：/usr/local/var/www，Ubuntu：/usr/share/nginx/html
+export NGINX_HTML_DIR=/usr/local/var/www
+# Nginx 主配置文件 nginx.conf 中需导入扩展配置 include servers/*;
+ln -s $(pwd)/nginx/bee.peacetrue.local.conf $NGINX_CONFIG_DIR/servers/bee.peacetrue.local.conf
+echo '127.0.0.1 bee.peacetrue.local' >> /etc/hosts
+ln -s $(pwd)/frontend/build $NGINX_HTML_DIR/bee
+# 打开 Google 浏览器
+open -a "Google Chrome" http://localhost:3000
+----
+
+=== 生产环境
+
+

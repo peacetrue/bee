@@ -22,7 +22,7 @@ task lnNginxBeeConf(group: "peacetrue-nginx") {
     doLast {
         exec {
             workingDir("/usr/local/etc/nginx/servers")
-            def args = ["ln", "-s", "$projectDir/bee.peacetrue.cn.conf", "bee.peacetrue.cn.conf"]
+            def args = ["ln", "-s", "$projectDir/bee.peacetrue.local.conf", "bee.peacetrue.local.conf"]
             println "command: ${String.join(' ', args)}"
             commandLine(args)
         }

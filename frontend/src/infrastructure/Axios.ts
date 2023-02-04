@@ -36,8 +36,8 @@ instance.interceptors.response.use(function (response) {
 instance.interceptors.response.use(undefined, function (error) {
   console.info("response error: ", error);
   document.dispatchEvent(new CustomEvent("feedback.show", {detail: error.message}));
-  return Promise.resolve(error);
+  // 使用 reject 返回，不能使用 resolve，否则业务认为是正常返回，然后使用 error 数据继续处理业务
+  return Promise.reject(error);
 });
-
 
 export default instance;

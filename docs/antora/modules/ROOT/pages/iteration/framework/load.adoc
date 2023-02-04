@@ -1,0 +1,253 @@
+= 负载测试
+
+本文将使用 https://jmeter.apache.org/[JMeter] 5.4.1 测试网站的最佳负载情况。
+
+// @formatter:off
+
+== 概述
+
+=== 注意事项
+
+请求必须设置连接超时和响应超时，
+否则有些连接一直未完成，
+导致整个测试计划不能退出，无法生成测试报告。
+连接超时一般设置为 500 毫秒，能连上的差不多就连上了，连不上的再多时间也还是不行；
+响应超时一般设置为 3000 毫秒，能返回数据的差不多就返回了，返回不了的再多时间也还是不行。
+
+本机压测必须勾选 keepalive 选项，
+否则线程在频繁创建连接时，
+相互之间可能存在冲突，
+会导致连接超时问题。
+
+测试时间较短时，执行相同的测试，
+可能得到不同的测试结果，且差距较大。
+
+=== 测试方案
+
+先使用较短的时间，快速测试网站的整体性能，
+找出大概范围后，再加长时间测试出更为准确的值。
+
+一般从 0 开始，每秒增加一个线程，增加到 600，持续 700 秒。
+观察此过程中，什么时间点 TPS 达到最高。
+找到时间点对应的线程数 *n*，
+然后从 *n-10* 开始，600 秒内，
+增加到 *n+10*，持续 700 秒。
+
+NOTE: 如果一直是升高的趋势，则表明 TPS 尚未达到峰值，需要增加线程数。
+
+=== 具体操作
+
+使用 GUI 模式设计测试计划，使用 NON_GUI 运行负载测试。
+为了方便调整负载测试的属性，设计了一些变量：
+
+.超时时间
+image::test/image-2022-09-06-17-24-40-094.png[]
+
+.线程组
+image::test/image-2022-08-23-06-51-54-752.png[]
+
+变量说明如下：
+
+|===
+|名称 |属性名 |默认值 |备注
+
+|连接超时（毫秒）
+|connectTimeout
+|500
+|
+
+|响应超时（毫秒）
+|responseTimeout
+|3000
+|
+
+|线程数
+|threadCount
+|1
+|
+
+|加速周期（秒）
+|rampUpSeconds
+|1
+|
+
+|循环次数
+|loopCount
+|1
+|整形，最大值 2147483647
+
+|持续时间（秒）
+|durationSeconds
+|1
+|
+
+|启动延迟（秒）
+|startupDelaySeconds
+|1
+|
+|===
+
+GUI 模式下，只需要运行 1 次，确认请求调用正常。
+NON_GUI 模式下，通过配置文件设置变量值。
+
+执行测试计划时，指定属性配置文件 *options.properties：*
+
+[source%nowrap,bash]
+----
+jmeter -n -t test-plan.jmx -q options.properties -l result.csv -e -o report
+----
+
+*options.properties* 文件内容如下：
+
+[source%nowrap,properties]
+----
+include::example$backend/main/src/test/resources/jmxs/options-600.properties[]
+----
+
+////
+
+=== 影响因数
+
+* 宽带：读取超时
+* 连接数：连接超时，IO 模型
+////
+
+
+== 服务器环境
+
+阿里云 ECS：
+
+image::test/image-2022-09-06-20-02-17-929.png[]
+
+* Ubuntu 22.04 64位
+* 4 核 8 GiB
+* 按量付费 100 Mbps 宽带
+* openjdk-17-jre-headless
+* nginx/1.18.0
+
+宽带如果不够，会导致性能低下，这里备足宽带。
+
+测试地址：
+
+* Nginx 首页： http://peacetrue.cn
+* Bee 项目前端首页： http://bee.peacetrue.cn
+* Bee 项目后端健康检查端点：
+** 直接访问： http://peacetrue.cn:8081/actuator/health
+** Nginx 转发： http://bee.peacetrue.cn/api/actuator/health
+
+== Nginx 首页
+
+使用 Nginx 默认配置，测试 Nginx 首页性能。
+
+.Nginx 默认配置
+[source%nowrap,conf]
+----
+include::example$test/nginx.conf[]
+----
+
+//worker_rlimit_nofile 默认值是 2000。
+
+启动 Nginx 观察其进程情况：
+
+[source%nowrap,bash]
+----
+$ ps -ef | grep nginx | grep -v grep
+root      184204       1  0 02:25 ?        00:00:00 nginx: master process nginx
+www-data  184205  184204  1 02:25 ?        00:00:23 nginx: worker process
+www-data  184206  184204  0 02:25 ?        00:00:04 nginx: worker process
+www-data  184207  184204  0 02:25 ?        00:00:00 nginx: worker process
+www-data  184208  184204  0 02:25 ?        00:00:00 nginx: worker process
+----
+
+1 个主进程，4 个工作进程，工作进程数目等于 CPU 核心数。
+
+使用 600 个线程：
+
+[source%nowrap,properties]
+----
+include::example$backend/main/src/test/resources/jmxs/options-600.properties[]
+----
+
+执行测试：
+
+[source%nowrap,bash]
+----
+jmeter -n -t nginx.jmx -q nginx.properties -l nginx.csv -e -o nginx
+----
+
+测试报告如下：
+
+image::test/image-2022-09-06-19-46-36-246.png[]
+
+image::test/image-2022-09-06-19-47-34-750.png[]
+
+image::test/image-2022-09-06-19-56-01-590.png[]
+
+worker_connections 为 768，则 4 * 768 = 3072。
+
+查看进程打开的文件描述符限制：
+
+[source%nowrap,bash]
+----
+$ ulimit -n
+65535
+----
+
+=== 连接超时问题排查
+
+整个网络通信过程如下：
+
+image::test/network.png[]
+
+各个步骤都可能出现问题，宽带也可能存在问题。
+
+也可以通过命令查看 https://cloud.tencent.com/developer/article/1430275[网络宽带^]：
+
+[source%nowrap,bash]
+----
+apt-get install nload -y
+nload
+----
+
+== Bee 主应用
+
+使用健康检查接口，测试 Bee 的性能。
+
+健康检查接口的地址如下：
+
+* Tomcat：http://peacetrue.cn:8080/actuator/health
+* Nginx ：{bee_url_prod}/api/actuator/health
+
+=== Tomcat 9
+
+Bee 使用 Tomcat 9 作为 Web 服务器，
+初始 Tomcat 使用默认的配置，后续根据测试结果调整。
+
+使用如下 JMeter 配置属性：
+
+[source%nowrap,properties]
+----
+include::example$backend/main/src/test/resources/jmxs/options-300.properties[]
+----
+
+执行测试计划：
+
+[source%nowrap,bash]
+----
+jmeter -n -t test-plan.jmx -q options.properties -l result.csv -e -o report
+----
+
+得到测试结果：
+
+image::test/image-2022-08-23-20-10-09-469.png[]
+
+观察发现，错误率比较高，主要是
+`ConnectTimeoutException` 和 `SocketTimeoutException`。
+
+查看服务器日志，没有发现错误日志。
+客户端发生错误，服务端却没有体现，是什么原因？
+
+`ConnectTimeoutException` 可能是达到了连接数上限。
+
+
+

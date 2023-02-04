@@ -20,10 +20,11 @@ task jmeter(group: "peacetrue-jmeter") {
     }
 }
 
-["baidu", "aliyun", "bee"].forEach(name -> {
+// "baidu", "aliyun"
+["nginx", "bee-tomcat", "bee-nginx"].forEach(name -> {
     def jmeterWorkingDir = "${sourceSets.test.resources.srcDirs[0]}/jmxs/$name"
 
-    ["100", "300", "500", "1000"].forEach(threadCount -> {
+    ["100", "300", "600", "1000"].forEach(threadCount -> {
         tasks.register("$name-$threadCount", task -> {
             task.setGroup("peacetrue-jmeter")
             task.finalizedBy("$name-run")

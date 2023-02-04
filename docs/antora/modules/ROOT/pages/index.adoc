@@ -5,18 +5,22 @@
 :foresight-repo-id: 02ea4d16-76a8-4400-bed3-47c567a7286d
 
 image:https://img.shields.io/badge/License-Apache%202.0-orange["LICENSE",link="https://github.com/peacetrue/bee/blob/master/LICENSE"]
-image:https://snyk.io/test/github/peacetrue/{app-name}/badge.svg["Snyk",link="https://app.snyk.io/org/peacetrue"]
 image:https://img.shields.io/github/workflow/status/peacetrue/{app-name}/build/master["GitHub Workflow Status",link="https://github.com/peacetrue/{app-name}/actions"]
-image:https://foresight.service.thundra.io/public/api/v1/badge/success?repoId={foresight-repo-id}["Foresight",link="https://foresight.thundra.io/repositories/github/peacetrue/{app-name}/test-runs"]
+image:https://snyk.io/test/github/peacetrue/{app-name}/badge.svg["Snyk",link="https://app.snyk.io/org/peacetrue"]
+image:https://api-public.service.runforesight.com/api/v1/badge/success?repoId={foresight-repo-id}["Foresight",link="https://foresight.thundra.io/repositories/github/peacetrue/{app-name}/test-runs"]
 image:https://img.shields.io/codecov/c/github/peacetrue/{app-name}/master["Codecov",link="https://app.codecov.io/gh/peacetrue/{app-name}"]
 
 //@formatter:off
-{website}/{app-name}/[Bee] 是一个开发者助手，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
 
-Bee 翻译成中文是蜜蜂 🐝 ，寓意像蜜蜂一样勤勤恳恳付出而又默默无闻的大多数。
-谨以此网站献给那些辛勤创造的人们，世界因你们的付出更加美好。
+== 简介（What）
 
-== 文档结构
+{website}/{app-name}/[{page-component-name}] 是一个开发者助手，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
+
+// {page-component-name} 翻译成中文是蜜蜂 🐝 ，寓意像蜜蜂一样勤勤恳恳付出而又默默无闻的大多数。
+// 谨以此网站献给那些辛勤创造的人们，世界因你们的付出更加美好。
+
+
+.文档结构
 
 文档主要包括 4 部分：需求、架构、实现和性能。
 
@@ -36,3 +40,29 @@ Bee 翻译成中文是蜜蜂 🐝 ，寓意像蜜蜂一样勤勤恳恳付出而�
 
 NOTE: 精力有限，会尽可能用简短的语句把事情说清楚。
 如遇过于简短难以理解之处，敬请见谅。
+
+== 背景（Why）
+
+日常开发工作中会产生很多需求，比如：Base64 编解码、MD5 哈希等等；
+也有很多实现类似需求的网站，比如： https://the-x.cn[在线工具箱^]。
+笔者仍然创建此网站，是希望能借此项目，记录下软件的开发过程，沉淀出一套实用的技术栈。
+
+== 用法（How）
+
+参考 {website}/{app-name}/manual.html[{page-component-name}]。
+
+== 维护者（Who）
+
+. peace(xiayouxue@hotmail.com)
+
+== 活动（When）
+
+初始提交于 2022-08-14，
+最近提交于 2023-02-02。
+
+== 许可证（License）
+
+https://github.com/peacetrue/{app-name}/blob/master/LICENSE[Apache License 2.0^]
+
+
+

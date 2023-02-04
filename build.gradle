@@ -1,13 +1,13 @@
-plugins {
-    id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}" apply false
-}
-
-group "com.github.peacetrue.bee"
-version "${beeMainVersion}${tailSnapshot}"
-description "开发者助手"
-apply plugin: "com.github.peacetrue.gradle.build-convention"
-
-dependencies {
-    implementation project("backend:main")
-    implementation project("backend:monitor")
-}
+//plugins {
+//    id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}" apply false
+//}
+//
+//group "com.github.peacetrue.bee"
+//version "${beeMainVersion}${tailSnapshot}"
+//description "开发者助手"
+//apply plugin: "com.github.peacetrue.gradle.build-convention"
+//
+//dependencies {
+//    implementation project("backend:main")
+//    implementation project("backend:monitor")
+//}

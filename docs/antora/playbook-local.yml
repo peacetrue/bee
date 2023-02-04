@@ -1,0 +1,29 @@
+# antora generate --clean --to-dir public playbook-local.yml
+# antora generate playbook-local.yml
+# ln -s ../../../../../README.adoc index.adoc
+site:
+  title: 安宁的知识库
+  url: https://peacetrue.github.io
+  start_page: bee::index.adoc
+asciidoc:
+  extensions:
+    - asciidoctor-plantuml
+  attributes:
+    plantuml-server-url: 'http://www.plantuml.com/plantuml@'
+    numbered: '@'
+    website: https://peacetrue.github.io
+    root-dir: docs/antora/modules/ROOT
+    root-dir-reverse: ../../../..
+    examples-dir: docs/antora/modules/ROOT/examples
+    examples-dir-reverse: ../../../../..
+content:
+  branches: master
+  sources:
+  - url: ../../
+    start_path: docs/antora
+
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files: ../../../peacetrue.github.io/supplemental-ui
