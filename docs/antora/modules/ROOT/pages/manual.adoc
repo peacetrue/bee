@@ -15,7 +15,7 @@
 # 检出项目
 git clone https://github.com/peacetrue/bee.git && cd bee
 # 设置环境变量
-sh env
+sh set-env
 ----
 
 === 开发环境

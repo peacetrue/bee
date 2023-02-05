@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # 初始化环境变量
+
 # https://stackoverflow.com/questions/4990172/how-to-append-several-lines-of-text-in-a-file-using-a-shell-script
-cat <<EOF >>.bashrc
+cat <<EOF >>~/.bashrc
 
 export PEACE_URL=https://peacetrue.cn
 export BEE_URL_DEV=http://bee.peacetrue.local
