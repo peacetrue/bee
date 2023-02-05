@@ -1,4 +1,5 @@
 #!/bin/bash
 
 cd "$(pwd)/frontend" || exit
+npm install
 npm start

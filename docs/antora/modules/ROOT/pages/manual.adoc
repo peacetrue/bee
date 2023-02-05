@@ -2,7 +2,7 @@
 
 本文介绍如何运行 {page-component-name} 项目。
 
-== 预览演示
+== 演示效果
 
 访问 http://bee.peacetrue.cn/function/conversion[数据转换功能^]。
 
@@ -10,17 +10,23 @@
 
 === 预备
 
+本机需事先安装 jdk(8+) 和 npm(8.5+)。
+
 [source%nowrap,bash,subs="specialchars,attributes"]
 ----
+
 # 检出项目
 git clone https://github.com/peacetrue/bee.git && cd bee
 # 设置环境变量
-sh set-env
+./set-env
 ----
 
 === 开发环境
 
 开发环境指直接通过 IDE 运行，以 IntelliJ IDEA 为例。
+
+链接 Gradle 项目：
+
 
 运行后端 `BeeMainApplication`：
 
@@ -37,6 +43,15 @@ image:manual/frontend.png[width=50%]
 访问：
 
 http://localhost:3000/function/conversion[数据转换功能^]。
+
+
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+# 运行后端项目
+./run-backend
+# 运行前端项目
+./run-frontend
+----
 
 === 本地环境
 
