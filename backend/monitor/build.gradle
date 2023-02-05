@@ -2,11 +2,11 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
     id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}"
-    id "org.springframework.boot" version "${springBootPluginVersion}"
+    id "org.springframework.boot" version "2.7.0"
 }
 
 group "com.github.peacetrue.bee"
-version "${beeMonitorVersion}${tailSnapshot}"
+version "${System.getenv("BEE_MONITOR_VERSION")}${tailSnapshot}"
 description "Bee 监控应用"
 
 dependencies {
@@ -19,11 +19,11 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
-processResources {
-    expand(project.properties)
-}
+//processResources {
+//    expand(project.properties)
+//}
 
 apply from: "../deploy.gradle"
 ext {
-    remotePort = "$bee_monitor_port"
+    remotePort = System.getenv("BEE_MONITOR_PORT")
 }
