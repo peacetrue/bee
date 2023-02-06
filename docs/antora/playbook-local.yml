@@ -17,7 +17,7 @@ asciidoc:
     examples-dir: docs/antora/modules/ROOT/examples
     examples-dir-reverse: ../../../../..
 content:
-  branches: master
+  branches: local
   sources:
   - url: ../../
     start_path: docs/antora

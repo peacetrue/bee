@@ -4,13 +4,13 @@
 
 == 前提条件
 
-读者需具有 https://www.java.com/zh-CN/[Java^]、https://www.npmjs.com/[npm^] 相关知识。
+读者需具有 https://www.java.com/zh-CN/[Java^]、 https://www.npmjs.com/[npm^] 相关知识。
 
-== 演示效果
+== 成品效果
 
 访问 http://bee.peacetrue.cn/function/conversion[数据转换功能^]。
 
-== 安装
+== 运行
 
 本机需事先安装 jdk(8+)、node(14+)、npm(8.5+)。
 
@@ -27,13 +27,20 @@ git clone https://github.com/peacetrue/bee.git && cd bee
 === 开发环境
 
 .直接通过 IDE 运行，以 IntelliJ IDEA 为例：
-. 链接 Gradle 项目
+* 链接 Gradle 项目
+
 image:manual/link-gradle.png[]
-. 运行后端 `BeeMainApplication`：
+
+* 运行后端 `BeeMainApplication`：
+
 image:manual/backend.png[width=50%]
-. 激活开发环境：
+
+* 激活开发环境：
+
 image:manual/dev.png[width=50%]
-. 启动前端 `package.json`：
+
+* 启动前端 `package.json`：
+
 image:manual/frontend.png[width=50%]
 
 .通过命令运行
