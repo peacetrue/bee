@@ -99,7 +99,7 @@ dependencies {
 // https://github.com/springdoc/springdoc-openapi-gradle-plugin#customization
 openApi {
     // 如果当前应用正在运行，需停止当前应用，否则端口冲突
-    apiDocsUrl = "${System.getenv('BEE_URL_DEV')}/api/v3/api-docs"
+    apiDocsUrl = "${System.getenv('BEE_URL_LOCAL')}/api/v3/api-docs"
     customBootRun {
         // 生成生产环境的配置
         args = ["--spring.profiles.active=prod"]

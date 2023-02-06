@@ -70,7 +70,7 @@ ln -s "$workingDir/bee/docs/antora/modules/ROOT/examples/backend/nginx/bee.peace
 nginx -s reload
 ----
 
-访问 {bee_url_dev} 。
+访问 {BEE_URL_LOCAL} 。
 
 == 已知网站
 
