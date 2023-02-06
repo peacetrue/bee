@@ -2,19 +2,22 @@
 
 本文介绍如何运行 {page-component-name} 项目。
 
+== 前提条件
+
+读者需具有 https://www.java.com/zh-CN/[Java^]、https://www.npmjs.com/[npm^] 相关知识。
+
 == 演示效果
 
 访问 http://bee.peacetrue.cn/function/conversion[数据转换功能^]。
 
 == 安装
 
-=== 预备
+本机需事先安装 jdk(8+)、node(14+)、npm(8.5+)。
 
-本机需事先安装 jdk(8+) 和 npm(8.5+)。
+// https://askubuntu.com/questions/426750/how-can-i-update-my-nodejs-to-the-latest-version
 
 [source%nowrap,bash,subs="specialchars,attributes"]
 ----
-
 # 检出项目
 git clone https://github.com/peacetrue/bee.git && cd bee
 # 设置环境变量
@@ -23,28 +26,17 @@ git clone https://github.com/peacetrue/bee.git && cd bee
 
 === 开发环境
 
-开发环境指直接通过 IDE 运行，以 IntelliJ IDEA 为例。
-
-链接 Gradle 项目：
-
-
-运行后端 `BeeMainApplication`：
-
+.直接通过 IDE 运行，以 IntelliJ IDEA 为例：
+. 链接 Gradle 项目
+image:manual/link-gradle.png[]
+. 运行后端 `BeeMainApplication`：
 image:manual/backend.png[width=50%]
-
-激活开发环境：
-
+. 激活开发环境：
 image:manual/dev.png[width=50%]
-
-启动前端 `package.json`：
-
+. 启动前端 `package.json`：
 image:manual/frontend.png[width=50%]
 
-访问：
-
-http://localhost:3000/function/conversion[数据转换功能^]。
-
-
+.通过命令运行
 [source%nowrap,bash,subs="specialchars,attributes"]
 ----
 # 运行后端项目
@@ -52,6 +44,9 @@ http://localhost:3000/function/conversion[数据转换功能^]。
 # 运行前端项目
 ./run-frontend
 ----
+
+// 访问：
+// http://localhost:3000/function/conversion[数据转换功能^]。
 
 === 本地环境
 
