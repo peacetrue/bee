@@ -2,8 +2,6 @@
 
 # 初始化环境变量
 
-source "$HOME/.bashrc"
-
 # https://stackoverflow.com/questions/4990172/how-to-append-several-lines-of-text-in-a-file-using-a-shell-script
 cat <<EOF >>~/.bashrc
 
@@ -12,8 +10,10 @@ export BEE_MONITOR_PORT=8080
 export BEE_MAIN_VERSION=1.0.0
 export BEE_MONITOR_VERSION=1.0.0
 export PEACE_URL=https://peacetrue.cn
-export BEE_URL_DEV="http://localhost:$BEE_MAIN_PORT"
+export BEE_URL_DEV=http://localhost:$BEE_MAIN_PORT
 export BEE_URL_LOCAL=http://bee.peacetrue.local
 export BEE_URL_PROD=http://bee.peacetrue.cn
 
 EOF
+
+source "$HOME/.bashrc"

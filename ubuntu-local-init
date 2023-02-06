@@ -7,7 +7,8 @@ export NGINX_CONFIG_DIR=/etc/nginx/conf.d
 export NGINX_HTML_DIR=/usr/share/nginx/html
 
 ln -s $(pwd)/nginx/bee.peacetrue.local.conf $NGINX_CONFIG_DIR/bee.peacetrue.local.conf
-echo "127.0.0.1 $BEE_URL_LOCAL" >> /etc/hosts
+# https://stackoverflow.com/questions/428109/extract-substring-in-bash
+echo "127.0.0.1 ${BEE_URL_LOCAL#*http://}" >> /etc/hosts
 ln -s $(pwd)/frontend/local $NGINX_HTML_DIR/bee
 
 nginx -s reload
