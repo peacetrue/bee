@@ -16,4 +16,3 @@ nginx -s reload
 
 # https://stackoverflow.com/questions/42458434/how-to-set-build-env-variables-when-running-create-react-app-build-script
 # https://github.com/toddbluhm/env-cmd
-npm install -g env-cmd

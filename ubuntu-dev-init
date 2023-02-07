@@ -1,5 +1,4 @@
 #!/bin/bash
 
-npm install -g env-cmd
 cd "$(pwd)/frontend" || exit
 npm install
