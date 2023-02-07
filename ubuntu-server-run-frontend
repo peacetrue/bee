@@ -1,12 +1,20 @@
 #!/bin/bash
 
 # ubuntu 环境，运行本地环境
+# tag::basic[]
 
-cd "$(pwd)/frontend" || exit
+cd frontend || exit
+# 服务端 nginx 静态资源目录
+REMOTE_DIR="/usr/share/nginx/html"
 # 删除历史文件
-rm -rf local
+rm -rf build build.tar
 # 重新构建
-npm run build:local
+npm run build:prod
 # 打包
-mv build local
-
+tar -cf build.tar build
+# 部署到远程服务
+sshpass -p $BEE_REMOTE_PASSWORD scp build.tar "$BEE_REMOTE_HOST:$REMOTE_DIR"
+sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST "cd $REMOTE_DIR; tar -xf build.tar; rm -rf bee; mv build bee"
+# 打开浏览器
+open -a "Google Chrome" $BEE_URL_PROD
+#end::basic[]

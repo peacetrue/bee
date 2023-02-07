@@ -2,31 +2,18 @@
 
 # ubuntu 环境，初始化生产环境
 
+# 安装 NGINX
+# https://serverfault.com/questions/241588/how-to-automate-ssh-login-with-password
+# https://stackoverflow.com/questions/32255660/how-to-install-sshpass-on-mac
+sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST <<EOF
 apt install nginx-core -y
 sed -i "s|www-data|root|g" /etc/nginx/nginx.conf
-export NGINX_CONFIG_DIR=/etc/nginx/conf.d
-export NGINX_HTML_DIR=/usr/share/nginx/html
-
-tee $NGINX_CONFIG_DIR/bee.peacetrue.cn.conf <<EOF
-server {
-    listen       80;
-    server_name  bee.peacetrue.cn;
-
-    root html/bee;
-    index index.html;
-
-    location / {
-        try_files \$uri \$uri/ /index.html;
-    }
-
-    location /monitor/ {
-       proxy_pass http://localhost:$BEE_MONITOR_PORT/;
-    }
-
-    location /api/ {
-       proxy_pass http://localhost:$BEE_MAIN_PORT/;
-    }
-}
+nginx -s reload
 EOF
 
-nginx -s reload
+# 创建工作目录
+sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST "mkdir $BEE_REMOTE_WORKING_DIR; ln -s /usr/share/nginx/html $BEE_REMOTE_WORKING_DIR/html"
+
+# 上传 bee.peacetrue.cn 配置
+sshpass -p $BEE_REMOTE_PASSWORD scp "$(pwd)/nginx/bee.peacetrue.cn.conf" "$BEE_REMOTE_HOST:/etc/nginx/conf.d/bee.peacetrue.cn.conf"
+

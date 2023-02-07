@@ -90,6 +90,8 @@ echo '127.0.0.1 bee.peacetrue.local' >> /etc/hosts
 ln -s $(pwd)/frontend/build $NGINX_HTML_DIR/bee
 # 打开 Google 浏览器
 open -a "Google Chrome" http://localhost:3000
+
+curl -s https://raw.githubusercontent.com/peacetrue/bee/local/ubuntu-server-init | bash
 ----
 
 === 生产环境

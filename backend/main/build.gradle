@@ -91,9 +91,9 @@ dependencies {
 // 在 Spring 配置文件中使用 Gradle 属性
 // https://docs.spring.io/spring-boot/docs/2.0.3.RELEASE/reference/html/howto-properties-and-configuration.html#howto-automatic-expansion-gradle
 // 使用 <%=bee_main_port%> 格式引用变量，过于繁琐，统一使用环境变量配置
-//processResources {
-//    expand(project.properties)
-//}
+processResources {
+    expand(System.getenv())
+}
 
 // 生成 open API 3 定义，启动应用并调用接口 /v3/api-docs
 // https://github.com/springdoc/springdoc-openapi-gradle-plugin#customization

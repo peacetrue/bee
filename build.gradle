@@ -9,6 +9,6 @@ apply plugin: "com.github.peacetrue.gradle.build-convention"
 
 
 dependencies {
-    implementation project("backend:main")
+//    implementation project("backend:main")
 //    implementation project("backend:monitor")
 }
