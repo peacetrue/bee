@@ -11,6 +11,7 @@ let instance = axios.create({
 });
 
 instance.interceptors.request.use(function (config) {
+  // https://stackoverflow.com/questions/37708586/reactjs-disable-console-log-system-wide
   console.info("request config: ", config)
   // 默认使用 v1 版本接口
   !config.headers && (config.headers = {});
