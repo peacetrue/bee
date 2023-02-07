@@ -33,9 +33,9 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "REACT_APP_ENV=development react-scripts start",
-    "build:local": "REACT_APP_ENV=local_ react-scripts build",
-    "build:prod": "REACT_APP_ENV=production react-scripts build",
+    "start": "react-scripts start",
+    "build:local": "env-cmd -f .env.native react-scripts build",
+    "build:prod": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
