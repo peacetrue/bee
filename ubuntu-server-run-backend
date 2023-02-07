@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# ubuntu 环境，运行本地环境
+
+
+cd "$(pwd)/backend/main" || exit
+# https://stackoverflow.com/questions/36923288/how-to-run-bootrun-with-spring-profile-via-gradle-task
+./gradlew clean bootRun --args='--spring.profiles.active=local'
