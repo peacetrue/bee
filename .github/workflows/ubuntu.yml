@@ -11,7 +11,7 @@ permissions:
 env:
   BEE_MAIN_PORT: 8081
   BEE_MONITOR_PORT: 8080
-  BEE_URL_DEV: "http://localhost:$BEE_MAIN_PORT"
+  BEE_URL_DEV: "http://localhost:8081"
   BEE_URL_LOCAL: "http://bee.peacetrue.local"
   BEE_URL_PROD: "http://bee.peacetrue.cn"
 
@@ -21,7 +21,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-#    - run: sudo apt install nginx-core -y
     - uses: actions/checkout@v3
 
     - name: Set up JDK 8
@@ -34,7 +33,6 @@ jobs:
       with:
         node-version: 16
 
-    - run: ./set-env
-    - run: ./ubuntu-dev-run-backend
     - run: ./ubuntu-dev-init
+    - run: ./ubuntu-dev-run-backend
     - run: ./ubuntu-dev-run-frontend
