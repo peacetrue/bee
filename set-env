@@ -13,4 +13,11 @@ export BEE_URL_PROD=http://bee.peacetrue.cn
 
 EOF
 
+# help ubuntu.yml
+export BEE_MAIN_PORT=8081
+export BEE_MONITOR_PORT=8080
+export BEE_URL_DEV=http://localhost:$BEE_MAIN_PORT
+export BEE_URL_LOCAL=http://bee.peacetrue.local
+export BEE_URL_PROD=http://bee.peacetrue.cn
+
 source "$HOME/.bashrc"
