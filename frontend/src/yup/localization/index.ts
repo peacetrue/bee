@@ -21,7 +21,7 @@ export function getLocaleObject(t: ((key: string) => string) = key => key): Loca
       notOneOf: t("mixed.notOneOf"),
       notType: ({path, type, value, originalValue}) => {
         let isCast = originalValue != null && originalValue !== value;
-        let msg = `${path} must be a \`${type}\` type, ` + `but the final value was: \`${printValue(value, true)}\`` + (isCast ? ` (cast from the value \`${printValue(originalValue, true)}\`).` : '.');
+        let msg = `${path} must be a \`${type}\` type, but the final value was: \`${printValue(value, true)}\`` + (isCast ? ` (cast from the value \`${printValue(originalValue, true)}\`).` : '.');
         if (value === null) {
           msg += `\n If "null" is intended as an empty value be sure to mark the schema as \`.nullable()\``;
         }

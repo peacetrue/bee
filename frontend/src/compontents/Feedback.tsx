@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Alert, Snackbar} from "@mui/material";
 
-export function Feedback({}: FeedbackProps) {
+export function Feedback() {
   const vertical = "top", horizontal = "center";
   let [open, setOpen] = useState(false);
   let [message, setMessage] = useState("<unknown>");
@@ -20,7 +20,4 @@ export function Feedback({}: FeedbackProps) {
       <Alert severity="error" onClose={() => setOpen(false)}>{message}</Alert>
     </Snackbar>
   )
-}
-
-export interface FeedbackProps {
 }

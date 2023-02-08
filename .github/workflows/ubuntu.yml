@@ -8,6 +8,7 @@ on:
 permissions:
   contents: read
 
+# 替代 set-env
 env:
   BEE_MAIN_PORT: 8081
   BEE_MONITOR_PORT: 8080
