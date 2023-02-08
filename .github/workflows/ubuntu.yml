@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: apt install nginx-core -y
+#    - run: sudo apt install nginx-core -y
     - uses: actions/checkout@v3
 
     - name: Set up JDK 8
@@ -35,6 +35,6 @@ jobs:
         node-version: 16
 
     - run: ./set-env
-    - run: ./ubuntu-dev-init
     - run: ./ubuntu-dev-run-backend
+    - run: ./ubuntu-dev-init
     - run: ./ubuntu-dev-run-frontend
