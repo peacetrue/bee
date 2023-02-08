@@ -15,6 +15,8 @@ tar -cf build.tar build
 # 部署到远程服务
 sshpass -p $BEE_REMOTE_PASSWORD scp build.tar "$BEE_REMOTE_HOST:$REMOTE_DIR"
 sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST "cd $REMOTE_DIR; tar -xf build.tar; rm -rf bee; mv build bee"
+# 删除历史文件
+rm -rf build.tar
 # 打开浏览器
 open -a "Google Chrome" $BEE_URL_PROD
 #end::basic[]

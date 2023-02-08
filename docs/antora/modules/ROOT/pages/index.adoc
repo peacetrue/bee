@@ -1,57 +1,78 @@
 = 简介
 :website: https://peacetrue.github.io
-:page-component-name: Bee
 :app-name: bee
 :foresight-repo-id: 02ea4d16-76a8-4400-bed3-47c567a7286d
 
 image:https://img.shields.io/badge/License-Apache%202.0-orange["LICENSE",link="https://github.com/peacetrue/bee/blob/master/LICENSE"]
-image:https://img.shields.io/github/workflow/status/peacetrue/{app-name}/build/master["GitHub Workflow Status",link="https://github.com/peacetrue/{app-name}/actions"]
+image:https://img.shields.io/github/actions/workflow/status/peacetrue/bee/main.yml?branch=master[GitHub Workflow Status (with branch),link="https://github.com/peacetrue/{app-name}/actions"]
 image:https://snyk.io/test/github/peacetrue/{app-name}/badge.svg["Snyk",link="https://app.snyk.io/org/peacetrue"]
 image:https://api-public.service.runforesight.com/api/v1/badge/success?repoId={foresight-repo-id}["Foresight",link="https://foresight.thundra.io/repositories/github/peacetrue/{app-name}/test-runs"]
 image:https://img.shields.io/codecov/c/github/peacetrue/{app-name}/master["Codecov",link="https://app.codecov.io/gh/peacetrue/{app-name}"]
 
 //@formatter:off
 
+
 == 简介（What）
 
-{website}/{app-name}/[{page-component-name}] 是一个开发者助手，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
+{website}/{app-name}/[{app-name}] 是一个开发者助手网站，用于辅助技术人员日常开发，致力于在琐碎的细节中提升效率。
 
-// {page-component-name} 翻译成中文是蜜蜂 🐝 ，寓意像蜜蜂一样勤勤恳恳付出而又默默无闻的大多数。
+// {app-name} 翻译成中文是蜜蜂 🐝 ，寓意像蜜蜂一样勤勤恳恳付出而又默默无闻的大多数。
 // 谨以此网站献给那些辛勤创造的人们，世界因你们的付出更加美好。
 
+=== 文档结构
 
-.文档结构
+文档按照迭代方式组织，除 _简介_、_开发者手册_、_版本变更_ 外，其他均为版本迭代。
+版本迭代除 _基础框架外_，都包含 _需求_、_功能_、_设计_、_接口_ 四部分。
 
-文档主要包括 4 部分：需求、架构、实现和性能。
-
-需求记录要做什么，与技术实现无关。
+*需求* 记录在开发过程中遭遇的不便之处，注重场景。
 主要使用 https://zh.wikipedia.org/zh-cn/%E7%BB%9F%E4%B8%80%E5%BB%BA%E6%A8%A1%E8%AF%AD%E8%A8%80[UML^] 表达，
-借助 https://plantuml.com/zh/[plantuml^] 实现。
-最终产出一套 UML 文档。
+借助 https://plantuml.com/zh/[plantuml^] 实现，
+产出需求文档。
 
-架构描述了系统的总体面貌和基础实现，侧重于技术。
-最终产出基础项目代码，它可以运行但不包含具体功能。
+// 架构描述了系统的总体面貌和基础实现，侧重于技术。
+// 最终产出基础项目代码，它可以运行但不包含具体功能。
+*功能* 遵循需求，描述具体实现逻辑，产出功能文档。
 
-实现则遵循需求，在架构的基础项目中，完善代码，实现功能。
-最终产出接口文档和用户手册。
+*设计* 遵循功能，描述具体技术实现方案，产出设计文档。
 
-功能体现能不能做到某事，性能则体现事情做得好不好。
-最终产出压测报告。
+*实现* 遵循设计，在基础框架中，完善代码，实现功能。产出接口文档和用户手册。
 
-NOTE: 精力有限，会尽可能用简短的语句把事情说清楚。
-如遇过于简短难以理解之处，敬请见谅。
+*测试* 包括单元测试和性能测试。
+单元测试体现是否正常实现了功能，产出单元测试报告；
+性能测试体现功能实现的质量高低，产出性能测试报告。
+
+=== 学习收获
+
+学习本项目会有如下收获：
+
+项目闭环::
+一个项目不论简单复杂，是不是完整做完了。
+怎么叫完整做完了，有详细的文档，
+其他开发者能通过文档详细了解项目快速上手；
+客户能通过用户手册了解如何使用网站。
+项目流程::
+常见 Web 项目开发流程。
+技术栈::
+常见 Web 项目中使用的软件和技术。
+
+// NOTE: 精力有限，会尽可能用简短的语句把事情说清楚。
+// 如遇过于简短难以理解之处，敬请见谅。
 
 == 背景（Why）
 
 日常开发工作中会产生很多需求，比如：Base64 编解码、MD5 哈希等等；
 也有很多实现类似需求的网站，比如： https://the-x.cn[在线工具箱^]。
 笔者仍然创建此网站，是希望能借此项目，记录下软件的开发过程，沉淀出一套常用的技术栈。
-希望能把一个项目做好，完整闭环；比如说，你到新公司上班，能不能做到给你一个文档，自己就能很快把项目运行起来。
-当然这只是一个常规的小型 Java Web 应用，更大的项目难度更高也更复杂。
+// 希望能把一个项目做好，完整闭环；比如说，你到新公司上班，能不能做到给你一个文档，自己就能很快把项目运行起来。
+// 当然这只是一个常规的小型 Java Web 应用，更大的项目难度更高也更复杂。
+
+== 先决条件
+
+读者需具有 https://www.java.com/zh-CN/[Java^]、 https://www.npmjs.com/[npm^] 知识背景。
 
 == 用法（How）
 
-参考 {website}/{app-name}/manual.html[{page-component-name}]。
+参考 {website}/{app-name}/manual.html[{app-name}]。
 
 == 维护者（Who）
 

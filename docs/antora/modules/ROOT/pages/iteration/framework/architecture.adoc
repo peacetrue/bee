@@ -73,7 +73,7 @@ Nginx 配置：
 .bee.peacetrue.local
 [source%nowrap,conf]
 ----
-include::example$backend/nginx/bee.peacetrue.local.conf[]
+include::example$nginx/bee.peacetrue.local.conf[]
 ----
 
 === 远程
@@ -116,7 +116,7 @@ Nginx 配置：
 .bee.peacetrue.cn
 [source%nowrap,conf]
 ----
-include::example$backend/nginx/bee.peacetrue.cn.conf[]
+include::example$nginx/bee.peacetrue.cn.conf[]
 ----
 
 == 技术栈

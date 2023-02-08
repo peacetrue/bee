@@ -1,0 +1,113 @@
+= 开发者手册
+
+本文介绍如何运行 {app-name} 项目。
+
+== 成品展示
+
+访问 http://bee.peacetrue.cn/function/conversion[{app-name}^] 网站查看演示效果。
+
+== 运行
+
+本机需安装 git(2+)、 jdk(8+)、node(14+)、npm(8.5+)、nginx(1.18+)，
+同时确保 8080、8081 端口可用。
+
+运行环境包括：
+
+. 开发环境：在 IDE 中开发，域名为 localhost，允许跨域
+. 本地环境：使用域名 bee.peacetrue.local，通过 nginx 配置为同域
+. 生产环境：使用域名 bee.peacetrue.cn，通过 nginx 配置为同域
+
+=== 检出源码
+
+// https://askubuntu.com/questions/426750/how-can-i-update-my-nodejs-to-the-latest-version
+
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+# 检出项目
+git clone https://github.com/peacetrue/bee.git && cd bee
+----
+
+=== Ubuntu
+
+在 Ubuntu 20+ 上运行 {app-name}。
+
+.安装缺失软件
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+sudo apt install openjdk-17-jdk -y
+sudo apt install nodejs npm -y
+sudo apt install nginx-core -y
+sudo apt install git -y
+----
+
+.设置环境变量
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+./set-env
+----
+
+.开发模式
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+./ubuntu-dev-init
+./ubuntu-dev-run-backend
+./ubuntu-dev-run-frontend
+----
+
+.本地模式
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+./ubuntu-local-init
+./ubuntu-local-run-backend
+./ubuntu-local-run-frontend
+----
+
+.生产模式
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+./ubuntu-prod-init
+./ubuntu-prod-run-backend
+./ubuntu-prod-run-frontend
+----
+
+//TODO window 系统测试
+
+
+////
+=== 开发环境
+
+.直接通过 IDE 运行，以 IntelliJ IDEA 为例：
+* 链接 Gradle 项目
+
+image:manual/link-gradle.png[]
+
+* 运行后端 `BeeMainApplication`：
+
+image:manual/backend.png[width=50%]
+
+* 激活开发环境：
+
+image:manual/dev.png[width=50%]
+
+* 启动前端 `package.json`：
+
+image:manual/frontend.png[width=50%]
+
+.通过命令运行
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+# 运行后端项目
+./run-backend
+# 运行前端项目
+./run-frontend
+----
+////
+
+
+// 访问：
+// http://localhost:3000/function/conversion[数据转换功能^]。
+
+
+
+
+

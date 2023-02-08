@@ -58,7 +58,7 @@ echo '127.0.0.1 bee.peacetrue.local' >> /etc/hosts
 .bee.peacetrue.local
 [source%nowrap,bash]
 ----
-include::example$backend/nginx/bee.peacetrue.local.conf[]
+include::example$nginx/bee.peacetrue.local.conf[]
 ----
 
 链接到 Nginx 配置目录：
@@ -66,7 +66,7 @@ include::example$backend/nginx/bee.peacetrue.local.conf[]
 [source%nowrap,bash]
 ----
 cd "$nginxDir/servers"
-ln -s "$workingDir/bee/docs/antora/modules/ROOT/examples/backend/nginx/bee.peacetrue.local.conf"  bee.peacetrue.local.conf
+ln -s "$workingDir/bee/docs/antora/modules/ROOT/examples/nginx/bee.peacetrue.local.conf"  bee.peacetrue.local.conf
 nginx -s reload
 ----
 
@@ -83,7 +83,7 @@ nginx -s reload
 .options.properties
 [source%nowrap,properties]
 ----
-include::example$backend/src/test/resources/jmxs/options-1000.properties[]
+include::example$backend/main/src/test/resources/jmxs/options-1000.properties[]
 ----
 
 测试结果如下：
@@ -113,7 +113,7 @@ image::test/image-2022-08-22-10-18-19-314.png[]
 
 [source%nowrap,properties]
 ----
-include::example$backend/src/test/resources/jmxs/baidu/options.properties[]
+include::example$backend/main/src/test/resources/jmxs/baidu/options.properties[]
 ----
 
 逐步增加线程数，花尽可能少的时间，得出比较全面准确的结果。

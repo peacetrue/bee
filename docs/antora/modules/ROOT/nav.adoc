@@ -1,5 +1,5 @@
 * xref:index.adoc[]
-* xref:manual.adoc[]
+* xref:developer.adoc[]
 * xref:version.adoc[]
 * 基础框架
 ** xref:iteration/framework/architecture.adoc[]
@@ -11,5 +11,4 @@
 ** xref:iteration/conversion/function.adoc[]
 ** xref:iteration/conversion/design.adoc[]
 ** xref:iteration/conversion/api.adoc[]
-** xref:iteration/conversion/manual.adoc[]
 

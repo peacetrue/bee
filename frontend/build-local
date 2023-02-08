@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# 删除历史文件
-rm -rf local
-# 重新构建
-npm run build:local
-# 打包
-mv build local
