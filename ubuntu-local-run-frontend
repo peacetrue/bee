@@ -9,4 +9,6 @@ rm -rf local
 npm run build:local
 # 打包
 mv build local
+# 打开网站
+open -a "Google Chrome" "http://bee.peacetrue.local"
 
