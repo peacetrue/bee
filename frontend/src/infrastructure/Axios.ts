@@ -2,7 +2,7 @@ import axios, {AxiosError} from 'axios';
 import qs from 'qs';
 
 let instance = axios.create({
-  baseURL: `${process.env.REACT_APP_BASE_URL}`,
+  baseURL: `${process.env.REACT_APP_API_URL}`,
   paramsSerializer: function (params) {
     let string = qs.stringify(params, {allowDots: true});
     console.info("query string: ", string)

@@ -44,10 +44,20 @@ function Header({themeState}: HeaderProps) {
               textColor={"inherit"} indicatorColor="secondary">
           <Tab label={`${t("function")}`} component={Link} to="/function/conversion" value={"/function"}/>
         </Tabs>
-        <Stack flexGrow={1} flexDirection={"row"}>
+        <Stack flexDirection={"row"}>
           <Button variant="text" sx={{color: "inherit", fontSize: "medium"}}
                   href={"https://peacetrue.github.io/bee"} target={"_blank"}
                   endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>{`${t("document")}`}</Button>
+        </Stack>
+        <Stack flexDirection={"row"}>
+          <Button variant="text" sx={{color: "inherit", fontSize: "medium"}}
+                  href={`${process.env.REACT_APP_SWAGGER_URL}`} target={"_blank"}
+                  endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>{`${t("swagger")}`}</Button>
+        </Stack>
+        <Stack flexGrow={1} flexDirection={"row"}>
+          <Button variant="text" sx={{color: "inherit", fontSize: "medium"}}
+                  href={`${process.env.REACT_APP_MONITOR_URL}`} target={"_blank"}
+                  endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>{`${t("monitor")}`}</Button>
         </Stack>
         {/* //TODO AppBar 下的颜色全部要使用继承，统一处理 */}
         <Stack sx={{flexDirection: "row", alignItems: "center", "& *": {color: "inherit"}}}>

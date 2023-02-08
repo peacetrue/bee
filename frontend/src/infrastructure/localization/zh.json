@@ -4,7 +4,9 @@
       "name": "Bee",
       "title": "开发者助手",
       "function": "功能",
-      "document": "文档"
+      "document": "文档",
+      "monitor": "监控",
+      "swagger": "Swagger"
     }
   }
 }

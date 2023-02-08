@@ -1,0 +1,9 @@
+# spring.config.activate.on-profile: log-console
+
+logging:
+  level:
+    root: info
+    org.springframework: debug
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    com.zaxxer.hikari: debug
+    com.github.peacetrue: trace

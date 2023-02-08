@@ -1,0 +1,17 @@
+# Spring Boot Admin 配置
+
+management:
+    endpoint:
+        health:
+            show-details: always
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+spring:
+    boot:
+        admin:
+            client:
+                url: \${spring.application.url}/monitor
+                instance:
+                    service-base-url: \${spring.application.url}/api

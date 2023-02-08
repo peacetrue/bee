@@ -36,11 +36,11 @@ note bottom of html: Nginx 静态文件目录
 Nginx --> html: 读取
 
 folder 前端{
-    folder build{
+    folder local{
     }
 }
-note right of build: 构建生成的静态资源文件
-bee --> build: 软链接，保持各部分独立性
+note right of local: 构建生成的静态资源文件
+bee --> local: 软链接，保持各部分独立性
 
 folder 后端{
     artifact 主应用

@@ -38,9 +38,9 @@ dependencies {
 
     //tag::sba[]
     // SBA 客户端
-//    implementation "de.codecentric:spring-boot-admin-starter-client"
+    implementation "de.codecentric:spring-boot-admin-starter-client"
     // 在 SBA 中基于 JMX 修改 MBean
-//    implementation "org.jolokia:jolokia-core"
+    implementation "org.jolokia:jolokia-core"
     //end::sba[]
 
     //tag::springdoc[]

@@ -102,21 +102,3 @@ $ java $JAVA_OPTS -jar backend-1.0.0-SNAPSHOT.jar
 # 正确的调用方式如下：
 $ eval "java $JAVA_OPTS -jar backend-1.0.0-SNAPSHOT.jar"
 ----
-
-=== 部署实现
-
-通过 Gradle 任务实现自动部署。
-
-.build.gradle
-[source%nowrap,gradle]
-----
-include::example$backend/deploy.gradle[]
-----
-
-.用法
-[source%nowrap,gradle]
-----
-./gradlew installBootDist
-----
-
-打包后，自动上传到远程服务器并重启，然后打开浏览器，访问应用主页。

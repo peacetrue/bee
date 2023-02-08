@@ -4,7 +4,9 @@
       "name": "Bee",
       "title": "Developer Helper",
       "function": "Function",
-      "document": "Document"
+      "document": "Document",
+      "monitor": "Monitor",
+      "swagger": "Swagger"
     }
   }
 }

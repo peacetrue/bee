@@ -1,0 +1,31 @@
+#spring.config.activate.on-profile: common
+
+server:
+  port: ${BEE_MAIN_PORT}
+  tomcat:
+    max-connections: 1000
+    max-keep-alive-requests: -1
+    threads:
+      max: 10
+      min-spare: 10
+
+spring:
+  application:
+    name: ${name}
+  data:
+    web:
+      pageable:
+        max-page-size: 2000
+  jpa:
+    # spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+    open-in-view: false
+  mvc:
+    format:
+      date-time: iso
+      date: iso
+      time: iso
+#  jackson:
+#    date-format: com.fasterxml.jackson.databind.util.StdDateFormat
+#    time-zone: Asia/Shanghai
+#    locale: zh_CN
+

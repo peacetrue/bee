@@ -3,12 +3,16 @@
 # ubuntu 环境，部署后端
 
 set -u # 遇到不存在的变量就会报错，并停止执行
-set -e # 脚本只要发生错误，就终止执行
+#set -e # 脚本只要发生错误，就终止执行
 
-cd "$(pwd)/backend/main"
-#打包
-./gradlew clean build
-#上传
-remoteArchiveName="main-boot-1.0.0"
-sshpass -p $BEE_REMOTE_PASSWORD scp "build/distributions/$remoteArchiveName.tar" "$BEE_REMOTE_HOST:$BEE_REMOTE_WORKING_DIR"
-sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST "cd $BEE_REMOTE_WORKING_DIR;rm -rf $remoteArchiveName;tar -xf $remoteArchiveName.tar;cd $remoteArchiveName;killall java;nohup bin/main > /dev/null 2>&1 &"
+pwd=$(pwd)
+sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST "killall java"
+for app in main monitor; do
+  cd "$pwd/backend/$app"
+  #打包
+  ./gradlew clean build
+  #上传
+  remoteArchiveName="$app-boot-1.0.0"
+  sshpass -p $BEE_REMOTE_PASSWORD scp "build/distributions/$remoteArchiveName.tar" "$BEE_REMOTE_HOST:$BEE_REMOTE_WORKING_DIR"
+  sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST "cd $BEE_REMOTE_WORKING_DIR;rm -rf $remoteArchiveName;tar -xf $remoteArchiveName.tar;cd $remoteArchiveName;nohup bin/$app >/dev/null 2>&1 &"
+done

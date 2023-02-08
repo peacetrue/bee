@@ -1,16 +1,14 @@
-import org.springframework.boot.gradle.plugin.SpringBootPlugin
-
 plugins {
     id "com.github.peacetrue.gradle.build-convention" version "${peaceGradleVersion}${tailSnapshot}"
     id "org.springframework.boot" version "2.7.0"
+    id "application"
 }
 
 group "com.github.peacetrue.bee"
-version "${System.getenv("BEE_MONITOR_VERSION")}${tailSnapshot}"
+version "1.0.0${tailSnapshot}"
 description "Bee 监控应用"
 
 dependencies {
-    implementation platform(SpringBootPlugin.BOM_COORDINATES)
     //tag::dependencies[]
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "de.codecentric:spring-boot-admin-starter-server" // SBA 服务端
@@ -19,11 +17,14 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
 }
 
-//processResources {
-//    expand(project.properties)
-//}
+processResources {
+    expand(project.properties + System.getenv())
+}
 
-apply from: "../deploy.gradle"
-ext {
-    remotePort = System.getenv("BEE_MONITOR_PORT")
+springBoot {
+    buildInfo()
+}
+
+application {
+    applicationDefaultJvmArgs = ["-Xms500M", "-Xms500M", "-Dspring.profiles.active=prod"]
 }
