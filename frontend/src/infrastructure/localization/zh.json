@@ -6,7 +6,18 @@
       "function": "功能",
       "document": "文档",
       "monitor": "监控",
-      "swagger": "Swagger"
+      "swagger": "Swagger",
+      "description": "辅助技术人员日常开发，致力于在琐碎的细节中提升效率",
+      "icp": "鄂ICP备20006312号",
+      "unselected": "请选择"
+    },
+    "conversion": {
+      "title": "数据转换",
+      "description": "不同格式的数据相互转换",
+      "source": "原始数据",
+      "target": "目标数据",
+      "format": "数据格式",
+      "content": "数据内容"
     }
   }
 }

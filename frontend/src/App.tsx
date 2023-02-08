@@ -22,6 +22,7 @@ import i18n from "./infrastructure/i18n"
 import {I18nextProvider, useTranslation} from "react-i18next";
 import LanguageSwitcher from "./compontents/LanguageSwitcher";
 import {Feedback} from "./compontents/Feedback";
+import Footer from "./pages/Footer";
 
 interface HeaderProps {
   themeState: [number, Dispatch<SetStateAction<number>>]
@@ -42,22 +43,22 @@ function Header({themeState}: HeaderProps) {
         <Tabs sx={{ml: 4, "& .MuiTab-root": {fontSize: "medium"}}}
               value={activeMenu} onChange={(event, newValue) => setActiveMenu(newValue)}
               textColor={"inherit"} indicatorColor="secondary">
-          <Tab label={`${t("function")}`} component={Link} to="/function/conversion" value={"/function"}/>
+          <Tab label={t("function")} component={Link} to="/function/conversion" value={"/function"}/>
         </Tabs>
         <Stack flexDirection={"row"}>
           <Button variant="text" sx={{color: "inherit", fontSize: "medium"}}
                   href={"https://peacetrue.github.io/bee"} target={"_blank"}
-                  endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>{`${t("document")}`}</Button>
+                  endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>{t("document")}</Button>
         </Stack>
         <Stack flexDirection={"row"}>
           <Button variant="text" sx={{color: "inherit", fontSize: "medium"}}
-                  href={`${process.env.REACT_APP_SWAGGER_URL}`} target={"_blank"}
-                  endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>{`${t("swagger")}`}</Button>
+                  href={process.env.REACT_APP_SWAGGER_URL as string} target={"_blank"}
+                  endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>{t("swagger")}</Button>
         </Stack>
         <Stack flexGrow={1} flexDirection={"row"}>
           <Button variant="text" sx={{color: "inherit", fontSize: "medium"}}
-                  href={`${process.env.REACT_APP_MONITOR_URL}`} target={"_blank"}
-                  endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>{`${t("monitor")}`}</Button>
+                  href={process.env.REACT_APP_MONITOR_URL as string} target={"_blank"}
+                  endIcon={<LaunchRoundedIcon fontSize="inherit"/>}>{t("monitor")}</Button>
         </Stack>
         {/* //TODO AppBar 下的颜色全部要使用继承，统一处理 */}
         <Stack sx={{flexDirection: "row", alignItems: "center", "& *": {color: "inherit"}}}>
@@ -76,6 +77,7 @@ function Header({themeState}: HeaderProps) {
 
 function App() {
   const themeState = React.useState<number>(0);
+  const {t} = useTranslation()
   return (
     <I18nextProvider i18n={i18n} defaultNS={"bee"}>
       <SwitchableThemeProvider value={themeState[0]}>
@@ -93,9 +95,7 @@ function App() {
               <Outlet/>
             </Box>
             {/* 页脚 */}
-            <Box sx={{textAlign: "center", height: theme => theme.spacing(8)}}>
-              © 2022 peacetrue. 鄂ICP备20006312号
-            </Box>
+            <Footer/>
           </Stack>
         </Container>
         <Feedback/>

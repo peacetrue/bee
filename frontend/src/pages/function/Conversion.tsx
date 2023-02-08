@@ -16,6 +16,7 @@ import {Controller, FieldValues, useForm} from "react-hook-form";
 import {UseFormReturn} from "react-hook-form/dist/types";
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import {useTranslation} from "react-i18next";
 
 interface DataPanelProps {
   label: string;
@@ -25,6 +26,8 @@ interface DataPanelProps {
 }
 
 function DataPanel(props: DataPanelProps) {
+  let {t} = useTranslation("conversion");
+
   const {label, name, form: {control}, formats} = props;
   return (
     <Stack spacing={2}>
@@ -36,9 +39,9 @@ function DataPanel(props: DataPanelProps) {
           name={`${name}.format`} control={control}
           render={({field, fieldState, formState}) =>
             <FormControl fullWidth error={!!fieldState.error}>
-              <InputLabel>数据格式</InputLabel>
-              <Select {...field} label={"数据格式"}>
-                <MenuItem value=""><em>请选择</em></MenuItem>
+              <InputLabel>{t("format")}</InputLabel>
+              <Select {...field} label={t("format")}>
+                <MenuItem value=""><em>{t("unselected", {ns: "bee"})}</em></MenuItem>
                 {formats.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>)}
               </Select>
               <FormHelperText>{fieldState.error?.message}</FormHelperText>
@@ -49,7 +52,7 @@ function DataPanel(props: DataPanelProps) {
         <Controller
           name={`${name}.content`} control={control}
           render={({field, fieldState, formState}) =>
-            <TextField label="数据内容" multiline minRows={20} fullWidth
+            <TextField label={t("content")} multiline minRows={20} fullWidth
                        {...field} error={!!fieldState.error} helperText={fieldState.error?.message}
             />
           }
@@ -73,6 +76,7 @@ const user_json = `{
 }`;
 
 export default function Conversion() {
+  let {t} = useTranslation("conversion");
   const [formats, setFormats] = React.useState<string[]>([]);
   useEffect(() => {
     Axios.get("/conversion/formats").then(response => setFormats(response.data));
@@ -100,7 +104,7 @@ export default function Conversion() {
   });
   return (
     <Stack spacing={1}>
-      <Box><Typography variant={"h6"}>不同格式的数据相互转换</Typography></Box>
+      <Box><Typography variant={"h6"}>{t("description")}</Typography></Box>
       <Box component={"form"} onSubmit={form.handleSubmit((data) => {
         //target 的内容不需要传回后台
         data = {source: data.source, target: {format: data.target.format, content: ""}};
@@ -109,13 +113,13 @@ export default function Conversion() {
       })}>
         <Stack sx={{flexDirection: "row", alignItems: "center"}}>
           <Box sx={{flexGrow: 1}}>
-            <DataPanel label={"原始数据"} name={"source"} form={form} formats={formats}/>
+            <DataPanel label={t("source")} name={"source"} form={form} formats={formats}/>
           </Box>
           <Box sx={{m: 1}}>
             <Button type="submit" size="medium" variant={"outlined"}> &gt; </Button>
           </Box>
           <Box sx={{flexGrow: 1}}>
-            <DataPanel label={"目标数据"} name={"target"} form={form} formats={formats}/>
+            <DataPanel label={t("target")} name={"target"} form={form} formats={formats}/>
           </Box>
         </Stack>
       </Box>

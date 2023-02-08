@@ -6,7 +6,18 @@
       "function": "Function",
       "document": "Document",
       "monitor": "Monitor",
-      "swagger": "Swagger"
+      "swagger": "Swagger",
+      "description": "Supporting technicians in daily development, dedicated to improving efficiency in trivial details",
+      "icp": "",
+      "unselected": "Please select"
+    },
+    "conversion": {
+      "title": "Data Conversion",
+      "description": "Convert data in different formats to and from each other",
+      "source": "Source Data",
+      "target": "Target Data",
+      "format": "Data Format",
+      "content": "Data Content"
     }
   }
 }

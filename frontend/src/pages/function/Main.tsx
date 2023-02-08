@@ -5,15 +5,19 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {Box, Paper, Stack} from "@mui/material";
 import {Outlet} from "react-router-dom";
 import {TreeNode, TreeNodeRender} from "../../compontents/TreeNode";
+import {useTranslation} from "react-i18next";
 
 const treeNodes: TreeNode[] = [
   {
-    name: '数据转换',
+    ns: 'conversion',
+    name: 'title',
     href: '/function/conversion',
   },
 ];
 
 export default function Main() {
+  let {t} = useTranslation();
+  let translatedTreeNodes = treeNodes.map(value => ({...value, name: t(value.name, {ns: value.ns})}))
   return (
     <Stack flexDirection={"row"}>
       <Paper sx={{
@@ -29,7 +33,7 @@ export default function Main() {
           defaultExpandIcon={<ChevronRightIcon/>}
           sx={{mt: 1}}
         >
-          {TreeNodeRender(treeNodes)}
+          {TreeNodeRender(translatedTreeNodes)}
         </TreeView>
       </Paper>
       <Box sx={{flexGrow: 1, ml: 2}}>

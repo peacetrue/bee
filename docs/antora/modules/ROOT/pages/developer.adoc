@@ -70,7 +70,8 @@ sudo apt install git -y
 ----
 # 服务器上需事先安装 jdk 和 nginx
 # 安装 sshpass 以便登录时设置密码
-sudo apt-get install sshpass
+sudo apt-get install sshpass -y
+sudo apt-get install jmeter -y
 # 设置远程服务器信息
 cat <<EOF >>~/.bashrc
 export BEE_REMOTE_HOST=root@aliyun

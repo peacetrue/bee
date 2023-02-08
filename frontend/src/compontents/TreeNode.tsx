@@ -5,6 +5,7 @@ import React from "react";
 
 export interface TreeNode {
   id?: string;
+  ns: string;
   name: string;
   href?: string;
   children?: readonly TreeNode[];
@@ -17,7 +18,7 @@ export function TreeNodeRender(nodes: TreeNode | TreeNode[]): React.ReactNode {
 
   const id = nodes.id || nodes.href || '';
   const label = nodes.href
-    ? <MuiLink component={Link} to={nodes.href} underline={"hover"}>{nodes.name}</MuiLink>
+    ? (<MuiLink component={Link} to={nodes.href} underline={"hover"}>{nodes.name}</MuiLink>)
     : nodes.name;
   return (
     <TreeItem key={id} nodeId={id} label={label}>
