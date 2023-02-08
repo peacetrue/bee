@@ -22,15 +22,10 @@ jobs:
         java-version: '8'
         distribution: 'temurin'
 
-    # 使用 Gradle 构建
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
-      with:
-        arguments: build
-
     - uses: actions/setup-node@v3
       with:
         node-version: 16
+
     - run: ./set-env
     - run: ./ubuntu-dev-init
     - run: ./ubuntu-dev-run-backend
