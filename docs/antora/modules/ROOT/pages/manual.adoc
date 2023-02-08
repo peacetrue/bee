@@ -2,17 +2,26 @@
 
 本文介绍如何运行 {page-component-name} 项目。
 
-== 前提条件
+== 先决条件
 
-读者需具有 https://www.java.com/zh-CN/[Java^]、 https://www.npmjs.com/[npm^] 相关知识。
+读者需具有 https://www.java.com/zh-CN/[Java^]、 https://www.npmjs.com/[npm^] 知识背景。
 
 == 成品展示
 
-访问 http://bee.peacetrue.cn/function/conversion[数据转换功能^]。
+访问 http://bee.peacetrue.cn/function/conversion[{page-component-name}^] 网站查看演示效果。
 
 == 运行
 
-本机需事先安装 git(2+)、 jdk(8+)、node(14+)、npm(8.5+)。
+本机需安装 git(2+)、 jdk(8+)、node(14+)、npm(8.5+)、nginx(1.18+)，
+同时确保 8080、8081 端口可用。
+
+运行环境包括：
+
+. 开发环境：在 IDE 中开发，域名为 localhost，允许跨域
+. 本地环境：使用域名 bee.peacetrue.local，通过 nginx 配置为同域
+. 生产环境：使用域名 bee.peacetrue.cn，通过 nginx 配置为同域
+
+=== 检出源码
 
 // https://askubuntu.com/questions/426750/how-can-i-update-my-nodejs-to-the-latest-version
 
@@ -20,9 +29,42 @@
 ----
 # 检出项目
 git clone https://github.com/peacetrue/bee.git && cd bee
-# 设置环境变量
+----
+
+=== Ubuntu
+
+在 Ubuntu 20+ 上运行 {page-component-name}。
+
+.设置环境变量
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
 ./set-env
 ----
+
+.开发模式
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+./ubuntu-dev-init
+./ubuntu-dev-run-backend
+./ubuntu-dev-run-frontend
+----
+
+.本地模式
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+./ubuntu-local-init
+./ubuntu-local-run-backend
+./ubuntu-local-run-frontend
+----
+
+.生产模式
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+./ubuntu-prod-init
+./ubuntu-prod-run-backend
+./ubuntu-prod-run-frontend
+----
+
 //TODO window 系统测试
 
 === 开发环境

@@ -13,6 +13,4 @@ export BEE_URL_PROD=http://bee.peacetrue.cn
 
 EOF
 
-
-
 source "$HOME/.bashrc"
