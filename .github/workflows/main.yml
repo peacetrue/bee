@@ -22,7 +22,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: sudo apt install nginx-core -y
     # 单元测试前置准备
     - name: Collect Workflow Telemetry
       uses: runforesight/foresight-workflow-kit-action@v1
@@ -64,6 +63,7 @@ jobs:
       with:
         node-version: 16
 
+#    - run: sudo apt install nginx-core -y
     - run: ./ubuntu-dev-init
     - run: ./ubuntu-dev-run-backend
     - run: ./ubuntu-dev-run-frontend
