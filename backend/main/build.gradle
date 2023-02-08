@@ -16,7 +16,7 @@ plugins {
 }
 
 group "com.github.peacetrue.bee"
-version "${System.getenv("BEE_MAIN_VERSION")}${tailSnapshot}"
+version "1.0.0${tailSnapshot}"
 description "Bee 后端模块"
 
 configurations {
@@ -90,9 +90,9 @@ dependencies {
 
 // 在 Spring 配置文件中使用 Gradle 属性
 // https://docs.spring.io/spring-boot/docs/2.0.3.RELEASE/reference/html/howto-properties-and-configuration.html#howto-automatic-expansion-gradle
-// 使用 <%=bee_main_port%> 格式引用变量，过于繁琐，统一使用环境变量配置
 processResources {
-    expand(System.getenv())
+    // https://e.printstacktrace.blog/how-to-merge-two-maps-in-groovy/
+    expand(project.properties + System.getenv())
 }
 
 // 生成 open API 3 定义，启动应用并调用接口 /v3/api-docs

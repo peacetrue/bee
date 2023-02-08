@@ -2,6 +2,17 @@
 
 # ubuntu 环境，初始化生产环境
 
+cat <<EOF >>~/.bashrc
+export BEE_REMOTE_HOST=root@aliyun
+export BEE_REMOTE_PASSWORD=123456
+export BEE_REMOTE_PORT=
+export BEE_REMOTE_MAIN_WORKING_DIR=~/bee/main
+export BEE_REMOTE_MAIN_ARCHIVE_NAME=main-boot
+EOF
+
+source "$HOME/.bashrc"
+
+
 # 安装 NGINX
 # https://serverfault.com/questions/241588/how-to-automate-ssh-login-with-password
 # https://stackoverflow.com/questions/32255660/how-to-install-sshpass-on-mac

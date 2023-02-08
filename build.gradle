@@ -3,7 +3,7 @@ plugins {
 }
 
 group "com.github.peacetrue.bee"
-version "${System.getenv("BEE_MAIN_VERSION")}${tailSnapshot}"
+version "1.0.0${tailSnapshot}"
 description "开发者助手"
 apply plugin: "com.github.peacetrue.gradle.build-convention"
 
