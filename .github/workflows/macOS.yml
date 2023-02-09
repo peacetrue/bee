@@ -20,17 +20,17 @@ env:
   BEE_URL_LOCAL: http://bee.peacetrue.local
   BEE_URL_PROD: http://bee.peacetrue.cn
 
-  BEE_FRONTEND_URL_DEV: "${BEE_URL_DEV}:${BEE_FRONTEND_PORT}"
-  BEE_MAIN_URL_DEV: ${BEE_URL_DEV}:${BEE_MAIN_PORT}
-  BEE_MONITOR_URL_DEV: ${BEE_URL_DEV}:${BEE_MONITOR_PORT}
+  BEE_FRONTEND_URL_DEV: http://localhost:3000
+  BEE_MAIN_URL_DEV: http://localhost:8081
+  BEE_MONITOR_URL_DEV: http://localhost:8080
 
-  BEE_FRONTEND_URL_LOCAL: ${BEE_URL_LOCAL}
-  BEE_MAIN_URL_LOCAL: ${BEE_URL_LOCAL}/api
-  BEE_MONITOR_URL_LOCAL: ${BEE_URL_LOCAL}/monitor
+  BEE_FRONTEND_URL_LOCAL: http://bee.peacetrue.local
+  BEE_MAIN_URL_LOCAL: http://bee.peacetrue.local/api
+  BEE_MONITOR_URL_LOCAL: http://bee.peacetrue.local/monitor
 
-  BEE_FRONTEND_URL_PROD: ${BEE_URL_PROD}
-  BEE_MAIN_URL_PROD: ${BEE_URL_PROD}/api
-  BEE_MONITOR_URL_PROD: ${BEE_URL_PROD}/monitor
+  BEE_FRONTEND_URL_PROD: http://bee.peacetrue.cn
+  BEE_MAIN_URL_PROD: http://bee.peacetrue.cn/api
+  BEE_MONITOR_URL_PROD: http://bee.peacetrue.cn/monitor
 
 jobs:
   build:
@@ -61,7 +61,7 @@ jobs:
 #     https://stackoverflow.com/questions/66980682/is-it-possible-to-define-host-mappings-in-github-actions
 #     https://stackoverflow.com/questions/428109/extract-substring-in-bash
     - run: |
-        sudo echo "127.0.0.1 ${BEE_MAIN_URL_LOCAL#*//}" | sudo tee -a /etc/hosts
+        sudo echo "127.0.0.1 ${BEE_MAIN_URL_LOCAL: http://bee.peacetrue.local/api
     - run: ./macOS-local-init
     - run: ./macOS-local-run-backend
     - run: ./macOS-local-run-frontend
