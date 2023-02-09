@@ -35,14 +35,15 @@ jobs:
       with:
         node-version: 16
 
-    - run: ./macOS-dev-init
-    - run: ./macOS-dev-run-backend
-    - run: ./macOS-dev-run-frontend
+#    - run: ./macOS-dev-init
+#    - run: ./macOS-dev-run-backend
+#    - run: ./macOS-dev-run-frontend
       # https://brew.sh/
     - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     - run: brew install nginx
-    - run: nginx -v
-    - run: killall java node
+    - run: nginx -h
+#    - run: killall java node
+    - run: sudo echo "127.0.0.1 ${BEE_URL_LOCAL#*//}" >> /etc/hosts
     - run: ./macOS-local-init
     - run: ./macOS-local-run-backend
     - run: ./macOS-local-run-frontend

@@ -9,7 +9,7 @@
 == 运行
 
 本机需安装 git(2+)、 jdk(8+)、node(14+)、npm(8.5+)、nginx(1.18+)，
-同时确保 8080、8081 端口可用。
+同时确保 {bee_monitor_port}、{bee_main_port} 端口可用。
 
 运行环境包括：
 
@@ -19,20 +19,15 @@
 
 开发环境和本地环境为 macOS（12.5.1），生产环境为 Ubuntu Server（11.2.0）。
 
-=== 检出源码
-
 // https://askubuntu.com/questions/426750/how-can-i-update-my-nodejs-to-the-latest-version
 
 [source%nowrap,bash,subs="specialchars,attributes"]
 ----
 # 检出项目
 git clone https://github.com/peacetrue/bee.git && cd bee
-# https://brew.sh/
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# node
-brew install node
 ----
 
+////
 .安装缺失软件
 [source%nowrap,bash,subs="specialchars,attributes"]
 ----
@@ -41,6 +36,7 @@ sudo apt install nodejs npm -y
 sudo apt install nginx-core -y
 sudo apt install git -y
 ----
+////
 
 .设置环境变量
 [source%nowrap,bash,subs="specialchars,attributes"]

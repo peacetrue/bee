@@ -4,7 +4,8 @@
 
 # https://stackoverflow.com/questions/4990172/how-to-append-several-lines-of-text-in-a-file-using-a-shell-script
 cat <<EOF >>~/.bashrc
-
+#本机密码，用于执行需要 root 权限的操作
+export PASSWORD=123456
 export BEE_MAIN_PORT=8081
 export BEE_MONITOR_PORT=8080
 export BEE_URL_DEV=http://localhost:$BEE_MAIN_PORT
