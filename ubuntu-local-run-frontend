@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ubuntu 环境，运行本地环境
+# ubuntu 环境，运行本地环境前端
 
 cd "$(pwd)/frontend" || exit
 # 删除历史文件
@@ -9,6 +9,4 @@ rm -rf local
 npm run build:local
 # 打包
 mv build local
-# 打开网站
-open -a "Google Chrome" "http://bee.peacetrue.local"
 
