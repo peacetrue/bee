@@ -28,6 +28,7 @@ jobs:
         node-version: 16
 
     - run: sudo apt install nginx-core -y
+    - run: set -x
     - run: nginx -h
     - run: ./ubuntu-local-init
     - run: ./ubuntu-local-run-backend
