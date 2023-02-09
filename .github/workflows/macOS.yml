@@ -43,7 +43,7 @@ jobs:
     - run: brew install nginx
     - run: nginx -h
 #    - run: killall java node
-    - run: sudo echo "127.0.0.1 ${BEE_URL_LOCAL#*//}" >> /etc/hosts
+    - run: echo ${{secrets.DECRYPTER_PASSPHRASE}} | sudo echo "127.0.0.1 ${BEE_URL_LOCAL#*//}" >> /etc/hosts
     - run: ./macOS-local-init
     - run: ./macOS-local-run-backend
     - run: ./macOS-local-run-frontend
