@@ -1,0 +1,33 @@
+# 测试在 ubuntu 上运行 local 环境
+name: ubuntu-local
+
+on:
+  push:
+    branches: [ local ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# 替代 set-env
+env:
+  BEE_MAIN_PORT: 8081
+  BEE_MONITOR_PORT: 8080
+  BEE_URL_DEV: "http://localhost:8081"
+  BEE_URL_LOCAL: "http://bee.peacetrue.local"
+  BEE_URL_PROD: "http://bee.peacetrue.cn"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - run: sudo apt install nginx-core -y
+    - run: ./ubuntu-local-init
+    - run: ./ubuntu-local-run-backend
+    - run: ./ubuntu-local-run-frontend
