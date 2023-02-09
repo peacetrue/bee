@@ -1,6 +1,0 @@
-#!/bin/bash
-
-cd "$(pwd)/backend/main" || exit
-# https://stackoverflow.com/questions/36923288/how-to-run-bootrun-with-spring-profile-via-gradle-task
-nohup ./gradlew clean bootRun --args='--spring.profiles.active=dev' >/dev/null 2>&1 &
-

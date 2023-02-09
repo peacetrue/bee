@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ubuntu 环境，运行本地环境
+# 运行本地环境
 # tag::basic[]
 
 cd frontend || exit

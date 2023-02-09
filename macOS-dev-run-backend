@@ -1,0 +1,9 @@
+#!/bin/bash
+
+pwd=$(pwd)
+for app in main monitor; do
+  cd "$pwd/backend/$app" || exit
+  # https://stackoverflow.com/questions/36923288/how-to-run-bootrun-with-spring-profile-via-gradle-task
+  nohup ./gradlew clean bootRun --args='--spring.profiles.active=dev' >/dev/null 2>&1 &
+done
+

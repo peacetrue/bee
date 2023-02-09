@@ -2,7 +2,7 @@
 
 本文介绍如何运行 {app-name} 项目。
 
-== 成品展示
+== 效果展示
 
 访问 http://bee.peacetrue.cn/function/conversion[{app-name}^] 网站查看演示效果。
 
@@ -17,6 +17,8 @@
 . 本地环境：使用域名 bee.peacetrue.local，通过 nginx 配置为同域
 . 生产环境：使用域名 bee.peacetrue.cn，通过 nginx 配置为同域
 
+开发环境和本地环境为 macOS（12.5.1），生产环境为 Ubuntu Server（11.2.0）。
+
 === 检出源码
 
 // https://askubuntu.com/questions/426750/how-can-i-update-my-nodejs-to-the-latest-version
@@ -25,11 +27,11 @@
 ----
 # 检出项目
 git clone https://github.com/peacetrue/bee.git && cd bee
+# https://brew.sh/
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# node
+brew install node
 ----
-
-=== Ubuntu
-
-在 Ubuntu 20+ 上运行 {app-name}。
 
 .安装缺失软件
 [source%nowrap,bash,subs="specialchars,attributes"]

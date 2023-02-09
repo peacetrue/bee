@@ -1,9 +1,9 @@
 # 测试在 ubuntu 上运行 local 环境
-name: ubuntu-local
+name: macOS-local
 
 on:
   push:
-    branches: [ local1 ]
+    branches: [ local ]
   workflow_dispatch:
 
 permissions:
@@ -20,7 +20,7 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: macos-12
 
     steps:
     - run: set -x
@@ -37,8 +37,14 @@ jobs:
       with:
         node-version: 16
 
-    - run: sudo apt install nginx-core -y
-
-    - run: ./ubuntu-local-init
-    - run: ./ubuntu-local-run-backend
-    - run: ./ubuntu-local-run-frontend
+    - run: ./macOS-dev-init
+    - run: ./macOS-dev-run-backend
+    - run: ./macOS-dev-run-frontend
+      # https://brew.sh/
+    - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    - run: brew install nginx
+    - run: nginx -v
+    - run: killall java node
+    - run: ./macOS-local-init
+    - run: ./macOS-local-run-backend
+    - run: ./macOS-local-run-frontend

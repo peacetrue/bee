@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ubuntu 环境，初始化生产环境
+# 初始化生产环境
 
 # 安装 NGINX
 #sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST <<EOF

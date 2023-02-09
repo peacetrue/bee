@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# 不在脚本中安装，由用户自行预装，sudo 密码问题无法解决
-# sudo apt install nodejs npm -y
-cd "$(pwd)/frontend" || exit
-npm install
