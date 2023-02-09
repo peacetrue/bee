@@ -39,7 +39,6 @@ jobs:
 
     - run: sudo apt install nginx-core -y
 
-    - run: nginx -h
     - run: ./ubuntu-local-init
     - run: ./ubuntu-local-run-backend
     - run: ./ubuntu-local-run-frontend
