@@ -1,20 +1,9 @@
 #!/bin/bash
 
+set -u # 遇到不存在的变量就会报错，并停止执行
 set -e # 脚本只要发生错误，就终止执行
 
-NGINX_CONFIG_DIR=/usr/local/etc/nginx/servers
-NGINX_HTML_DIR=/usr/local/Cellar/nginx/1.23.1/html
-
-# https://stackoverflow.com/questions/428109/extract-substring-in-bash
-# /etc/hosts 需要 root 权限
-#echo $PASSWORD | sudo -S echo "127.0.0.1 ${BEE_URL_LOCAL#*//}" >> /etc/hosts
 ln -s $(pwd)/nginx/bee.peacetrue.local.conf $NGINX_CONFIG_DIR/bee.peacetrue.local.conf
-ln -s $(pwd)/frontend/local $NGINX_HTML_DIR/bee
-
+ln -s $(pwd)/frontend/local $NGINX_HTML_DIR/html/bee
 nginx -s reload
-
-# https://stackoverflow.com/questions/42458434/how-to-set-build-env-variables-when-running-create-react-app-build-script
-# https://github.com/toddbluhm/env-cmd
-
-echo '安装前端依赖'
 ./macOS-dev-init

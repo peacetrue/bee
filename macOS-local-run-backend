@@ -7,8 +7,9 @@ for app in main monitor; do
   cd "$pwd/backend/$app"
   #打包
   ./gradlew clean build
-  #上传
   remoteArchiveName="$app-boot-1.0.0"
-  sshpass -p $BEE_REMOTE_PASSWORD scp "build/distributions/$remoteArchiveName.tar" "$BEE_REMOTE_HOST:$BEE_REMOTE_WORKING_DIR"
-  sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST "cd $BEE_REMOTE_WORKING_DIR;rm -rf $remoteArchiveName;tar -xf $remoteArchiveName.tar;cd $remoteArchiveName;nohup bin/$app >/dev/null 2>&1 &"
+  cd "build/distributions"
+  tar -xf $remoteArchiveName.tar
+  cd $remoteArchiveName
+  nohup bin/$app >/dev/null 2>&1 &
 done
