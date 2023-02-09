@@ -8,7 +8,6 @@ on:
 permissions:
   contents: read
 
-# 替代 set-env
 env:
   BEE_MAIN_PORT: 8081
   BEE_MONITOR_PORT: 8080
@@ -16,7 +15,7 @@ env:
   BEE_URL_LOCAL: http://bee.peacetrue.local
   BEE_URL_PROD: http://bee.peacetrue.cn
   NGINX_CONFIG_DIR: /usr/local/etc/nginx/servers
-  NGINX_HTML_DIR: /usr/local/Cellar/nginx/1.23.3/html
+  NGINX_HTML_DIR: /usr/local/Cellar/nginx/1.23.3
 
 jobs:
   build:
@@ -42,8 +41,6 @@ jobs:
       # https://brew.sh/
     - run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     - run: brew install nginx
-    - run: nginx -h
-    - run: cat /usr/local/etc/nginx/nginx.conf
 #    - run: killall java node
 #     https://stackoverflow.com/questions/66980682/is-it-possible-to-define-host-mappings-in-github-actions
 #     https://stackoverflow.com/questions/428109/extract-substring-in-bash
