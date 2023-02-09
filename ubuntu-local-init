@@ -3,11 +3,13 @@
 # ubuntu 环境，初始化本地环境
 set -x
 
+echo '初始化本地环境'
+
+echo '配置 Nginx'
 # 用户自行安装 apt install nginx-core -y
 sed -i "s|www-data|root|g" /etc/nginx/nginx.conf
 export NGINX_CONFIG_DIR=/etc/nginx/conf.d
 export NGINX_HTML_DIR=/usr/share/nginx/html
-
 
 ln -s $(pwd)/nginx/bee.peacetrue.local.conf $NGINX_CONFIG_DIR/bee.peacetrue.local.conf
 # https://stackoverflow.com/questions/428109/extract-substring-in-bash
@@ -19,6 +21,6 @@ nginx -s reload
 # https://stackoverflow.com/questions/42458434/how-to-set-build-env-variables-when-running-create-react-app-build-script
 # https://github.com/toddbluhm/env-cmd
 
-# 安装前端依赖
+echo '安装前端依赖'
 cd $(pwd)/frontend || exit
 npm install

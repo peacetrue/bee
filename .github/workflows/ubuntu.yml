@@ -23,12 +23,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run: set -x
+
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+
     - uses: actions/setup-node@v3
       with:
         node-version: 16
 
     - run: sudo apt install nginx-core -y
-    - run: set -x
+
     - run: nginx -h
     - run: ./ubuntu-local-init
     - run: ./ubuntu-local-run-backend
