@@ -5,5 +5,11 @@ set -e # 脚本只要发生错误，就终止执行
 
 ln -s $(pwd)/nginx/bee.peacetrue.local.conf $NGINX_CONFIG_DIR/bee.peacetrue.local.conf
 ln -s $(pwd)/frontend/local $NGINX_HTML_DIR/html/bee
-nginx -s reload
+
+if ps -ef | grep nginx | grep -v grep; then
+  nginx -s reload
+else
+  nginx
+fi
+
 ./macOS-dev-init
