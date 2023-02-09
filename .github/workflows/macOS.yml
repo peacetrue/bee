@@ -61,7 +61,7 @@ jobs:
 #     https://stackoverflow.com/questions/66980682/is-it-possible-to-define-host-mappings-in-github-actions
 #     https://stackoverflow.com/questions/428109/extract-substring-in-bash
     - run: |
-        sudo echo "127.0.0.1 ${BEE_MAIN_URL_LOCAL: http://bee.peacetrue.local/api
+        sudo echo "127.0.0.1 ${BEE_URL_LOCAL#*//}" | sudo tee -a /etc/hosts
     - run: ./macOS-local-init
     - run: ./macOS-local-run-backend
     - run: ./macOS-local-run-frontend
