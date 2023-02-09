@@ -3,7 +3,7 @@
 set -e # 脚本只要发生错误，就终止执行
 set -u # 遇到不存在的变量就会报错，并停止执行
 set -x
-
-curl $BEE_FRONTEND_URL_DEV
-curl $BEE_MAIN_URL_DEV/actuator/health
-curl $BEE_MONITOR_URL_DEV/actuator/health
+# 可能服务还没启动成功，多尝试几次
+curl --retry 5 --retry-max-time 120 --retry-connrefused $BEE_FRONTEND_URL_DEV
+curl --retry 5 --retry-max-time 120 --retry-connrefused $BEE_MAIN_URL_DEV/actuator/health
+curl --retry 5 --retry-max-time 120 --retry-connrefused $BEE_MONITOR_URL_DEV/actuator/health

@@ -2,7 +2,7 @@
 
 set -x
 
-cd "$(pwd)/.github/workflows" || exit
+cd "$(pwd)/frontend" || exit
 for app in FRONTEND MAIN MONITOR ; do
     for env in DEV LOCAL PROD ; do
       name="BEE_${app}_URL_${env}"

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -x
+# 根据设置的环境变量，初始化 .github/workflows/macOS.yml 文件
+cd "$(pwd)/.github/workflows" || exit
+for app in FRONTEND MAIN MONITOR ; do
+    for env in DEV LOCAL PROD ; do
+      name="BEE_${app}_URL_${env}"
+      value=$(printenv $name)
+      sed -i "s|${name}.*|${name}: $value|g" macOS.yml
+    done
+done
