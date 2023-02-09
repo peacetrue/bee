@@ -13,9 +13,9 @@ permissions:
 env:
   BEE_MAIN_PORT: 8081
   BEE_MONITOR_PORT: 8080
-  BEE_URL_DEV: "http://localhost:8081"
-  BEE_URL_LOCAL: "http://bee.peacetrue.local"
-  BEE_URL_PROD: "http://bee.peacetrue.cn"
+  BEE_MAIN_URL_DEV: "http://localhost:8081"
+  BEE_MAIN_URL_LOCAL: "http://bee.peacetrue.local"
+  BEE_MAIN_URL_PROD: "http://bee.peacetrue.cn"
 
 jobs:
   build:

@@ -7,8 +7,8 @@ asciidoc:
     website: https://peacetrue.github.io
     app-name: bee
     peace_url: http://peacetrue.cn
-    bee_url_local: http://bee.peacetrue.local
-    bee_url_prod: http://bee.peacetrue.cn
+    BEE_MAIN_URL_local: http://bee.peacetrue.local
+    BEE_MAIN_URL_prod: http://bee.peacetrue.cn
     bee_monitor_port: 8080
     bee_main_port: 8081
 start_page: ROOT:index.adoc

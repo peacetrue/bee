@@ -10,19 +10,31 @@ spring:
 spring.config.activate.on-profile: dev
 
 spring:
-  application:
-    url: ${BEE_URL_DEV}
+  boot:
+    admin:
+      ui:
+        # https://codecentric.github.io/spring-boot-admin/current/#_running_behind_a_front_end_proxy_server
+        # 80 端口是必须的，否则会被替换为 server.port=8080
+        public-url: ${BEE_MONITOR_URL_DEV}
 
 ---
 spring.config.activate.on-profile: local
 
 spring:
-  application:
-    url: ${BEE_URL_LOCAL}
+  boot:
+    admin:
+      ui:
+        # https://codecentric.github.io/spring-boot-admin/current/#_running_behind_a_front_end_proxy_server
+        # 80 端口是必须的，否则会被替换为 server.port=8080
+        public-url: ${BEE_MONITOR_URL_LOCAL}
 
 ---
 spring.config.activate.on-profile: prod
 
 spring:
-  application:
-    url: ${BEE_URL_PROD}
+  boot:
+    admin:
+      ui:
+        # https://codecentric.github.io/spring-boot-admin/current/#_running_behind_a_front_end_proxy_server
+        # 80 端口是必须的，否则会被替换为 server.port=8080
+        public-url: ${BEE_MONITOR_URL_PROD}

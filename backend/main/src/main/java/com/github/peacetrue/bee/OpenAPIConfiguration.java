@@ -24,7 +24,7 @@ public class OpenAPIConfiguration {
 
     @Value("${springdoc.api.info.version}")
     private String infoVersion;
-    @Value("${spring.application.url}")
+    @Value("${spring.boot.admin.client.instance.service-base-url}")
     private String url;
 
     @Bean
@@ -34,7 +34,7 @@ public class OpenAPIConfiguration {
 //                        .description("")
                         .version(infoVersion)
                         .license(new License().name("Apache 2.0").url("https://github.com/peacetrue/bee/blob/master/LICENSE")))
-                .addServersItem(new Server().url(url + "/api").description("API 地址"))
+                .addServersItem(new Server().url(url).description("API 地址"))
                 .externalDocs(new ExternalDocumentation()
                         .description("Bee 项目文档")
                         .url("https://peacetrue.github.io/bee"))

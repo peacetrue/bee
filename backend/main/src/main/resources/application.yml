@@ -5,23 +5,4 @@ spring:
       dev: common,log-console,sba,springdoc
       local: common,log-file,sba,springdoc
       prod: common,log-file,sba,springdoc
----
-spring.config.activate.on-profile: dev
 
-spring:
-  application:
-    url: ${BEE_URL_DEV}
-
----
-spring.config.activate.on-profile: local
-
-spring:
-  application:
-    url: ${BEE_URL_LOCAL}
-
----
-spring.config.activate.on-profile: prod
-
-spring:
-  application:
-    url: ${BEE_URL_PROD}

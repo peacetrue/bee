@@ -8,10 +8,37 @@ management:
         web:
             exposure:
                 include: '*'
+
+---
+spring.config.activate.on-profile: dev
+
 spring:
     boot:
         admin:
             client:
-                url: \${spring.application.url}/monitor
+                url: ${BEE_MONITOR_URL_DEV}
                 instance:
-                    service-base-url: \${spring.application.url}/api
+                    service-base-url: ${BEE_MAIN_URL_DEV}
+
+---
+spring.config.activate.on-profile: local
+
+spring:
+    boot:
+        admin:
+            client:
+                url: ${BEE_MONITOR_URL_LOCAL}
+                instance:
+                    service-base-url: ${BEE_MAIN_URL_LOCAL}
+
+
+---
+spring.config.activate.on-profile: prod
+
+spring:
+    boot:
+        admin:
+            client:
+                url: ${BEE_MONITOR_URL_PROD}
+                instance:
+                    service-base-url: ${BEE_MAIN_URL_PROD}
