@@ -23,8 +23,6 @@ jobs:
     runs-on: macos-12
 
     steps:
-    - run: set -x
-
     - uses: actions/checkout@v3
 
     - name: Set up JDK 8
