@@ -3,14 +3,14 @@
 # 初始化生产环境
 
 # 安装 NGINX
-#sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST <<EOF
-#sed -i "s|www-data|root|g" /etc/nginx/nginx.conf
-#nginx -s reload
-#EOF
+ssh $BEE_REMOTE_HOST <<EOF
+sed -i "s|www-data|root|g" /etc/nginx/nginx.conf
+nginx -s reload
+EOF
 
 # 创建工作目录
-sshpass -p $BEE_REMOTE_PASSWORD ssh $BEE_REMOTE_HOST "mkdir $BEE_REMOTE_WORKING_DIR; ln -s /usr/share/nginx/html $BEE_REMOTE_WORKING_DIR/html"
+ssh $BEE_REMOTE_HOST "mkdir $BEE_REMOTE_WORKING_DIR; ln -s /usr/share/nginx/html $BEE_REMOTE_WORKING_DIR/html"
 
 # 上传 bee.peacetrue.cn 配置
-sshpass -p $BEE_REMOTE_PASSWORD scp "$(pwd)/nginx/bee.peacetrue.cn.conf" "$BEE_REMOTE_HOST:/etc/nginx/conf.d/bee.peacetrue.cn.conf"
+scp "$(pwd)/nginx/bee.peacetrue.cn.conf" "$BEE_REMOTE_HOST:/etc/nginx/conf.d/bee.peacetrue.cn.conf"
 

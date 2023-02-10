@@ -1,4 +1,4 @@
-= 开发者手册
+= 开发手册
 
 本文介绍如何运行 {app-name} 项目。
 
@@ -8,14 +8,14 @@
 
 == 运行
 
-本机需安装 git(2+)、 jdk(8+)、node(14+)、npm(8.5+)、nginx(1.18+)，
-同时确保 {bee_monitor_port}、{bee_main_port} 端口可用。
+本机需安装 git(2+)、jdk(8+)、node(14+)、npm(8.5+)、nginx(1.18+)，
+同时确保 {BEE_MONITOR_PORT}、{BEE_MAIN_PORT} 端口可用。
 
 运行环境包括：
 
-. 开发环境：在 IDE 中开发，域名为 localhost，允许跨域
-. 本地环境：使用域名 bee.peacetrue.local，通过 nginx 配置为同域
-. 生产环境：使用域名 bee.peacetrue.cn，通过 nginx 配置为同域
+. 开发环境：在 IDE 中开发，域名为 {BEE_URL_DEV}，允许跨域
+. 本地环境：使用域名 {BEE_URL_LOCAL}，通过 nginx 配置为同域
+. 生产环境：使用域名 {BEE_URL_PROD}，通过 nginx 配置为同域
 
 开发环境和本地环境为 macOS（12.5.1），生产环境为 Ubuntu Server（11.2.0）。
 
