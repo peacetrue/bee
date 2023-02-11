@@ -2,12 +2,8 @@
 
 #set -x
 
-echo "设置系统环境变量"
-
 if [[ -z $SHELL_CONF_LOCATION ]]; then
   SHELL_CONF_LOCATION="$HOME/${SHELL}rc"
-#elif [[ ! -f $SHELL_CONF_LOCATION ]]; then
-#  echo -e "\033[0;31m ERROR\033[0m: 不支持的 shell $SHELL "
 fi
 
 if [[ -f $SHELL_CONF_LOCATION ]]; then
@@ -19,7 +15,7 @@ else
   exit 1
 fi
 
-sed "/^export BEE/d" "$SHELL_CONF_LOCATION"
+sed -i "/^export BEE/d" "$SHELL_CONF_LOCATION"
 # 删除首行 #!/bin/bash、注释、空行，然后添加到系统配置
 sed "1d;/^#/d;/^\s*$/d" env-vars.sh >>"$SHELL_CONF_LOCATION"
 
@@ -38,5 +34,3 @@ sed "1d;/^#/d;/^\s*$/d" env-vars.sh >>"$SHELL_CONF_LOCATION"
 #  fi
 #done
 
-#echo "ERROR: 不支持 $SHELL shell"
-#exit 1

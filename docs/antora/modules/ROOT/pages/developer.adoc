@@ -43,11 +43,11 @@ export SHELL_CONF_LOCATION={SHELL_CONF_LOCATION}
 # 设置环境变量，可自行修改以下配置
 cat <<EOF >>"$SHELL_CONF_LOCATION"
 export BEE_MAIN_PORT={BEE_MAIN_PORT} #主应用端口
-expoBEE_MONITOR_PORTrt ={BEE_MONITOR_PORT} #监控应用端口
+export BEE_MONITOR_PORT={BEE_MONITOR_PORT} #监控应用端口
 export BEE_HOST_LOCAL={BEE_HOST_LOCAL} #本地环境域名
 export BEE_HOST_PROD={BEE_HOST_PROD} #生产环境域名
 EOF
-
+source "$SHELL_CONF_LOCATION"
 # 初始化环境变量
 ./env-init.sh
 #配置本地域名，在 /etc/hosts 中添加以下代码

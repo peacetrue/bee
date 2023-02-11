@@ -2,6 +2,7 @@
 
 #set -x
 ./env-set.sh
+source "$SHELL_CONF_LOCATION"
 
 pwd=$(pwd)
 # 根据 Shell 环境变量，初始化 workflows 环境变量
@@ -39,5 +40,6 @@ for (( i = 0; i < ${#front_envs[@]}; i++ )); do
 done
 
 # 根据 Shell 环境变量，初始化 nginx 配置
-sed "s|BEE_HOST|$BEE_HOST_LOCAL|g;s|BEE_MONITOR_PORT|$BEE_MONITOR_PORT|g;s|BEE_MAIN_PORT|$BEE_MAIN_PORT|g;"  bee.peacetrue.tpl.conf >> bee.peacetrue.local.conf
-sed "s|BEE_HOST|$BEE_HOST_PROD|g;s|BEE_MONITOR_PORT|$BEE_MONITOR_PORT|g;s|BEE_MAIN_PORT|$BEE_MAIN_PORT|g;"  bee.peacetrue.tpl.conf >> bee.peacetrue.cn.conf
+cd "$pwd/nginx" || exit
+sed "s|BEE_HOST|$BEE_HOST_LOCAL|g;s|BEE_MONITOR_PORT|$BEE_MONITOR_PORT|g;s|BEE_MAIN_PORT|$BEE_MAIN_PORT|g;"  bee.peacetrue.tpl.conf > bee.peacetrue.local.conf
+sed "s|BEE_HOST|$BEE_HOST_PROD|g;s|BEE_MONITOR_PORT|$BEE_MONITOR_PORT|g;s|BEE_MAIN_PORT|$BEE_MAIN_PORT|g;"  bee.peacetrue.tpl.conf > bee.peacetrue.cn.conf
