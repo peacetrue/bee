@@ -17,12 +17,12 @@ asciidoc:
     BEE_FRONTEND_URL_DEV: http://localhost:3000
     BEE_MAIN_URL_PROD: http://bee.peacetrue.cn/api
     BEE_MAIN_URL_DEV: http://localhost:8081
-    BEE_URL_LOCAL: http://bee.peacetrue.local
+    BEE_HOST_LOCAL: bee.peacetrue.local
     BEE_FRONTEND_URL_LOCAL: http://bee.peacetrue.local
     BEE_MONITOR_URL_PROD: http://bee.peacetrue.cn/monitor
     BEE_MONITOR_PORT: 8080
     BEE_VERSION: 1.0.0
-    BEE_URL_PROD: http://bee.peacetrue.cn
+    BEE_HOST_PROD: bee.peacetrue.cn
     BEE_MONITOR_URL_DEV: http://localhost:8080
 start_page: ROOT:index.adoc
 nav:

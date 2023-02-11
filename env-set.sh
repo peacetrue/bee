@@ -6,15 +6,21 @@ echo "设置系统环境变量"
 
 if [[ -z $SHELL_CONF_LOCATION ]]; then
   SHELL_CONF_LOCATION="$HOME/${SHELL}rc"
-  echo "export SHELL_CONF_LOCATION=$SHELL_CONF_LOCATION" >>"$SHELL_CONF_LOCATION"
+#elif [[ ! -f $SHELL_CONF_LOCATION ]]; then
+#  echo -e "\033[0;31m ERROR\033[0m: 不支持的 shell $SHELL "
 fi
 
-if [[ ! -f $SHELL_CONF_LOCATION ]]; then
-  echo "不存在配置文件 $SHELL_CONF_LOCATION，请手动设置"
+if [[ -f $SHELL_CONF_LOCATION ]]; then
+  if ! grep SHELL_CONF_LOCATION "$SHELL_CONF_LOCATION"; then
+    echo "export SHELL_CONF_LOCATION=$SHELL_CONF_LOCATION" >>"$SHELL_CONF_LOCATION"
+  fi
+else
+  echo -e "\033[0;31m ERROR\033[0m: 系统配置文件 $SHELL_CONF_LOCATION 不存在，请手动设置"
   exit 1
 fi
 
-sed "1d" env-vars.sh >>"$SHELL_CONF_LOCATION"
+# 删除首行 #!/bin/bash、注释、空行，然后添加到系统配置
+sed "1d;/^#/d;/^\s*$/d" env-vars.sh >>"$SHELL_CONF_LOCATION"
 
 # 根据用户使用的 shell 名称，写入对应的配置文件
 #shell_names=(bash zsh)

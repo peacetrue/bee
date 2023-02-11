@@ -7,10 +7,10 @@ export BEE_FRONTEND_PORT=3000
 export BEE_VERSION=1.0.0
 
 export BEE_URL_DEV=http://localhost
-#export BEE_URL_LOCAL=http://bee.peacetrue.local
-export BEE_HOST_LOCAL=${BEE_URL_LOCAL#*//}
-#export BEE_URL_PROD=http://bee.peacetrue.cn
-export BEE_HOST_PROD=${BEE_URL_PROD#*//}
+#export BEE_HOST_LOCAL=bee.peacetrue.local
+export BEE_URL_LOCAL=http://$BEE_HOST_LOCAL
+#export BEE_HOST_PROD=bee.peacetrue.cn
+export BEE_URL_PROD=http://$BEE_URL_PROD
 
 export BEE_FRONTEND_URL_DEV=$BEE_URL_DEV:$BEE_FRONTEND_PORT
 export BEE_MAIN_URL_DEV=$BEE_URL_DEV:$BEE_MAIN_PORT

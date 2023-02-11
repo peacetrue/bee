@@ -1,15 +1,12 @@
-= 开发手册
+= 开发者手册
 
 本文介绍如何运行 {app-name} 项目。
 
 == 效果展示
 
-访问 http://bee.peacetrue.cn/function/conversion[{app-name}^] 网站查看演示效果。
+访问 {BEE_URL_PROD}[{app-name}^] 网站查看演示效果。
 
 == 运行
-
-本机需安装 git(2+)、jdk(8+)、node(14+)、npm(8.5+)、nginx(1.18+)，
-同时确保 {BEE_MONITOR_PORT}、{BEE_MAIN_PORT} 端口可用。
 
 ////
 .安装缺失软件
@@ -24,11 +21,14 @@ sudo apt install git -y
 
 运行环境包括：
 
-. 开发环境：在 IDE 中开发，域名为 {BEE_URL_DEV}，允许跨域
-. 本地环境：使用域名 {BEE_URL_LOCAL}，通过 nginx 配置为同域
-. 生产环境：使用域名 {BEE_URL_PROD}，通过 nginx 配置为同域
+. 开发环境：在 IDE 中开发，域名为 {BEE_URL_DEV} ，允许跨域
+. 本地环境：使用域名 {BEE_URL_LOCAL} ，通过 nginx 配置为同域
+. 生产环境：使用域名 {BEE_URL_PROD} ，通过 nginx 配置为同域
 
 开发环境和本地环境为 macOS（12.5.1），生产环境为 Ubuntu Server（11.2.0）。
+
+本机需安装 git(2+)、jdk(8+)、node(14+)、npm(8.5+)、nginx(1.18+)，
+同时确保 {BEE_MONITOR_PORT}、{BEE_MAIN_PORT} 端口可用。
 
 // https://askubuntu.com/questions/426750/how-can-i-update-my-nodejs-to-the-latest-version
 
@@ -36,20 +36,25 @@ sudo apt install git -y
 ----
 # 检出项目
 git clone https://github.com/peacetrue/bee.git && cd bee
-# 设置 Shell 配置文件位置，默认使用 {SHELL_CONF_LOCATION}，可能是 ~/.bashrc、~/.zshrc 或其他
+# 设置 Shell 配置文件位置，默认为 {SHELL_CONF_LOCATION}，可能是 ~/.bashrc、~/.zshrc 或其他，
+# 后续会向该配置文件写入系统环境变量
 export SHELL_CONF_LOCATION={SHELL_CONF_LOCATION}
 
-# 设置环境变量，可自行修改如下配置
+# 设置环境变量，可自行修改以下配置
 cat <<EOF >>"$SHELL_CONF_LOCATION"
+#主应用端口
 export BEE_MAIN_PORT={BEE_MAIN_PORT}
+#监控应用端口
 export BEE_MONITOR_PORT={BEE_MONITOR_PORT}
-export BEE_URL_LOCAL={BEE_URL_LOCAL}
-export BEE_URL_PROD={BEE_URL_PROD}
+#本地环境域名
+export BEE_HOST_LOCAL={BEE_HOST_LOCAL}
+#生产环境域名
+export BEE_HOST_PROD={BEE_HOST_PROD}
 EOF
 
 # 初始化环境变量
 ./env-init.sh
-#配置本地域名，在 /etc/hosts 中添加如下代码
+#配置本地域名，在 /etc/hosts 中添加以下代码
 echo "127.0.0.1 $BEE_HOST_LOCAL" >> /etc/hosts
 
 # 开发模式
@@ -75,7 +80,7 @@ echo "127.0.0.1 $BEE_HOST_LOCAL" >> /etc/hosts
 # 安装 sshpass 以便登录时设置密码
 #sudo apt-get install sshpass -y
 #sudo apt-get install jmeter -y
-# 设置远程服务器信息，可修改如下配置后，拷贝到 ~/.bashrc 或者 ~/.zshrc 中并使用 source 更新
+# 设置远程服务器信息，可修改以下配置后，拷贝到 ~/.bashrc 或者 ~/.zshrc 中并使用 source 更新
 export BEE_REMOTE_HOST=root@aliyun
 export BEE_REMOTE_PASSWORD=123456
 export BEE_REMOTE_WORKING_DIR=~/bee
