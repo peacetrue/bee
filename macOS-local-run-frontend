@@ -9,4 +9,4 @@ rm -rf local
 npm run build:local
 # 打包
 mv build local
-
+open -a "Google Chrome" $BEE_FRONTEND_URL_LOCAL

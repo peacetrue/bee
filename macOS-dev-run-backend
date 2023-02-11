@@ -3,6 +3,7 @@
 pwd=$(pwd)
 for app in main monitor; do
   cd "$pwd/backend/$app" || exit
+   ps -ef | grep -i "Bee${app}Application" | grep -v grep | awk '{print $2}' | xargs kill -9
   # https://stackoverflow.com/questions/36923288/how-to-run-bootrun-with-spring-profile-via-gradle-task
   nohup ./gradlew clean bootRun --args='--spring.profiles.active=dev' >/dev/null 2>&1 &
 done

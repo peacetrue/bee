@@ -7,9 +7,10 @@ for app in main monitor; do
   cd "$pwd/backend/$app"
   #打包
   ./gradlew clean build
-  remoteArchiveName="$app-boot-1.0.0"
+  remoteArchiveName="$app-boot-$BEE_VERSION"
   cd "build/distributions"
   tar -xf $remoteArchiveName.tar
   cd $remoteArchiveName
+  ps -ef | grep -i "Bee${app}Application" | grep -v grep | awk '{print $2}' | xargs kill -9
   nohup bin/$app >/dev/null 2>&1 &
 done
