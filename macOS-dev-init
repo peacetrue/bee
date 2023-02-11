@@ -6,6 +6,6 @@ npm install
 
 for app in main monitor; do
   cd "$pwd/backend/$app" || exit
-  ./gradlew build
+  ./gradlew clean build
 done
 
