@@ -1,6 +1,8 @@
 #!/bin/bash
 
 set -x
+./env-set.sh
+
 pwd=$(pwd)
 # 根据 Shell 环境变量，初始化 workflows 环境变量
 cd "$pwd/.github/workflows" || exit
@@ -35,3 +37,7 @@ for (( i = 0; i < ${#front_envs[@]}; i++ )); do
   sed -i "s|REACT_APP_SWAGGER_URL.*|REACT_APP_SWAGGER_URL='$(printenv "BEE_MAIN_URL_${back_env}")/swagger-ui/index.html'|g" ".env.$front_env"
   sed -i "s|REACT_APP_MONITOR_URL.*|REACT_APP_MONITOR_URL='$(printenv "BEE_MONITOR_URL_${back_env}")'|g" ".env.$front_env"
 done
+
+# 根据 Shell 环境变量，初始化 nginx 配置
+sed "s|BEE_HOST|$BEE_HOST_LOCAL|g;s|BEE_MONITOR_PORT|$BEE_MONITOR_PORT|g;s|BEE_MAIN_PORT|$BEE_MAIN_PORT|g;"  bee.peacetrue.tpl.conf >> bee.peacetrue.local.conf
+sed "s|BEE_HOST|$BEE_HOST_PROD|g;s|BEE_MONITOR_PORT|$BEE_MONITOR_PORT|g;s|BEE_MAIN_PORT|$BEE_MAIN_PORT|g;"  bee.peacetrue.tpl.conf >> bee.peacetrue.cn.conf

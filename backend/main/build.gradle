@@ -17,7 +17,7 @@ plugins {
 }
 
 group "com.github.peacetrue.bee"
-version "1.0.0${tailSnapshot}"
+version "${System.getenv("BEE_VERSION")}${tailSnapshot}"
 description "Bee 后端模块"
 
 configurations {

@@ -11,6 +11,17 @@
 本机需安装 git(2+)、jdk(8+)、node(14+)、npm(8.5+)、nginx(1.18+)，
 同时确保 {BEE_MONITOR_PORT}、{BEE_MAIN_PORT} 端口可用。
 
+////
+.安装缺失软件
+[source%nowrap,bash,subs="specialchars,attributes"]
+----
+sudo apt install openjdk-17-jdk -y
+sudo apt install nodejs npm -y
+sudo apt install nginx-core -y
+sudo apt install git -y
+----
+////
+
 运行环境包括：
 
 . 开发环境：在 IDE 中开发，域名为 {BEE_URL_DEV}，允许跨域
@@ -25,65 +36,54 @@
 ----
 # 检出项目
 git clone https://github.com/peacetrue/bee.git && cd bee
-----
+# 设置 Shell 配置文件位置，默认使用 {SHELL_CONF_LOCATION}，可能是 ~/.bashrc、~/.zshrc 或其他
+export SHELL_CONF_LOCATION={SHELL_CONF_LOCATION}
 
-////
-.安装缺失软件
-[source%nowrap,bash,subs="specialchars,attributes"]
-----
-sudo apt install openjdk-17-jdk -y
-sudo apt install nodejs npm -y
-sudo apt install nginx-core -y
-sudo apt install git -y
-----
-////
+# 设置环境变量，可自行修改如下配置
+cat <<EOF >>"$SHELL_CONF_LOCATION"
+export BEE_MAIN_PORT={BEE_MAIN_PORT}
+export BEE_MONITOR_PORT={BEE_MONITOR_PORT}
+export BEE_URL_LOCAL={BEE_URL_LOCAL}
+export BEE_URL_PROD={BEE_URL_PROD}
+EOF
 
-.设置环境变量
-[source%nowrap,bash,subs="specialchars,attributes"]
-----
-./set-env
-----
+# 初始化环境变量
+./env-init.sh
+#配置本地域名，在 /etc/hosts 中添加如下代码
+echo "127.0.0.1 $BEE_HOST_LOCAL" >> /etc/hosts
 
-.开发模式
-[source%nowrap,bash,subs="specialchars,attributes"]
-----
-./ubuntu-dev-init
-./ubuntu-dev-run-backend
-./ubuntu-dev-run-frontend
-----
+# 开发模式
+./macOS-dev-init
+./macOS-dev-run-backend
+./macOS-dev-run-frontend
+./macOS-dev-run-test
 
-.本地模式
-[source%nowrap,bash,subs="specialchars,attributes"]
-----
-./ubuntu-local-init
-./ubuntu-local-run-backend
-./ubuntu-local-run-frontend
+#本地模式
+./macOS-local-init
+./macOS-local-run-backend
+./macOS-local-run-frontend
+./macOS-local-run-test
 ----
 
 // # https://serverfault.com/questions/241588/how-to-automate-ssh-login-with-password
 // # https://stackoverflow.com/questions/32255660/how-to-install-sshpass-on-mac
 
-.生产模式
+生产模式服务器上需安装 jre(1.8+) 和 nginx(1.18+)，并在本地配置免密登录。
+
 [source%nowrap,bash,subs="specialchars,attributes"]
 ----
-# 服务器上需事先安装 jdk 和 nginx
 # 安装 sshpass 以便登录时设置密码
-sudo apt-get install sshpass -y
-sudo apt-get install jmeter -y
-# 设置远程服务器信息
-cat <<EOF >>~/.bashrc
+#sudo apt-get install sshpass -y
+#sudo apt-get install jmeter -y
+# 设置远程服务器信息，可修改如下配置后，拷贝到 ~/.bashrc 或者 ~/.zshrc 中并使用 source 更新
 export BEE_REMOTE_HOST=root@aliyun
 export BEE_REMOTE_PASSWORD=123456
 export BEE_REMOTE_WORKING_DIR=~/bee
-EOF
-source "$HOME/.bashrc"
 
 ./ubuntu-prod-init
 ./ubuntu-prod-run-backend
 ./ubuntu-prod-run-frontend
 ----
-
-//TODO window 系统测试
 
 
 ////

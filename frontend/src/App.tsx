@@ -76,8 +76,6 @@ function Header({themeState}: HeaderProps) {
 }
 
 function App() {
-  console.info("process.env.NODE_ENV:", process.env.NODE_ENV)
-  console.info("process.env.NODE_ENV:", process.env)
   const themeState = React.useState<number>(0);
   return (
     <I18nextProvider i18n={i18n} defaultNS={"bee"}>
