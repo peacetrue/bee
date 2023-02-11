@@ -1,15 +1,15 @@
 #!/bin/bash
 
-export BEE_FRONTEND_PORT=3000
-#export BEE_MAIN_PORT=8081
-#export BEE_MONITOR_PORT=8080
-
 export BEE_VERSION=1.0.0
 
+export BEE_FRONTEND_PORT=3000
+export BEE_MAIN_PORT=${BEE_MAIN_PORT-8081}
+export BEE_MONITOR_PORT=${BEE_MONITOR_PORT-8080}
+
 export BEE_URL_DEV=http://localhost
-#export BEE_HOST_LOCAL=bee.peacetrue.local
+export BEE_HOST_LOCAL=${BEE_HOST_LOCAL:bee.peacetrue.local}
 export BEE_URL_LOCAL=http://$BEE_HOST_LOCAL
-#export BEE_HOST_PROD=bee.peacetrue.cn
+export BEE_HOST_PROD=${BEE_HOST_PROD:bee.peacetrue.cn}
 export BEE_URL_PROD=http://$BEE_URL_PROD
 
 export BEE_FRONTEND_URL_DEV=$BEE_URL_DEV:$BEE_FRONTEND_PORT
