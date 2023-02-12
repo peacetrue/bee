@@ -4,13 +4,11 @@
 
 pwd=$(pwd)
 for app in main monitor; do
-  cd "$pwd/backend-$app"
+  app="backend-$app"
+  cd "$pwd/$app"
   #打包
-  ./gradlew clean build
-  remoteArchiveName="$app-boot-$BEE_VERSION"
-  cd "build/distributions"
-  tar -xf $remoteArchiveName.tar
-  cd $remoteArchiveName
+  ./gradlew clean installBootDist
+  cd "build/install/$app-boot"
   ps -ef | grep -i "Bee${app}Application" | grep -v grep | awk '{print $2}' | xargs kill -9
   nohup bin/$app >/dev/null 2>&1 &
 done

@@ -18,5 +18,3 @@ if ps -ef | grep nginx | grep -v grep; then
 else
   nginx
 fi
-
-./macOS-dev-init
