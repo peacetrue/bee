@@ -7,11 +7,13 @@ source "$SHELL_CONF_LOCATION"
 pwd=$(pwd)
 # 根据 Shell 环境变量，初始化 workflows 环境变量
 cd "$pwd/.github/workflows" || exit
-sed -i "/^\s*BEE/d" "macOS.yml"
-for env in $(printenv | grep BEE | grep -v BEE_REMOTE) ; do
-    sed -i "/jobs/i${env//=/: }" "macOS.yml"
+for yml in main macOS ; do
+  sed -i "/^\s*BEE/d" "$yml.yml"
+  for env in $(printenv | grep BEE | grep -v BEE_REMOTE) ; do
+      sed -i "/jobs/i${env//=/: }" "$yml.yml"
+  done
+  (TAB=$'  ' ; sed -i "s/^BEE/${TAB}BEE/" "$yml.yml")
 done
-(TAB=$'  ' ; sed -i "s/^BEE/${TAB}BEE/" "macOS.yml")
 
 
 # 根据 Shell 环境变量，初始化文档环境变量
