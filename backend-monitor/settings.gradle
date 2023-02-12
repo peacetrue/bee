@@ -15,4 +15,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "monitor"
+rootProject.name = "backend-monitor"

@@ -16,4 +16,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "main"
+rootProject.name = "backend-main"
