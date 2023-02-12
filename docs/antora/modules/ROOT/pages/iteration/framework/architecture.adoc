@@ -2,7 +2,7 @@
 
 //@formatter:off
 
-https://zhuanlan.zhihu.com/p/87855907[前后端分离^]。
+使用 https://zhuanlan.zhihu.com/p/87855907[前后端分离^] 架构。
 
 == 项目划分
 
@@ -14,11 +14,49 @@ https://zhuanlan.zhihu.com/p/87855907[前后端分离^]。
 @enduml
 ----
 
+* 前端应用：提供功能界面展示
 * 后端主应用：提供功能接口
 * 后端监控应用：监控后端主应用运行状态及异常告警
-* 前端应用：提供功能界面展示
 
-== 部署模式
+.应用端口：
+* 前端应用：{BEE_FRONTEND_PORT}
+* 后端监控应用：{BEE_MONITOR_PORT}
+* 后端主应用：{BEE_MAIN_PORT}
+
+== 运行环境
+
+=== 开发
+
+.开发运行模式
+[plantuml,target=deployment-dev,format=png]
+----
+@startuml
+
+artifact 前端
+
+folder 后端{
+    artifact 主应用
+    artifact 监控应用
+}
+
+前端 --> 主应用: 调用接口，localhost 可跨域
+主应用 --> 监控应用: 注册
+主应用 <-- 监控应用: 获取监控指标
+@enduml
+----
+
+.直接通过 IDE 运行，以 IntelliJ IDEA 为例：
+* 链接 Gradle 项目
+
+image:manual/link-gradle.png[]
+
+* 运行后端 `BeeMainApplication`：
+
+image:manual/backend.png[width=50%]
+
+* 启动前端 `package.json`：
+
+image:manual/frontend.png[width=50%]
 
 === 本地
 
@@ -53,19 +91,13 @@ Nginx --> 主应用: 反向代理
 @enduml
 ----
 
-.应用端口
-* 前端应用：3000
-* 后端监控应用：8080
-* 后端主应用：8081
-
-本地使用地址： {BEE_URL_LOCAL} 。
 
 添加 hosts 条目：
 
 ./etc/hosts
-[source%nowrap,bash]
+[source%nowrap,bash,subs="specialchars,attributes"]
 ----
-echo '127.0.0.1 bee.peacetrue.local' >> /etc/hosts
+echo '127.0.0.1 {BEE_HOST_LOCAL}' >> /etc/hosts
 ----
 
 Nginx 配置：
@@ -76,9 +108,7 @@ Nginx 配置：
 include::example$nginx/bee.peacetrue.local.conf[]
 ----
 
-=== 远程
-
-远程指服务端。
+=== 生产
 
 .远程部署模式
 [plantuml,target=deployment-remote,format=png]
@@ -105,19 +135,15 @@ Nginx --> 主应用: 反向代理
 @enduml
 ----
 
-.应用端口
-* 后端监控应用：8080
-* 后端主应用：8081
-
-远程使用地址： {bee_url_prod} 。
-
 Nginx 配置：
 
-.bee.peacetrue.cn
+.{BEE_HOST_PROD}
 [source%nowrap,conf]
 ----
 include::example$nginx/bee.peacetrue.cn.conf[]
 ----
+
+本地打完包后，上传到服务器，完成上线部署。
 
 == 技术栈
 

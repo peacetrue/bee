@@ -38,30 +38,6 @@ public class ConversionController {
     }
 
     /**
-     * 获取系统支持转换的数据格式。
-     *
-     * @return 支持转换的数据格式
-     */
-    @GetMapping(value = "/formats", produces = "application/vnd.bee.v2+json")
-    public List<String> getFormatsV2() {
-        List<String> formats = new ArrayList<>(formatterRegistrar.getFormats());
-        formats.add("v2");
-        return formats;
-    }
-
-    /**
-     * 获取系统支持转换的数据格式。
-     *
-     * @return 支持转换的数据格式
-     */
-    @GetMapping(value = "/formats", produces = "application/vnd.bee.v3+json")
-    public List<String> getFormatsV3() {
-        List<String> formats = formatterRegistrar.getFormats();
-        formats.add("v3");
-        return formats;
-    }
-
-    /**
      * 转换指定格式的原始数据内容为其他格式的目标数据内容。
      *
      * @param conversion 数据转换参数

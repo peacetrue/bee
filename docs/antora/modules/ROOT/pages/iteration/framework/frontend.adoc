@@ -181,16 +181,6 @@ npm install axios
 npm install qs
 ----
 
-=== 部署
-
-将本地构建的静态文件，上传到服务器 Nginx 静态资源目录下。
-
-.部署脚本
-[source%nowrap,bash]
-----
-include::example$frontend/deploy[tag=basic]
-----
-
 == 特性
 
 * 主题切换（日 / 夜）

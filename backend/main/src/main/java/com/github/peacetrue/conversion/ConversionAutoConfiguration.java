@@ -6,7 +6,6 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
-import lombok.Generated;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
@@ -29,31 +28,22 @@ public class ConversionAutoConfiguration {
     }
 
     @Bean
-    
     public ConversionServiceImpl conversionService() {
         return new ConversionServiceImpl();
     }
 
     @Bean
-    
     public JsonFormatter jsonFormatter() {
         return new JsonFormatter();
     }
 
     @Bean
-    
     @ConditionalOnMissingBean
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
     }
 
-//    @Bean
-    public XmlFormatter xmlFormatter() {
-        return new XmlFormatter();
-    }
-
     @Bean
-    
     @ConditionalOnMissingBean
     public XmlMapper xmlMapper() {
         XmlMapper xmlMapper = new XmlMapper();
@@ -62,13 +52,11 @@ public class ConversionAutoConfiguration {
     }
 
     @Bean
-    
     public YamlFormatter yamlFormatter() {
         return new YamlFormatter();
     }
 
     @Bean
-    
     @ConditionalOnMissingBean
     public YAMLMapper yamlMapper() {
         YAMLMapper yamlMapper = new YAMLMapper();
@@ -77,13 +65,11 @@ public class ConversionAutoConfiguration {
     }
 
     @Bean
-    
     public PropertiesFormatter propertiesFormatter() {
         return new PropertiesFormatter();
     }
 
     @Bean
-    
     @ConditionalOnMissingBean
     public JavaPropsMapper javaPropsMapper() {
         return new JavaPropsMapper();

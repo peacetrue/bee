@@ -32,7 +32,7 @@ image::backend/image-2022-08-31-17-26-27-976.png[]
 
 === 数据类型
 
-https://zh.wikipedia.org/zh-cn/%E8%B3%87%E6%96%99%E9%A1%9E%E5%9E%8B[数据类型^] 主要是复合类型（对象和集合），不处理原始类型。
+https://zh.wikipedia.org/zh-cn/%E8%B3%87%E6%96%99%E9%A1%9E%E5%9E%8B[数据类型^] 主要是对象，不处理集合和原始类型。
 
 === 示例
 

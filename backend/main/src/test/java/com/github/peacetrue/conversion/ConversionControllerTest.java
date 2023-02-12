@@ -5,7 +5,6 @@ import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 import com.github.peacetrue.bee.OpenAPIConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -34,6 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Slf4j
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {
+        VersionedConversionController.class,
         JacksonAutoConfiguration.class,
         ConversionAutoConfiguration.class,
         WebMvcAutoConfiguration.class,
@@ -51,10 +52,30 @@ class ConversionControllerTest {
     @Test
     void getFormats() throws Exception {
         this.mockMvc.perform(get("/conversion/formats")
-                .accept(MediaType.APPLICATION_JSON))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
-        ;
+                .andExpect(jsonPath("$").value(not(hasItem("v2"))));
+    }
+
+    @Test
+    void getFormatsV2() throws Exception {
+        this.mockMvc.perform(get("/conversion/formats")
+                        .accept("application/vnd.bee.v2+json")
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$").value(hasItem("v2")));
+    }
+
+    @Test
+    void getFormatsV3() throws Exception {
+        this.mockMvc.perform(get("/conversion/formats")
+                        .accept("application/vnd.bee.v3+json")
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$").value(hasItem("v3")));
     }
 
     @Test
@@ -74,10 +95,10 @@ class ConversionControllerTest {
         String params = objectMapper.writeValueAsString(args);
         log.debug("params: {}", params);
         this.mockMvc.perform(post("/conversion")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(params)
-                .accept(OpenAPIConfiguration.V1)
-        )
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(params)
+                        .accept(OpenAPIConfiguration.V1)
+                )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(targetData))
         ;

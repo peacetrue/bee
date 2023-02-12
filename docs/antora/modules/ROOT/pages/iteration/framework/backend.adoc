@@ -11,19 +11,15 @@ Gradle 7.4.2 和 spring-boot-gradle-plugin 2.7.0 可正常匹配
 
 == 应用
 
-|===
-|名称 |描述 |端口 |备注
+=== 主应用
 
-|http://peacetrue.cn:{bee_monitor_port}[bee-monitor^]
-|监控应用
-|{bee_monitor_port}
-|监控主应用的运行状态，基于 https://github.com/codecentric/spring-boot-admin[SBA^] 实现
+依赖如下：
 
-|http://peacetrue.cn:{bee_main_port}[bee-main^]
-|主应用
-|{bee_main_port}
-|实现业务功能
-|===
+.build.gradle
+[source%nowrap,gradle]
+----
+include::example$backend/main/build.gradle[tags=web;sba;springdoc;validation]
+----
 
 === 监控应用
 
@@ -35,23 +31,13 @@ Gradle 7.4.2 和 spring-boot-gradle-plugin 2.7.0 可正常匹配
 include::example$backend/monitor/build.gradle[tag=dependencies]
 ----
 
-=== 主应用
-
-依赖如下：
-
-.build.gradle
-[source%nowrap,gradle]
-----
-include::example$backend/main/build.gradle[tags=web;sba;springdoc;validation]
-----
-
-== 自动部署
+== 构建
 
 使用 https://docs.gradle.org/current/userguide/application_plugin.html[application^] 插件打包后，
 部署到远程服务。
 
-以 *bee-main* 为例说明，
-*bee-monitor* 与此类似。
+以 *main* 为例说明，
+*monitor* 与此类似。
 
 === 部署包结构
 
@@ -59,19 +45,19 @@ include::example$backend/main/build.gradle[tags=web;sba;springdoc;validation]
 在 *build/install* 目录下生成部署包，
 文件结构如下：
 
-[source%nowrap,tree]
+[source%nowrap,tree,subs="specialchars,attributes"]
 ----
 main-boot
 ├── bin
 │   ├── main
 │   └── main.bat
 └── lib
-    └── main-1.0.0-SNAPSHOT.jar
+    └── main-{BEE_VERSION}.jar
 ----
 
-=== 部署脚本
+=== 运行脚本
 
-部署脚本名称默认与项目名相同。
+运行脚本名称默认与项目名相同。
 
 调用脚本，脚本会自动根据上面的目录结构，找到执行的 jar 包：
 
@@ -92,7 +78,7 @@ $ ./main
 
 关于 $JAVA_OPTS 的调用方式：
 
-[source%nowrap,bash]
+[source%nowrap,bash,subs="specialchars,attributes"]
 ----
 $ export JAVA_OPTS='"-Xmx1G" "-Xms1G"'
 $ java $JAVA_OPTS -jar backend-1.0.0-SNAPSHOT.jar
@@ -100,5 +86,5 @@ $ java $JAVA_OPTS -jar backend-1.0.0-SNAPSHOT.jar
 原因: java.lang.ClassNotFoundException: "-Xmx1G" "-Xms1G"
 
 # 正确的调用方式如下：
-$ eval "java $JAVA_OPTS -jar backend-1.0.0-SNAPSHOT.jar"
+$ eval "java $JAVA_OPTS -jar backend-{BEE_VERSION}.jar"
 ----

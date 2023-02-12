@@ -126,7 +126,6 @@ include::example$backend/main/src/test/resources/jmxs/baidu/options.properties[]
 jmeter -n -t test-plan.jmx -q options.properties -l result.csv -e -o report
 ----
 
-测试报告：
 
 
 

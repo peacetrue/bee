@@ -1,5 +1,6 @@
 package com.github.peacetrue.bee;
 
+import lombok.Generated;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,6 +17,7 @@ public class BeeMainApplication {
      *
      * @param args 命令行参数
      */
+    @Generated
     public static void main(String[] args) {
         SpringApplication.run(BeeMainApplication.class, args);
     }

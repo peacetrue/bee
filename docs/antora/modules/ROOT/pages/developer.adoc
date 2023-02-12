@@ -94,22 +94,6 @@ source "$SHELL_CONF_LOCATION"
 ////
 === 开发环境
 
-.直接通过 IDE 运行，以 IntelliJ IDEA 为例：
-* 链接 Gradle 项目
-
-image:manual/link-gradle.png[]
-
-* 运行后端 `BeeMainApplication`：
-
-image:manual/backend.png[width=50%]
-
-* 激活开发环境：
-
-image:manual/dev.png[width=50%]
-
-* 启动前端 `package.json`：
-
-image:manual/frontend.png[width=50%]
 
 .通过命令运行
 [source%nowrap,bash,subs="specialchars,attributes"]

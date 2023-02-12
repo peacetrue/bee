@@ -1,6 +1,8 @@
-package com.github.peacetrue.conversion;
+package com.github.peacetrue.conversion.incubate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.peacetrue.conversion.Formatter;
+import com.github.peacetrue.conversion.FormatterRegistrar;
 import com.github.peacetrue.net.URLQueryUtils;
 import lombok.Generated;
 import lombok.extern.slf4j.Slf4j;
@@ -56,13 +58,13 @@ public class CollectionConverter implements Formatter<List<String>> {
 
 
     @Autowired
-    
+
     public void setObjectMapper(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
     @Autowired
-    
+
     public void setFormatterRegistrar(FormatterRegistrar formatterRegistrar) {
         formatterRegistrar.registerFormatter("collection", this);
     }
