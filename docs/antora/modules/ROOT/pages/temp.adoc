@@ -83,7 +83,7 @@ nginx -s reload
 .options.properties
 [source%nowrap,properties]
 ----
-include::example$backend/main/src/test/resources/jmxs/options-1000.properties[]
+include::example$backend-main/src/test/resources/jmxs/options-1000.properties[]
 ----
 
 测试结果如下：
@@ -113,7 +113,7 @@ image::test/image-2022-08-22-10-18-19-314.png[]
 
 [source%nowrap,properties]
 ----
-include::example$backend/main/src/test/resources/jmxs/baidu/options.properties[]
+include::example$backend-main/src/test/resources/jmxs/baidu/options.properties[]
 ----
 
 逐步增加线程数，花尽可能少的时间，得出比较全面准确的结果。

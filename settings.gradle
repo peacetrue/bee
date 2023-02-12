@@ -20,5 +20,5 @@ pluginManagement {
 // 此项目的目的是为了实现 GitHub 自动构建
 rootProject.name = "bee"
 include("backend-main")
-//include("backend:monitor")
+//include("backend-monitor")
 

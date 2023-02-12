@@ -18,7 +18,7 @@ Gradle 7.4.2 和 spring-boot-gradle-plugin 2.7.0 可正常匹配
 .build.gradle
 [source%nowrap,gradle]
 ----
-include::example$backend/main/build.gradle[tags=web;sba;springdoc;validation]
+include::example$backend-main/build.gradle[tags=web;sba;springdoc;validation]
 ----
 
 === 监控应用
@@ -28,7 +28,7 @@ include::example$backend/main/build.gradle[tags=web;sba;springdoc;validation]
 .build.gradle
 [source%nowrap,gradle]
 ----
-include::example$backend/monitor/build.gradle[tag=dependencies]
+include::example$backend-monitor/build.gradle[tag=dependencies]
 ----
 
 == 构建

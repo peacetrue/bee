@@ -101,7 +101,7 @@ jmeter -n -t test-plan.jmx -q options.properties -l result.csv -e -o report
 
 [source%nowrap,properties]
 ----
-include::example$backend/main/src/test/resources/jmxs/options-600.properties[]
+include::example$backend-main/src/test/resources/jmxs/options-600.properties[]
 ----
 
 ////
@@ -165,7 +165,7 @@ www-data  184208  184204  0 02:25 ?        00:00:00 nginx: worker process
 
 [source%nowrap,properties]
 ----
-include::example$backend/main/src/test/resources/jmxs/options-600.properties[]
+include::example$backend-main/src/test/resources/jmxs/options-600.properties[]
 ----
 
 执行测试：
@@ -227,7 +227,7 @@ Bee 使用 Tomcat 9 作为 Web 服务器，
 
 [source%nowrap,properties]
 ----
-include::example$backend/main/src/test/resources/jmxs/options-300.properties[]
+include::example$backend-main/src/test/resources/jmxs/options-300.properties[]
 ----
 
 执行测试计划：

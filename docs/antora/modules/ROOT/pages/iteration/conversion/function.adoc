@@ -72,25 +72,25 @@ user::roles --> role2
 .json
 [source%nowrap,json]
 ----
-include::example$backend/main/src/test/resources/conversion/user.json[]
+include::example$backend-main/src/test/resources/conversion/user.json[]
 ----
 
 .xml
 [source%nowrap,xml]
 ----
-include::example$backend/main/src/test/resources/conversion/user.xml[]
+include::example$backend-main/src/test/resources/conversion/user.xml[]
 ----
 
 .properties
 [source%nowrap,properties]
 ----
-include::example$backend/main/src/test/resources/conversion/user.properties[]
+include::example$backend-main/src/test/resources/conversion/user.properties[]
 ----
 
 .yaml
 [source%nowrap,yaml]
 ----
-include::example$backend/main/src/test/resources/conversion/user.yaml[]
+include::example$backend-main/src/test/resources/conversion/user.yaml[]
 ----
 
 
