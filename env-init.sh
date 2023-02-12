@@ -24,6 +24,9 @@ for env in $(printenv | grep BEE | grep -v BEE_REMOTE) ; do
 done
 #https://unix.stackexchange.com/questions/552689/multiline-variable-add-a-tab-before-each-newline
 (TAB=$'    ' ; sed -i "s/^BEE/${TAB}BEE/" "antora.yml")
+if command -v antora > /dev/null; then
+    antora generate playbook-local.yml
+fi
 
 # 根据 Shell 环境变量，初始化前端环境变量
 cd "$pwd/frontend" || exit

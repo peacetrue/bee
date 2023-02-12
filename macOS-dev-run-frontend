@@ -1,5 +1,6 @@
 #!/bin/bash
 
 cd "$(pwd)/frontend" || exit
-nohup npm start >/dev/null 2>&1 &
-open -a "Google Chrome" $BEE_FRONTEND_URL_DEV
+npm start
+#nohup npm start >/dev/null 2>&1 &
+#open -a "Google Chrome" $BEE_FRONTEND_URL_DEV

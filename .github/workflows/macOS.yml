@@ -9,8 +9,8 @@ permissions:
   contents: read
 
 env:
-  NGINX_CONFIG_DIR: /usr/local/etc/nginx/servers
-  NGINX_HTML_DIR: /usr/local/Cellar/nginx/1.23.3
+#  NGINX_CONFIG_DIR: /usr/local/etc/nginx/servers
+#  NGINX_HTML_DIR: /usr/local/Cellar/nginx/1.23.3
 
   BEE_FRONTEND_PORT: 3000
   BEE_MAIN_PORT: 8081
@@ -61,7 +61,7 @@ jobs:
 #     https://stackoverflow.com/questions/66980682/is-it-possible-to-define-host-mappings-in-github-actions
 #     https://stackoverflow.com/questions/428109/extract-substring-in-bash
     - run: |
-        sudo echo "127.0.0.1 ${BEE_URL_LOCAL#*//}" | sudo tee -a /etc/hosts
+        sudo echo "127.0.0.1 ${BEE_HOST_LOCAL}" | sudo tee -a /etc/hosts
     - run: ./macOS-local-init
     - run: ./macOS-local-run-backend
     - run: ./macOS-local-run-frontend

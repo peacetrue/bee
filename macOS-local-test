@@ -1,9 +1,11 @@
 #!/bin/bash
 
-set -e # 脚本只要发生错误，就终止执行
-set -u # 遇到不存在的变量就会报错，并停止执行
-set -x
+#set -e # 脚本只要发生错误，就终止执行
+#set -u # 遇到不存在的变量就会报错，并停止执行
+#set -x
 
 curl --retry 100 --retry-max-time 120 --retry-connrefused $BEE_FRONTEND_URL_LOCAL
+echo -e "\n"
 curl --retry 100 --retry-max-time 120 --retry-connrefused $BEE_MAIN_URL_LOCAL/actuator/health
+echo -e "\n"
 curl --retry 100 --retry-max-time 120 --retry-connrefused $BEE_MONITOR_URL_LOCAL/actuator/health

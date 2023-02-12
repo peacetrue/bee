@@ -3,8 +3,15 @@
 set -u # 遇到不存在的变量就会报错，并停止执行
 set -e # 脚本只要发生错误，就终止执行
 
-ln -s $(pwd)/nginx/bee.peacetrue.local.conf $NGINX_CONFIG_DIR/bee.peacetrue.local.conf
-ln -s $(pwd)/frontend/local $NGINX_HTML_DIR/html/bee
+NGINX_CONFIG_DIR="/usr/local/etc/nginx/servers"
+if [[ ! -e $NGINX_CONFIG_DIR/bee.peacetrue.local.conf ]]; then
+  ln -s $(pwd)/nginx/bee.peacetrue.local.conf $NGINX_CONFIG_DIR/bee.peacetrue.local.conf
+fi
+
+NGINX_HTML_DIR="/usr/local/Cellar/nginx/$(ls /usr/local/Cellar/nginx/ | tail -n 1)"
+if [[ ! -e $NGINX_HTML_DIR/html/bee ]]; then
+  ln -s $(pwd)/frontend/local $NGINX_HTML_DIR/html/bee
+fi
 
 if ps -ef | grep nginx | grep -v grep; then
   nginx -s reload

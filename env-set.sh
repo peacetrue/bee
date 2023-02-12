@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #set -x
-
 if [[ -z $SHELL_CONF_LOCATION ]]; then
   SHELL_CONF_LOCATION="$HOME/${SHELL}rc"
 fi
@@ -15,6 +14,7 @@ else
   exit 1
 fi
 
+source "$SHELL_CONF_LOCATION"
 sed -i "/^export BEE/d" "$SHELL_CONF_LOCATION"
 # 删除首行 #!/bin/bash、注释、空行，然后添加到系统配置
 sed "1d;/^#/d;/^\s*$/d" env-vars.sh >>"$SHELL_CONF_LOCATION"

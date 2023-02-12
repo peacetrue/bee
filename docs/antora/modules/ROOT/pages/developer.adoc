@@ -47,9 +47,10 @@ export BEE_MONITOR_PORT={BEE_MONITOR_PORT} #监控应用端口
 export BEE_HOST_LOCAL={BEE_HOST_LOCAL} #本地环境域名
 export BEE_HOST_PROD={BEE_HOST_PROD} #生产环境域名
 EOF
-source "$SHELL_CONF_LOCATION"
+
 # 初始化环境变量
 ./env-init.sh
+source "$SHELL_CONF_LOCATION"
 #配置本地域名，在 /etc/hosts 中添加以下代码
 echo "127.0.0.1 $BEE_HOST_LOCAL" >> /etc/hosts
 
@@ -77,9 +78,12 @@ echo "127.0.0.1 $BEE_HOST_LOCAL" >> /etc/hosts
 #sudo apt-get install sshpass -y
 #sudo apt-get install jmeter -y
 # 设置远程服务器信息，可修改以下配置后，拷贝到 ~/.bashrc 或者 ~/.zshrc 中并使用 source 更新
+cat <<EOF >>"$SHELL_CONF_LOCATION"
 export BEE_REMOTE_HOST=root@aliyun
 export BEE_REMOTE_PASSWORD=123456
 export BEE_REMOTE_WORKING_DIR=~/bee
+EOF
+source "$SHELL_CONF_LOCATION"
 
 ./ubuntu-prod-init
 ./ubuntu-prod-run-backend
