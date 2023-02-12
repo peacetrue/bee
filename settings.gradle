@@ -19,6 +19,6 @@ pluginManagement {
 // 子项目本身是可以独立运行的
 // 此项目的目的是为了实现 GitHub 自动构建
 rootProject.name = "bee"
-include("backend:main")
+include("backend-main")
 //include("backend:monitor")
 

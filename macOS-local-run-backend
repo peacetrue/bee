@@ -4,7 +4,7 @@
 
 pwd=$(pwd)
 for app in main monitor; do
-  cd "$pwd/backend/$app"
+  cd "$pwd/backend-$app"
   #打包
   ./gradlew clean build
   remoteArchiveName="$app-boot-$BEE_VERSION"

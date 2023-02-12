@@ -3,11 +3,11 @@ plugins {
 }
 
 group "com.github.peacetrue.bee"
-version "1.0.0${tailSnapshot}"
+version "${System.getenv("BEE_VERSION")}${tailSnapshot}"
 description "开发者助手"
 apply plugin: "com.github.peacetrue.gradle.build-convention"
 
 dependencies {
-    implementation project("backend:main")
+    implementation project("backend-main")
 //    implementation project("backend:monitor")
 }

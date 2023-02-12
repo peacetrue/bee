@@ -8,7 +8,7 @@ set -u # 遇到不存在的变量就会报错，并停止执行
 pwd=$(pwd)
 ssh $BEE_REMOTE_HOST "killall java"
 for app in main monitor; do
-  cd "$pwd/backend/$app"
+  cd "$pwd/backend-$app"
   ./gradlew clean build
   remoteArchiveName="$app-boot-$BEE_VERSION"
   scp "build/distributions/$remoteArchiveName.tar" "$BEE_REMOTE_HOST:$BEE_REMOTE_WORKING_DIR"

@@ -5,7 +5,6 @@ cd "$pwd/frontend" || exit
 npm install
 
 for app in main monitor; do
-  cd "$pwd/backend/$app" || exit
+  cd "$pwd/backend-$app" || exit
   ./gradlew clean build
 done
-
